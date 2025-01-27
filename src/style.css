@@ -1,0 +1,28 @@
+.pencil-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.pencil-icon:hover {
+  background-color: #f3f3f3;
+}
+
+.pencil {
+  color: black;
+}
+
+.custom-link, .study-link {
+  color: black;
+  text-decoration: none;
+}
+
+.custom-link:hover, .follower-link:hover, .study-link:hover {
+  color: #0a66c2;
+  text-decoration: underline;
+}
+
+.follower-link {
+    color: #0A66C2;
+    text-decoration: none;
+}

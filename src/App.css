@@ -6,4 +6,10 @@ html,
 body {
   margin: 0;
   padding: 0;
+  background-color: #F4F2EE !important;
+}
+
+.main-container {
+  padding-left: 5rem !important;
+  padding-right: 5rem !important;
 }

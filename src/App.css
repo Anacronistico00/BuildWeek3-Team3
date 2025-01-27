@@ -10,6 +10,78 @@ p {
   padding: 0;
 }
 
+.HomeIcons {
+  width: 24px;
+  height: 24px;
+}
+
+.nameTab {
+  font-size: 0.85em;
+  margin-left: 3px;
+}
+
+@media screen and (max-width: 767px) {
+  .HomeIcons {
+    width: 20px;
+    height: 20px;
+  }
+  .nameTab {
+    display: none;
+  }
+}
+
+.input-group {
+  position: relative;
+}
+
+.input-group .form-control {
+  padding-left: 2.5rem;
+  background-color: #edf3f8;
+}
+
+.input-group .form-control:focus-within {
+  width: 360px;
+}
+
+.input-group .search-icon {
+  z-index: 1;
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.85rem;
+  color: rgb(0, 0, 0);
+}
+
+@media screen and (max-width: 767px) {
+  .input-group .search-icon {
+    font-size: 1em;
+  }
+}
+
+.SubsIcon {
+  font-size: 0.85em;
+  margin: 0;
+  padding: 0;
+}
+
+.ImgProfile {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.ImgProfile img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+#basic-nav-dropdown {
+  padding: 0;
+}
+
 .coverImage {
   height: 30vh;
 }

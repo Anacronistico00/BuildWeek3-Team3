@@ -520,6 +520,7 @@ const PersonalInfoComponent = () => {
           ))}
         </Modal.Body>
       </Modal>
+
       {profile && (
         <Modal
           class

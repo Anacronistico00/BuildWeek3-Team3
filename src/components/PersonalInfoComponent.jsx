@@ -46,7 +46,6 @@ const PersonalInfoComponent = () => {
   const handleContactsModalShow = () => setShowProfile(true);
   const handleContactsModalClose = () => setShowProfile(false);
 
-  const [showProfileModifyModal, setShowProfileModifyModal] = useState(false);
   const [openSection, setOpenSection] = useState(null);
 
   const toggleSection = (section) => {

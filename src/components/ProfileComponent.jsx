@@ -17,7 +17,7 @@ const ProfileComponent = () => {
           <AnalisiComponent />
           <InformationComponent />
           <ActivityComponent />
-          <Experiences />
+          {/* <Experiences /> */}
           <Study />
           <Skills />
         </Col>

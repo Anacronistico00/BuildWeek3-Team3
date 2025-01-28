@@ -11,7 +11,8 @@ p {
 }
 
 html,
-body {
+body,
+.footer {
   background-color: #f4f2ee !important;
 }
 

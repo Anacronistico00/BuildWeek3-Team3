@@ -17,13 +17,13 @@ const Skills = () => {
                   href='#'
                   className='pencil-icon d-flex align-items-center justify-content-center'
                 >
-                  <GoPlus className='fs-2 text-decoration-none pencil' />
+                  <GoPlus className='fs-2 text-decoration-none text-black' />
                 </a>
                 <a
                   href='#'
                   className='pencil-icon d-flex align-items-center justify-content-center'
                 >
-                  <HiOutlinePencil className='fs-4 text-decoration-none pencil' />
+                  <HiOutlinePencil className='fs-4 text-decoration-none text-black' />
                 </a>
               </Col>
             </Row>

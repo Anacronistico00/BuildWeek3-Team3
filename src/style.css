@@ -1,3 +1,220 @@
+.HomeIcons {
+  width: 24px;
+  height: 24px;
+}
+
+.nameTab {
+  font-size: 0.85em;
+  margin-left: 3px;
+}
+
+@media screen and (max-width: 767px) {
+  .HomeIcons {
+    width: 20px;
+    height: 20px;
+  }
+  .nameTab {
+    display: none;
+  }
+}
+
+.input-group {
+  position: relative;
+}
+
+.input-group .form-control {
+  padding-left: 2.5rem;
+  background-color: #edf3f8;
+}
+
+.input-group .form-control:focus-within {
+  width: 360px;
+}
+
+.input-group .search-icon {
+  z-index: 1;
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.85rem;
+  color: rgb(0, 0, 0);
+}
+
+.SubsIcon {
+  font-size: 0.85em;
+  margin: 0;
+  padding: 0;
+}
+
+.ImgProfile {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.ImgProfile img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+#basic-nav-dropdown {
+  padding: 0;
+}
+
+.coverImage {
+  height: 30vh;
+}
+
+.btnCamera {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 50px;
+  width: 30px;
+  height: 30px;
+  padding: 5px;
+  color: blue;
+}
+
+.btnCamera:hover {
+  background-color: #cecece;
+  cursor: pointer;
+}
+
+.profileImage {
+  width: 100px;
+  border-radius: 50px;
+  position: absolute;
+  top: -70px;
+  left: 0;
+}
+
+.username {
+  font-size: 0.8em;
+  margin-top: 0;
+}
+
+.workplaceImage {
+  width: 30px;
+  border-radius: 50px;
+}
+
+.name:hover,
+.btnModify:hover {
+  background-color: #e4e4e4;
+  cursor: pointer;
+}
+
+.workplaceInfo:hover,
+.username:hover,
+.contactsInfo:hover {
+  color: blue !important;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.areaInfo {
+  font-size: 0.8em;
+}
+
+.contactsInfo {
+  border-left: 1px solid black;
+  padding-left: 5px;
+}
+
+.profileLink {
+  font-size: 0.8em;
+}
+
+.profileLink:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.modal-dialog {
+  max-width: 550px;
+}
+
+.btnProfile:hover,
+.btnProfileModify:hover {
+  border: 2px solid blue !important;
+  color: blue !important;
+  background-color: rgb(224, 224, 253);
+}
+
+.btnResource:hover {
+  border: 2px solid black !important;
+  background-color: rgb(218, 218, 218);
+}
+
+.custom-dropdown .dropdown-item {
+  width: 250px;
+  padding: 0.5rem;
+  font-size: 0.8rem;
+}
+
+.custom-dropdown2 .dropdown-item {
+  display: flex;
+  align-items: center;
+  width: 250px;
+}
+
+.custom-dropdown2 h6 {
+  padding: 0.5rem;
+  font-size: 0.8rem;
+}
+.dropdown-item {
+  white-space: normal;
+}
+
+.dropdown-toggle::after {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 0;
+  }
+  .coverImage {
+    height: 15vh;
+  }
+}
+
+@media screen and (min-width: 1px) and (max-width: 575px) {
+  .btnResource {
+    font-size: 0;
+  }
+  .btnResource::before {
+    content: '⋯';
+    font-size: 1rem;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+  .btnResource {
+    font-size: 0;
+  }
+  .btnResource::before {
+    content: '⋯';
+    font-size: 1rem;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .coverImage {
+    height: 20vh;
+  }
+}
+
+.main-container {
+  padding-left: 5rem !important;
+  padding-right: 5rem !important;
+}
+
 .pencil-icon {
   width: 50px;
   height: 50px;
@@ -12,17 +229,20 @@
   color: black;
 }
 
-.custom-link, .study-link {
+.custom-link,
+.study-link {
   color: black;
   text-decoration: none;
 }
 
-.custom-link:hover, .follower-link:hover, .study-link:hover {
+.custom-link:hover,
+.follower-link:hover,
+.study-link:hover {
   color: #0a66c2;
   text-decoration: underline;
 }
 
 .follower-link {
-    color: #0A66C2;
-    text-decoration: none;
+  color: #0a66c2;
+  text-decoration: none;
 }

@@ -28,7 +28,7 @@
 }
 
 .input-group .form-control:focus-within {
-  width: 360px;
+  width: 300px;
 }
 
 .input-group .search-icon {
@@ -66,6 +66,56 @@
 
 .coverImage {
   height: 30vh;
+}
+
+#dropdown-basic-button {
+  background-color: transparent;
+  border: none;
+  color: black;
+}
+
+.smallertext {
+  font-size: 0.8em;
+}
+
+.dropdown-menu {
+  width: 550px;
+  height: 100vh;
+  padding: 10px;
+  overflow: scroll;
+}
+
+.navbar-dropdown {
+  position: absolute;
+  top: 55%;
+  right: 10%;
+  z-index: 2;
+}
+
+@media screen and (max-width: 767px) {
+  .navbar-dropdown {
+    right: 6%;
+    top: 25%;
+  }
+  .dropdown-menu {
+    width: 250px;
+  }
+}
+
+.linksChange {
+  text-decoration: none;
+  color: black;
+  font-weight: 500;
+  font-size: 1em;
+  line-height: 1;
+}
+
+.linksChange:hover {
+  text-decoration: underline;
+}
+.smallerTitle {
+  font-size: 0.85em;
+  color: gray;
 }
 
 .btnCamera {
@@ -171,9 +221,9 @@
   white-space: normal;
 }
 
-.dropdown-toggle::after {
+/* .dropdown-toggle::after {
   display: none;
-}
+} */
 
 @media screen and (max-width: 768px) {
   .container {
@@ -189,7 +239,7 @@
     font-size: 0;
   }
   .btnResource::before {
-    content: '⋯';
+    content: "⋯";
     font-size: 1rem;
   }
 }
@@ -199,7 +249,7 @@
     font-size: 0;
   }
   .btnResource::before {
-    content: '⋯';
+    content: "⋯";
     font-size: 1rem;
   }
 }

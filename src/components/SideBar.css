@@ -1,0 +1,69 @@
+.card h2 {
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.first-card p {
+    font-size: 0.9rem;
+    color: #666666;
+}
+
+.card {
+    border: 1px #DFDEDB solid !important;
+    border-radius: 10px;
+}
+
+.card h3 {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.card h3 span {
+    font-size: 0.9rem;
+    color: #666666;
+    font-weight: 300;
+}
+
+.third-card p {
+    font-size: 0.9rem;
+}
+
+.third-card button {
+    color: #404040;
+    font-weight: 600;
+    background-color: transparent;
+    outline: 1px #181818 transparent;
+    border: 1px #404040 solid;
+    border-radius: 20px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+.third-card button:hover {
+    outline: 1px #181818 solid;
+    background-color: #F3F3F3;
+    color: #181818;
+}
+
+hr {
+    border-color: #9f9e9e !important;
+}
+
+.pencil {
+    position: absolute;
+    right: 10px;
+}
+
+.list-group {
+    --bs-list-group-border-width: 0 !important;
+
+}
+
+.list-group-item:not(:last-child) {
+    border-bottom: 1px solid #E7E7E7;
+}
+
+.button-mostra:hover {
+    background-color: #F3F3F3;
+    cursor: pointer;
+}

@@ -1,12 +1,22 @@
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap-icons/font/bootstrap-icons.css";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Footer from "./components/FooterComponent";
+import ProfileComponent from "./components/ProfileComponent";
+import "./style.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap-icons/font/bootstrap-icons.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { BrowserRouter } from "react-router-dom";
+import NavBarComponent from "./components/NavBarComponent";
 
 function App() {
   return (
-    <>
-      <Footer />
-    </>
+    <BrowserRouter>
+      <NavBarComponent />
+      <ProfileComponent />
+    </BrowserRouter>
   );
 }
 

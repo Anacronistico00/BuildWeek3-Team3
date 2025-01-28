@@ -4,6 +4,7 @@ import {
   Button,
   Card,
   Col,
+  Collapse,
   Container,
   Dropdown,
   Modal,
@@ -13,14 +14,19 @@ import {
   Arrow90degRight,
   BookmarkFill,
   CameraFill,
+  CardImage,
+  ChevronDown,
+  ChevronUp,
   Download,
   Envelope,
   InfoSquareFill,
   Linkedin,
   Newspaper,
+  Pencil,
   PersonFill,
+  Trash,
 } from 'react-bootstrap-icons';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { HiOutlinePencil } from 'react-icons/hi2';
 
 const PersonalInfoComponent = () => {
@@ -28,7 +34,6 @@ const PersonalInfoComponent = () => {
   const profile = useSelector((state) => state.profile);
 
   const [showProfileModal, setShowProfileModal] = useState(false);
-  const [showProfileModifyModal, setShowProfileModifyModal] = useState(false);
   const [showContactsModal, setShowProfile] = useState(false);
 
   const handleProfileModalShow = () => setShowProfileModal(true);
@@ -40,13 +45,119 @@ const PersonalInfoComponent = () => {
   const handleContactsModalShow = () => setShowProfile(true);
   const handleContactsModalClose = () => setShowProfile(false);
 
+  const [showProfileModifyModal, setShowProfileModifyModal] = useState(false);
+  const [openSection, setOpenSection] = useState(null);
+
+  const toggleSection = (section) => {
+    setOpenSection((prev) => (prev === section ? null : section));
+  };
+
+  const [showProfilePicModal, setShowProfilePicModal] = useState(false);
+
+  const handleProfilePicModalClose = () => setShowProfilePicModal(false);
+  const handleProfilePicModalShow = () => setShowProfilePicModal(true);
+
+  const [showProfilePicModalModify, setShowProfilePicModalModify] =
+    useState(false);
+
+  const handleProfilePicModalModifyShow = () => {
+    setShowProfilePicModalModify(true);
+  };
+
+  const handleProfilePicModalModifyClose = () => {
+    setShowProfilePicModalModify(false);
+  };
+
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [previewSrc, setPreviewSrc] = useState(null);
+  const [showPreviewModal, setShowPreviewModal] = useState(false);
+  const handlePreviewModalClose = () => setShowPreviewModal(false);
+  const handlePreviewModalShow = () => setShowPreviewModal(true);
+
+  const token =
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Nzk3NDI1ZTE2ZjYzNTAwMTVmZWNiNzYiLCJpYXQiOjE3Mzc5NjYxNzQsImV4cCI6MTczOTE3NTc3NH0.C54YDV4poWgVTe4vEBdnfY19L0nYPNupc4t-FcJn1m8';
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    setSelectedFile(file);
+    setPreviewSrc(URL.createObjectURL(file));
+    handlePreviewModalShow();
+  };
+
+  const fileInputRef = useRef(null);
+
+  const handleSaveClick = async () => {
+    await handleUploadClick();
+    handlePreviewModalClose();
+    setShowCamera(false);
+  };
+
+  const handleUploadClick = async () => {
+    if (selectedFile) {
+      try {
+        await uploadProfilePic(selectedFile);
+        await getProfileInfo();
+        handleProfilePicModalClose();
+      } catch (error) {
+        console.error("Errore nel caricamento dell'immagine:", error);
+      }
+    }
+  };
+
+  const videoRef = useRef(null);
+  const canvasRef = useRef(null);
+  const [showCamera, setShowCamera] = useState(false);
+
+  const startCamera = async () => {
+    setShowCamera(true);
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+      videoRef.current.srcObject = stream;
+      videoRef.current.play();
+    } catch (error) {
+      console.error("Errore nell'accesso alla fotocamera:", error);
+    }
+  };
+
+  const ClosePhoto = () => {
+    setShowCamera(false);
+    videoRef.current.srcObject.getTracks().forEach((track) => track.stop());
+  };
+
+  const capturePhoto = () => {
+    const context = canvasRef.current.getContext('2d');
+    const width = videoRef.current.videoWidth;
+    const height = videoRef.current.videoHeight;
+    const size = Math.min(width, height);
+    canvasRef.current.width = size;
+    canvasRef.current.height = size;
+    context.drawImage(
+      videoRef.current,
+      (width - size) / 2,
+      (height - size) / 2,
+      size,
+      size,
+      0,
+      0,
+      size,
+      size
+    );
+    canvasRef.current.toBlob(async (blob) => {
+      const file = new File([blob], 'profile-pic.jpg', { type: 'image/jpeg' });
+      setSelectedFile(file);
+      setPreviewSrc(URL.createObjectURL(file));
+      handlePreviewModalShow();
+      setShowCamera(false);
+    }, 'image/jpeg');
+  };
+
   const getProfileInfo = async () => {
     try {
       const response = await fetch(
         'https://striveschool-api.herokuapp.com/api/profile/me',
         {
           headers: {
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Nzk3NDI1ZTE2ZjYzNTAwMTVmZWNiNzYiLCJpYXQiOjE3Mzc5NjYxNzQsImV4cCI6MTczOTE3NTc3NH0.C54YDV4poWgVTe4vEBdnfY19L0nYPNupc4t-FcJn1m8`,
+            Authorization: `Bearer ${token}`,
           },
         }
       );
@@ -58,6 +169,34 @@ const PersonalInfoComponent = () => {
       dispatch(setProfile(data));
     } catch (error) {
       console.error(error);
+    }
+  };
+
+  const uploadProfilePic = async (file) => {
+    const url = `https://striveschool-api.herokuapp.com/api/profile/${profile._id}/picture`;
+
+    const formData = new FormData();
+    formData.append('profile', file);
+
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error(`Errore ${response.status}: ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      console.log('Immagine caricata con successo:', data);
+      return data;
+    } catch (error) {
+      console.error("Errore nel caricamento dell'immagine:", error);
+      throw error;
     }
   };
 
@@ -81,6 +220,8 @@ const PersonalInfoComponent = () => {
             <Card.Title>
               <div className=' position-relative'>
                 <img
+                  onClick={handleProfilePicModalShow}
+                  style={{ cursor: 'pointer' }}
                   src={profile.image}
                   alt='Profile Image'
                   className='profileImage'
@@ -260,25 +401,278 @@ const PersonalInfoComponent = () => {
         </Modal>
       )}
 
-      <Modal show={showProfileModal} onHide={handleProfileModalClose}>
+      <Modal
+        show={showProfileModal}
+        onHide={handleProfileModalClose}
+        dialogClassName='enhanceProfileModal'
+      >
         <Modal.Header closeButton>
           <Modal.Title>Migliora il tuo Profilo</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          <p>Contenuto della modale per Migliora Profilo</p>
+        <Modal.Body className='enhanceProfile'>
+          <div>
+            <p className='fw-bold'>
+              Aggiungi un pulsante personalizzato su LinkedIn
+            </p>
+            <p>Promuovi le visite al tuo sito web, al tuo portfolio e altro.</p>
+            <hr />
+          </div>
+          <div>
+            <p className='fw-bold'>
+              Usa l’assistente di scrittura del profilo con IA
+            </p>
+            <p>
+              Fai risaltare il tuo profilo con l’aiuto dell’intelligenza
+              artificiale.
+            </p>
+            <hr />
+          </div>
+          <div>
+            <p className='fw-bold'>Mostra sezioni del profilo in alto</p>
+            <p>Mostra i dettagli principali nella sezione in primo piano.</p>
+            <hr />
+          </div>
         </Modal.Body>
       </Modal>
 
       <Modal
         show={showProfileModifyModal}
         onHide={handleProfileModifyModalClose}
+        dialogClassName='addToProfileModal'
       >
         <Modal.Header closeButton>
-          <Modal.Title>Aggiungi sezione del profilo</Modal.Title>
+          <Modal.Title>Aggiungi al profilo</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p>Contenuto della modale per Aggiungi sezione del profilo</p>
+          {[
+            {
+              title: 'Sezioni principali',
+              key: 'principali',
+              description:
+                'Iniziamo dalle basi. Se compili queste sezioni, sarà più facile trovarti per i recruiter e le persone che potresti conoscere',
+              items: [
+                'Aggiungi informazioni',
+                'Aggiungi grado di formazione',
+                'Aggiungi posizione lavorativa',
+                'Aggiungi servizi',
+                'Aggiungi pausa lavorativa',
+                'Aggiungi competenze',
+              ],
+            },
+            {
+              title: 'Sezioni consigliate',
+              key: 'consigliate',
+              description:
+                'Completando queste sezioni aumenterai la tua credibilità e potrai accedere a più opportunità.',
+              items: [
+                'Aggiungi elementi in primo piano',
+                'Aggiungi licenze e certificazioni',
+                'Aggiungi progetti',
+                'Aggiungi corsi',
+                'Aggiungi referenze',
+              ],
+            },
+            {
+              title: 'Altro',
+              key: 'altro',
+              description:
+                'Conferisci ancora più personalità al tuo profilo. Queste sezioni ti aiuteranno a espandere la tua rete e a instaurare più relazioni lavorative.',
+              items: [
+                'Aggiungi esperienza di volontariato',
+                'Aggiungi pubblicazioni',
+                'Aggiungi brevetti',
+                'Aggiungi riconoscimenti e premi',
+                'Aggiungi votazioni esame',
+                'Aggiungi lingue',
+                'Aggiungi organizzazioni',
+                'Aggiungi cause',
+                'Aggiungi informazioni di contatto',
+              ],
+            },
+          ].map((section) => (
+            <div key={section.key}>
+              <Button
+                variant='light'
+                className='w-100 text-start d-flex justify-content-between align-items-center mt-3'
+                onClick={() => toggleSection(section.key)}
+              >
+                <span className='fw-bold'>{section.title}</span>
+                {openSection === section.key ? <ChevronUp /> : <ChevronDown />}
+              </Button>
+
+              <Collapse in={openSection === section.key}>
+                <div className='p-2'>
+                  {section.description && (
+                    <p className='text-muted'>{section.description}</p>
+                  )}
+                  {section.items.map((item, index) => (
+                    <Button
+                      variant='transparent'
+                      key={index}
+                      className='w-100 text-start text-secondary fw-bold border-bottom my-2 py-1 rounded-3'
+                    >
+                      {item}
+                    </Button>
+                  ))}
+                </div>
+              </Collapse>
+            </div>
+          ))}
         </Modal.Body>
+      </Modal>
+
+      {profile && (
+        <Modal
+          class
+          show={showProfilePicModal}
+          onHide={handleProfilePicModalClose}
+          dialogClassName='profilePhotoModal'
+        >
+          <Modal.Header closeButton className='border-0'>
+            <Modal.Title>Foto profilo</Modal.Title>
+          </Modal.Header>
+          <Modal.Body className='d-flex justify-content-center align-items-center'>
+            <img src={profile.image} alt='Profile' className='profilePic' />
+          </Modal.Body>
+          <Modal.Footer className='justify-content-between'>
+            <div className='d-flex flex-row footerButtons'>
+              <Button
+                variant='transparent'
+                onClick={handleProfilePicModalClose}
+                className='d-flex flex-column align-items-center text-white'
+              >
+                <Pencil></Pencil>
+                Modifica
+              </Button>
+              <Button
+                variant='transparent'
+                onClick={handleProfilePicModalModifyShow}
+                className='d-flex flex-column align-items-center text-white'
+              >
+                <CameraFill></CameraFill>
+                Aggiungi foto
+              </Button>
+              <Button
+                variant='transparent'
+                onClick={handleProfilePicModalClose}
+                className='d-flex flex-column align-items-center text-white'
+              >
+                <CardImage></CardImage>
+                Fotogrammi
+              </Button>
+            </div>
+            <div className='footerButtons'>
+              <Button
+                variant='transparent'
+                onClick={handleProfilePicModalClose}
+                className='d-flex flex-column align-items-center text-white'
+              >
+                <Trash></Trash>
+                Elimina
+              </Button>
+            </div>
+          </Modal.Footer>
+        </Modal>
+      )}
+
+      {profile && (
+        <Modal
+          show={showProfilePicModalModify}
+          onHide={handleProfilePicModalModifyClose}
+          dialogClassName='profilePhotoModalModify'
+        >
+          <Modal.Header closeButton className='border-0'>
+            <Modal.Title>Foto profilo</Modal.Title>
+          </Modal.Header>
+          {!showCamera && (
+            <Modal.Body className='d-flex flex-column justify-content-center align-items-center text-secondary'>
+              <h5>{profile.name}, aiuta gli altri a riconoscerti!</h5>
+              <img src={profile.image} alt='Profile' className='profilePic' />
+              <p className='text-center'>
+                Chiediamo agli utenti di LinkedIn di utilizzare le loro vere
+                identità, quindi scatta o carica una tua foto. Poi ritagliala,
+                applica dei filtri e perfezionala come vuoi.
+              </p>
+            </Modal.Body>
+          )}
+          {showCamera && (
+            <Container className='camera '>
+              <video ref={videoRef} style={{ width: '100%' }}></video>
+              <div className='d-flex justify-content-between mt-3'>
+                <Button
+                  variant='transparent'
+                  onClick={ClosePhoto}
+                  className='btnClosePhoto rounded-5 border-2 border-primary'
+                >
+                  Annulla
+                </Button>
+                <Button
+                  variant='primary'
+                  onClick={capturePhoto}
+                  className='btnCapture rounded-5'
+                >
+                  Cattura
+                </Button>
+              </div>
+
+              <canvas ref={canvasRef} style={{ display: 'none' }}></canvas>
+            </Container>
+          )}
+          <Modal.Footer className='justify-content-center'>
+            {!showCamera && (
+              <Button
+                variant='transparent'
+                onClick={startCamera}
+                className='btnTakePicture rounded-5 border-2 border-primary'
+              >
+                Usa Fotocamera
+              </Button>
+            )}
+
+            <div className='custom-file-input'>
+              {!showCamera && (
+                <div className='d-flex'>
+                  <input
+                    type='file'
+                    id='fileInput'
+                    onChange={handleFileChange}
+                    ref={fileInputRef}
+                    style={{ display: 'none' }}
+                  />
+                  <label
+                    htmlFor='fileInput'
+                    className='btn btn-primary rounded-5 fw-bold'
+                  >
+                    Carica foto
+                  </label>
+                </div>
+              )}
+            </div>
+          </Modal.Footer>
+        </Modal>
+      )}
+
+      <Modal
+        show={showPreviewModal}
+        onHide={handlePreviewModalClose}
+        dialogClassName='previewModal'
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Anteprima Foto</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className='d-flex flex-column justify-content-center align-items-center'>
+          {previewSrc && (
+            <img src={previewSrc} alt='Preview' className='profilePic' />
+          )}
+        </Modal.Body>
+        <Modal.Footer className='justify-content-end'>
+          <Button variant='secondary' onClick={handlePreviewModalClose}>
+            Chiudi
+          </Button>
+          <Button variant='primary' onClick={handleSaveClick}>
+            Salva
+          </Button>
+        </Modal.Footer>
       </Modal>
     </>
   );

@@ -10,6 +10,11 @@ p {
   padding: 0;
 }
 
+html,
+body {
+  background-color: #F4F2EE !important;
+}
+
 .HomeIcons {
   width: 24px;
   height: 24px;
@@ -25,6 +30,7 @@ p {
     width: 20px;
     height: 20px;
   }
+
   .nameTab {
     display: none;
   }
@@ -182,6 +188,7 @@ p {
   .container {
     padding: 0;
   }
+
   .coverImage {
     height: 15vh;
   }
@@ -189,21 +196,27 @@ p {
 
 @media screen and (min-width: 1px) and (max-width: 575px) {
   .btnResource {
-    font-size: 0; /* Nasconde il testo del bottone */
+    font-size: 0;
+    /* Nasconde il testo del bottone */
   }
+
   .btnResource::before {
     content: '⋯';
-    font-size: 1rem; /* Dimensione dei puntini */
+    font-size: 1rem;
+    /* Dimensione dei puntini */
   }
 }
 
 @media screen and (min-width: 768px) and (max-width: 991px) {
   .btnResource {
-    font-size: 0; /* Nasconde il testo del bottone */
+    font-size: 0;
+    /* Nasconde il testo del bottone */
   }
+
   .btnResource::before {
     content: '⋯';
-    font-size: 1rem; /* Dimensione dei puntini */
+    font-size: 1rem;
+    /* Dimensione dei puntini */
   }
 }
 

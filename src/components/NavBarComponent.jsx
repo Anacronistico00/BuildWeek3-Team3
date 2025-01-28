@@ -29,7 +29,7 @@ const NavBarComponent = function () {
 
   return (
     <>
-      {profile && (
+      {profile.profile && (
         <Navbar className='p-0' fixed='top' bg='light' expand='lg'>
           <Container className='position-relative'>
             <Row className='w-100'>
@@ -108,7 +108,7 @@ const NavBarComponent = function () {
                   <div className='d-flex justify-content-center align-items-center'>
                     <div className='ImgProfile'>
                       <img
-                        src={profile.image}
+                        src={profile.profile.image}
                         alt='imagine profilo'
                         className='rounded-circle'
                         width='20'
@@ -126,7 +126,7 @@ const NavBarComponent = function () {
                     <Dropdown.Item>
                       <div style={{ display: 'flex', alignItems: 'center' }}>
                         <img
-                          src={profile.image}
+                          src={profile.profile.image}
                           alt='Profile'
                           style={{
                             width: '50px',
@@ -136,9 +136,9 @@ const NavBarComponent = function () {
                         />
                         <div>
                           <strong>
-                            {profile.name} {profile.surname}
+                            {profile.profile.name} {profile.profile.surname}
                           </strong>
-                          <p>{profile.bio}</p>
+                          <p>{profile.profile.bio}</p>
                         </div>
                       </div>
                     </Dropdown.Item>

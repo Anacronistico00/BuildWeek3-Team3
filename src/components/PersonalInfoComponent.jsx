@@ -173,7 +173,7 @@ const PersonalInfoComponent = () => {
   };
 
   const uploadProfilePic = async (file) => {
-    const url = `https://striveschool-api.herokuapp.com/api/profile/${profile._id}/picture`;
+    const url = `https://striveschool-api.herokuapp.com/api/profile/${profile.profile._id}/picture`;
 
     const formData = new FormData();
     formData.append('profile', file);
@@ -208,7 +208,7 @@ const PersonalInfoComponent = () => {
 
   return (
     <>
-      {profile && (
+      {profile.profile && (
         <Card className='rounded-4 mt-4 position-relative'>
           <Card.Img
             variant='top'
@@ -222,7 +222,7 @@ const PersonalInfoComponent = () => {
                 <img
                   onClick={handleProfilePicModalShow}
                   style={{ cursor: 'pointer' }}
-                  src={profile.image}
+                  src={profile.profile.image}
                   alt='Profile Image'
                   className='profileImage'
                 />
@@ -240,9 +240,9 @@ const PersonalInfoComponent = () => {
                   <Col>
                     <div>
                       <h2 className='name'>
-                        {profile.name} {profile.surname}
+                        {profile.profile.name} {profile.profile.surname}
                       </h2>
-                      <p className='username'>@{profile.username}</p>
+                      <p className='username'>@{profile.profile.username}</p>
                       <p>--</p>
                     </div>
                   </Col>
@@ -266,7 +266,9 @@ const PersonalInfoComponent = () => {
                 <Row>
                   <Col>
                     <div className='areaInfo'>
-                      <span className='text-secondary'>{profile.area} </span>
+                      <span className='text-secondary'>
+                        {profile.profile.area}{' '}
+                      </span>
                       <span
                         onClick={handleContactsModalShow}
                         className='contactsInfo text-primary'
@@ -366,11 +368,11 @@ const PersonalInfoComponent = () => {
         </Card>
       )}
 
-      {profile && (
+      {profile.profile && (
         <Modal show={showContactsModal} onHide={handleContactsModalClose}>
           <Modal.Header closeButton>
             <Modal.Title>
-              {profile.name} {profile.surname}
+              {profile.profile.name} {profile.profile.surname}
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
@@ -384,8 +386,8 @@ const PersonalInfoComponent = () => {
                 <div className='ms-2 mb-3'>
                   <h6>Il tuo profilo</h6>
                   <p className='profileLink text-primary'>
-                    Linkedin.com/in/{profile.name}-{profile.surname}-
-                    {profile._id}
+                    Linkedin.com/in/{profile.profile.name}-
+                    {profile.profile.surname}-{profile.profile._id}
                   </p>
                 </div>
               </div>
@@ -521,7 +523,7 @@ const PersonalInfoComponent = () => {
         </Modal.Body>
       </Modal>
 
-      {profile && (
+      {profile.profile && (
         <Modal
           class
           show={showProfilePicModal}
@@ -532,7 +534,11 @@ const PersonalInfoComponent = () => {
             <Modal.Title>Foto profilo</Modal.Title>
           </Modal.Header>
           <Modal.Body className='d-flex justify-content-center align-items-center'>
-            <img src={profile.image} alt='Profile' className='profilePic' />
+            <img
+              src={profile.profile.image}
+              alt='Profile'
+              className='profilePic'
+            />
           </Modal.Body>
           <Modal.Footer className='justify-content-between'>
             <div className='d-flex flex-row footerButtons'>
@@ -575,7 +581,7 @@ const PersonalInfoComponent = () => {
         </Modal>
       )}
 
-      {profile && (
+      {profile.profile && (
         <Modal
           show={showProfilePicModalModify}
           onHide={handleProfilePicModalModifyClose}
@@ -586,8 +592,12 @@ const PersonalInfoComponent = () => {
           </Modal.Header>
           {!showCamera && (
             <Modal.Body className='d-flex flex-column justify-content-center align-items-center text-secondary'>
-              <h5>{profile.name}, aiuta gli altri a riconoscerti!</h5>
-              <img src={profile.image} alt='Profile' className='profilePic' />
+              <h5>{profile.profile.name}, aiuta gli altri a riconoscerti!</h5>
+              <img
+                src={profile.profile.image}
+                alt='Profile'
+                className='profilePic'
+              />
               <p className='text-center'>
                 Chiediamo agli utenti di LinkedIn di utilizzare le loro vere
                 identità, quindi scatta o carica una tua foto. Poi ritagliala,

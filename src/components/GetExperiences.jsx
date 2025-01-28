@@ -5,15 +5,15 @@ import { useSelector } from 'react-redux';
 function GetExperiences(props) {
   const [exp, setExp] = useState({
     role: '',
-    area: '',
     company: '',
-    description: '',
     startDate: '',
     endDate: '',
+    description: '',
+    area: '',
   });
 
   const [img, setImg] = useState(undefined);
-
+  const profile = useSelector((state) => state.profile);
   const user = useSelector((state) => state.user.user_logged);
   const token = useSelector((state) => state.token.token);
 
@@ -36,8 +36,8 @@ function GetExperiences(props) {
             area: expTomod.area,
             company: expTomod.company,
             description: expTomod.description,
-            startDate: expTomod.startDate.slice(0, 16),
-            endDate: expTomod.endDate.slice(0, 16),
+            startDate: expTomod.startDate.slice(0, 10),
+            endDate: expTomod.endDate.slice(0, 10),
           });
         } else {
           throw new Error('Errore durante il recupero dell’esperienza');
@@ -46,14 +46,7 @@ function GetExperiences(props) {
         alert(err.message);
       }
     } else {
-      setExp({
-        role: '',
-        area: '',
-        company: '',
-        description: '',
-        startDate: '',
-        endDate: '',
-      });
+      setExp(exp);
     }
   };
 
@@ -66,7 +59,7 @@ function GetExperiences(props) {
     e.preventDefault();
     try {
       const response = await fetch(
-        `https://striveschool-api.herokuapp.com/api/profile/${user._id}/experiences`,
+        `https://striveschool-api.herokuapp.com/api/profile/${profile.profile._id}/experiences`,
         {
           method: 'POST',
           body: JSON.stringify(exp),
@@ -79,12 +72,13 @@ function GetExperiences(props) {
       if (response.ok) {
         const data = await response.json();
         console.log(data);
+        console.log(exp);
 
         if (img) {
           let formData = new FormData();
           formData.append('experience', img);
           const response2 = await fetch(
-            `https://striveschool-api.herokuapp.com/api/profile/${user._id}/experiences/${data._id}/picture`,
+            `https://striveschool-api.herokuapp.com/api/profile/${profile.profile._id}/experiences/${data._id}/picture`,
             {
               method: 'POST',
               body: formData,
@@ -147,11 +141,15 @@ function GetExperiences(props) {
   const handleModify = async (e) => {
     e.preventDefault();
     try {
+      const body = {
+        ...exp,
+        endDate: exp.endDate ? exp.endDate : null,
+      };
       const response = await fetch(
         `https://striveschool-api.herokuapp.com/api/profile/${user._id}/experiences/${props.elementId}`,
         {
           method: 'PUT',
-          body: JSON.stringify(exp),
+          body: JSON.stringify(body),
           headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',

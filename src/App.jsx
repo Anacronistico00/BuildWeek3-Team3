@@ -16,7 +16,6 @@ function App() {
   return (
     <>
       <ProfileComponent />
-    
   <AnalisiComponent />
   <InformationComponent />
   <ActivityComponent />

@@ -135,12 +135,40 @@
   text-decoration: underline;
 }
 
-.modal-dialog {
-  max-width: 550px;
+.enhanceProfileModal {
+  font-size: 0.8em;
+  width: 300px;
+}
+
+.addToProfileModal {
+  width: 550px;
+}
+
+.profilePhotoModal,
+.profilePhotoModalModify {
+  max-width: 700px;
+  color: white;
+}
+
+.profilePhotoModal .modal-content {
+  background-color: #1b1f23;
+}
+
+.profilePic {
+  margin: 20px 0;
+  width: 50%;
+  border-radius: 50%;
+}
+
+.footerButtons button:hover {
+  background-color: #6d6c6c;
+  cursor: pointer;
 }
 
 .btnProfile:hover,
-.btnProfileModify:hover {
+.btnProfileModify:hover,
+.btnTakePicture:hover,
+.btnClosePhoto:hover {
   border: 2px solid blue !important;
   color: blue !important;
   background-color: rgb(224, 224, 253);
@@ -172,6 +200,10 @@
 }
 
 .dropdown-toggle::after {
+  display: none;
+}
+
+.inputFile {
   display: none;
 }
 

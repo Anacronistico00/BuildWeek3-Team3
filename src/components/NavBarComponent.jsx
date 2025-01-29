@@ -37,8 +37,6 @@ const NavBarComponent = function () {
     dispatch(getProfileInfo(token));
   }, [dispatch]);
 
-  const dispatch = useDispatch();
-
   useEffect(() => {
     console.log('Fetching profile info');
 

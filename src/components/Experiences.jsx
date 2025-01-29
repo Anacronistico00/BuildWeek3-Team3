@@ -95,7 +95,7 @@ function Experiences() {
       />
       <Row>
         <Col xs={12}>
-          <Card className='p-4'>
+          <Card className='p-4 pb-0'>
             <Row className=' align-items-end mb-3'>
               <Col xs={'auto'}>
                 <h4>Esperienze</h4>
@@ -149,12 +149,26 @@ function Experiences() {
                     </Row>
                   );
                 })}
-              {visibleCount < expList.length && (
-                <button onClick={showMore}>Mostra di più</button>
-              )}
-              {visibleCount >= expList.length && expList.length > 3 && (
-                <button onClick={showLess}>Mostra meno</button>
-              )}
+              <Row className='border-top'>
+                <Col>
+                  {visibleCount < expList.length && (
+                    <button
+                      className='rounded-top-0 btn btn-light '
+                      onClick={showMore}
+                    >
+                      Mostra di più
+                    </button>
+                  )}
+                  {visibleCount >= expList.length && expList.length > 3 && (
+                    <button
+                      className='rounded-top-0 btn btn-light '
+                      onClick={showLess}
+                    >
+                      Mostra meno
+                    </button>
+                  )}
+                </Col>
+              </Row>
             </div>
           </Card>
         </Col>

@@ -117,7 +117,7 @@ const NavBarComponent = function () {
 
                 <div className='d-flex justify-content-center align-items-center'>
                   <div className='ImgProfile'>
-                    {profile.profile && (
+                    {profile.profileInfo && (
                       <img
                         src={profile.profileInfo.image}
                         alt='imagine profilo'

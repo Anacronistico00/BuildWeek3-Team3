@@ -10,12 +10,12 @@ function HomeComponent() {
         <Col xs={12} md={3}>
           <RightSide />
         </Col>
-        {/* <Col xs={12} md={7}>
+        <Col xs={12} md={7}>
           <div></div>
         </Col>
         <Col xs={12} md={3}>
           <div></div>
-        </Col> */}
+        </Col>
       </Row>
     </>
   );

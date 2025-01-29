@@ -9,7 +9,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import NavBarComponent from './components/NavBarComponent';
 import Footer from './components/FooterComponent';
-import HomeComponent from './components/HomeComponent';
+import PostsComponent from './components/PostsComponent';
 import JobPageComponent from './components/JobPageComponent';
 
 function App() {
@@ -17,8 +17,9 @@ function App() {
     <BrowserRouter>
       <NavBarComponent />
       <Routes>
-        <Route path='/' element={<HomeComponent />} />
+        {/* <Route path="/" element={<HomeComponent />} /> */}
         <Route path='/profile' element={<ProfileComponent />} />
+        <Route path='/' element={<PostsComponent />} />
 
         <Route path='/jobs' element={<JobPageComponent />} />
         {/* <Route path='*' element={<ErrorComponent />} />  */}

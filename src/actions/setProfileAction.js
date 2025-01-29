@@ -1,20 +1,13 @@
-export const RETRIEVE_EXPERIENCES = 'RETRIEVE_EXPERIENCES';
-export const SET_TOKEN = 'SET_TOKEN';
-export const RETRIEVE_USER = 'RETRIEVE_USER';
-export const RETRIEVE_PROFILE = 'RETRIEVE_PROFILE';
-
-const SET_PROFILE = 'SET_PROFILE';
-
-export const setProfile = (profile) => ({
-  type: SET_PROFILE,
-  payload: profile,
-});
+export const RETRIEVE_EXPERIENCES = "RETRIEVE_EXPERIENCES";
+export const SET_TOKEN = "SET_TOKEN";
+export const RETRIEVE_USER = "RETRIEVE_USER";
+export const RETRIEVE_PROFILE = "RETRIEVE_PROFILE";
 
 export const RetrieveUserAction = (token) => {
   return async (dispatch) => {
     try {
       const response = await fetch(
-        'https://striveschool-api.herokuapp.com/api/profile/me',
+        "https://striveschool-api.herokuapp.com/api/profile/me",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -29,7 +22,7 @@ export const RetrieveUserAction = (token) => {
           payload: user,
         });
       } else {
-        throw new Error('ooops');
+        throw new Error("ooops");
       }
     } catch (err) {
       console.log(err);
@@ -56,7 +49,7 @@ export const RetrieveExperiencesAction = (token, user) => {
           payload: experiences,
         });
       } else {
-        throw new Error('ooops');
+        throw new Error("ooops");
       }
     } catch (err) {
       console.log(err);
@@ -90,7 +83,7 @@ export const RetrieveProfileAction = (token, id) => {
           payload: user,
         });
       } else {
-        throw new Error('ops');
+        throw new Error("ops");
       }
     } catch (err) {
       console.log(err);

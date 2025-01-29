@@ -37,6 +37,13 @@ const NavBarComponent = function () {
     dispatch(getProfileInfo(token));
   }, [dispatch]);
 
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    console.log('Fetching profile info');
+
+    dispatch(getProfileInfo(token));
+  }, [dispatch]);
   return (
     <>
       <Navbar className='p-0' fixed='top' bg='light' expand='lg'>

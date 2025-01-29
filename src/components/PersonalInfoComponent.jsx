@@ -97,6 +97,7 @@ const PersonalInfoComponent = () => {
       try {
         await uploadProfilePic(selectedFile);
         dispatch(getProfileInfo(token));
+        dispatch(getProfileInfo(token));
         handleProfilePicModalClose();
       } catch (error) {
         console.error("Errore nel caricamento dell'immagine:", error);

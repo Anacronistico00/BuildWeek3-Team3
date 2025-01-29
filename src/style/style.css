@@ -68,6 +68,10 @@
   height: 30vh;
 }
 
+.coverImage2 {
+  height: 8vh;
+}
+
 #dropdown-basic-button {
   background-color: transparent;
   border: none;
@@ -168,6 +172,21 @@
   position: absolute;
   top: -70px;
   left: 0;
+}
+
+.profileImage2 {
+  width: 60px;
+  border: 2px solid white;
+  border-radius: 50px;
+  position: absolute;
+  top: -25px;
+  left: 0;
+}
+
+.cardSide {
+  border-radius: 10px;
+  margin-top: 20%;
+  margin-left: 30%;
 }
 
 .username {
@@ -441,6 +460,82 @@ select {
   text-align: center;
   font-size: 10px;
   margin-top: 0.1rem;
+}
+
+.divVuoto {
+  height: 5vh;
+}
+
+.nameCardSide {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 1.2rem !important;
+  padding: 0 !important;
+}
+
+.azienda {
+  height: 3vh;
+  padding: 0 !important;
+  font-size: 0.7rem;
+}
+
+.workplaceImage2 {
+  width: 10px;
+  border-radius: 50px;
+}
+
+.azienda:hover {
+  text-decoration: none !important;
+  color: #6d6c6c;
+  cursor: pointer;
+}
+
+.premium {
+  font-size: 0.9rem;
+  color: #000000df;
+  font-weight: 600;
+}
+
+.premium:hover {
+  color: #0a66c2;
+  cursor: pointer;
+}
+
+.premiumTitle {
+  font-size: 0.8rem !important;
+  color: #0909094a;
+}
+
+.overflow {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.linkAlbero {
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.collegamenti {
+  font-size: 0.9rem;
+}
+
+.espandi {
+  font-size: 0.8rem;
+  color: #000000a9;
+}
+.linkAlbero:hover,
+.espandi:hover,
+.collegamenti:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.bioText {
+  font-size: 0.8rem;
+  color: rgba(0, 0, 0, 0.736);
 }
 
 /* ----- css del CreateNewPostComponent-------*/

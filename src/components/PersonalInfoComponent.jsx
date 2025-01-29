@@ -25,7 +25,7 @@ import {
   PersonFill,
   Trash,
 } from 'react-bootstrap-icons';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { HiOutlinePencil } from 'react-icons/hi2';
 import { getProfileInfo } from '../actions/profileInfo';
 
@@ -96,6 +96,7 @@ const PersonalInfoComponent = () => {
     if (selectedFile) {
       try {
         await uploadProfilePic(selectedFile);
+        dispatch(getProfileInfo(token));
         dispatch(getProfileInfo(token));
         handleProfilePicModalClose();
       } catch (error) {

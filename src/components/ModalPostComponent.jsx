@@ -1,8 +1,18 @@
 import { Button, Modal, Row, Col, FloatingLabel, Form } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import postComment from '../actions/postcomment';
 
 const ModalPost = ({ show, handleClose }) => {
   const profile = useSelector((state) => state.profile);
+  const dispatch = useDispatch();
+  const text = useSelector((state) => state.text);
+
+  const token = useSelector((state) => state.token);
+
+  const handleSubmit = () => {
+    dispatch(postComment(token.token, text.text));
+  };
+
   return (
     <>
       {profile.profile && (
@@ -42,12 +52,19 @@ const ModalPost = ({ show, handleClose }) => {
                 as='textarea'
                 placeholder='Di cosa vorresti Parlare?'
                 style={{ height: '250px' }}
+                value={text.text}
+                onChange={(e) => {
+                  dispatch({
+                    type: 'SUBMIT_COMMENT',
+                    payload: e.target.value,
+                  });
+                }}
               />
             </FloatingLabel>
           </Modal.Body>
 
           <Modal.Footer>
-            <Button variant='primary' onClick={handleClose}>
+            <Button variant='primary' onClick={handleSubmit}>
               Salva modifiche
             </Button>
           </Modal.Footer>

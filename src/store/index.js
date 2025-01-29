@@ -3,12 +3,14 @@ import experiencesReducer from '../reducers/experiences';
 import tokenReducer from '../reducers/token';
 import userReducer from '../reducers/user';
 import setProfileReducer from '../reducers/profile';
+import { submitTextReducer } from '../reducers/submitTextReducer';
 
 const mainReducer = combineReducers({
   experiences: experiencesReducer,
   token: tokenReducer,
   user: userReducer,
-  profileInfo: setProfileReducer,
+  profile: setProfileReducer,
+  text: submitTextReducer,
 });
 
 const store = configureStore({

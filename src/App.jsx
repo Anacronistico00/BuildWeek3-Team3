@@ -5,24 +5,26 @@ import ProfileComponent from './components/ProfileComponent';
 import './style/style.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import NavBarComponent from './components/NavBarComponent';
 import Footer from './components/FooterComponent';
-import HomeComponent from './components/HomeComponent';
+import PostsComponent from './components/PostsComponent';
 
 function App() {
   return (
     <BrowserRouter>
       <NavBarComponent />
       <Routes>
-        <Route path='/' element={<HomeComponent />} />
+        {/* <Route path="/" element={<HomeComponent />} /> */}
         <Route path='/profile' element={<ProfileComponent />} />
+        <Route path='/' element={<PostsComponent />} />
 
         {/* <Route path='/jobs' element={<JobsComponent />} />
         <Route path='*' element={<ErrorComponent />} /> */}
       </Routes>
 
-      <Footer />
+      {<Footer />}
     </BrowserRouter>
   );
 }

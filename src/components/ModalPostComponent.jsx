@@ -5,7 +5,7 @@ const ModalPost = ({ show, handleClose }) => {
   const profile = useSelector((state) => state.profile);
   return (
     <>
-      {profile && (
+      {profile.profile && (
         <Modal show={show} onHide={handleClose} className='modalePost modal-lg'>
           <Modal.Header closeButton>
             <Modal.Title>
@@ -13,7 +13,7 @@ const ModalPost = ({ show, handleClose }) => {
                 <Row className='align-items-center hover-row '>
                   <Col md={2}>
                     <img
-                      src={profile.image}
+                      src={profile.profile.image}
                       alt='Profile'
                       className='circular-image'
                       style={{ width: '40px', borderRadius: '50%' }}
@@ -22,7 +22,7 @@ const ModalPost = ({ show, handleClose }) => {
                   <Col className='ms-4 d-flex align-items-center justify-content-between'>
                     <div>
                       <h4 className='mb-0 text-black text-start ms-2'>
-                        {profile.name} {profile.surname}
+                        {profile.profile.name} {profile.profile.surname}
                       </h4>
                       <p className='mb-0 fs-6 text-black text-start ms-2'>
                         Pubblica: Chiunque

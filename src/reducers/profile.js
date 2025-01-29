@@ -2,7 +2,7 @@ const initialState = {
   profile: null,
 };
 
-const mainReducer = (state = initialState, action) => {
+const setProfileReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'SET_PROFILE':
       return {
@@ -14,4 +14,4 @@ const mainReducer = (state = initialState, action) => {
   }
 };
 
-export default mainReducer;
+export default setProfileReducer;

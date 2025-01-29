@@ -276,9 +276,9 @@
   white-space: normal;
 }
 
-/* .dropdown-toggle::after {
+.dropdown-toggle::after {
   display: none;
-} */
+}
 
 .inputFile {
   display: none;
@@ -298,7 +298,7 @@
     font-size: 0;
   }
   .btnResource::before {
-    content: "⋯";
+    content: '⋯';
     font-size: 1rem;
   }
 }
@@ -308,7 +308,7 @@
     font-size: 0;
   }
   .btnResource::before {
-    content: "⋯";
+    content: '⋯';
     font-size: 1rem;
   }
 }

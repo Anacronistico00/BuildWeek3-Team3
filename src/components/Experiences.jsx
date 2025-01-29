@@ -3,8 +3,6 @@ import { useSelector } from 'react-redux';
 import { GoPencil, GoPlus } from 'react-icons/go';
 import { useState, useEffect } from 'react';
 import GetExperiences from './GetExperiences';
-import { useDispatch } from 'react-redux';
-import { RetrieveExperiencesAction } from '../actions/setProfileAction';
 
 function Experiences() {
   const [show, setShow] = useState(false);
@@ -14,7 +12,6 @@ function Experiences() {
   const token = useSelector((state) => state.token.token);
   const user = useSelector((state) => state.user.user_logged);
   const profile = useSelector((state) => state.user.profile);
-  const dispatch = useDispatch();
 
   useEffect(() => {
     if (profile) {
@@ -25,7 +22,7 @@ function Experiences() {
   const fetchExperiences = async () => {
     try {
       const response = await fetch(
-        `https://striveschool-api.herokuapp.com/api/profile/${profile._id}/experiences`,
+        `https://striveschool-api.herokuapp.com/api/profile/${profile.profile._id}/experiences`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

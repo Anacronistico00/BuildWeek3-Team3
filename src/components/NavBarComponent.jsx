@@ -80,7 +80,40 @@ const NavBarComponent = function () {
                   <HouseDoorFill className='HomeIcons' />
                   <p className='SubsIcon d-none d-md-block'>Home</p>
                 </Nav.Link>
+              {/* Barra di ricerca */}
+              <Form className='mr-auto d-flex align-items-center'>
+                <div className='input-group'>
+                  <Search className='search-icon' />
+                  <FormControl
+                    type='text'
+                    placeholder='Search'
+                    className='d-none d-md-block me-2'
+                  />
+                </div>
+              </Form>
+            </Col>
+            <Col
+              xs={8}
+              lg={6}
+              className=' d-flex justify-content-evenly justify-content-lg-between'
+            >
+              {/* Menu di navigazione */}
+              <div className='d-flex flex-row align-items-center justify-content-between mx-3  '>
+                <Nav.Link
+                  href='#home'
+                  className='d-flex flex-column align-items-center mx-3 mx-lg-4 '
+                >
+                  <HouseDoorFill className='HomeIcons' />
+                  <p className='SubsIcon d-none d-md-block'>Home</p>
+                </Nav.Link>
 
+                <Nav.Link
+                  href='#network'
+                  className='d-flex flex-column align-items-center mx-3 mx-lg-4 '
+                >
+                  <PeopleFill className='HomeIcons' />
+                  <p className='SubsIcon d-none d-md-block'>Rete</p>
+                </Nav.Link>
                 <Nav.Link
                   href='#network'
                   className='d-flex flex-column align-items-center mx-3 mx-lg-4 '
@@ -96,7 +129,21 @@ const NavBarComponent = function () {
                   <BriefcaseFill className='HomeIcons' />
                   <p className='SubsIcon d-none d-md-block'>Lavoro</p>
                 </Nav.Link>
+                <Nav.Link
+                  href='#jobs'
+                  className='d-flex flex-column align-items-center mx-3 mx-lg-4 '
+                >
+                  <BriefcaseFill className='HomeIcons' />
+                  <p className='SubsIcon d-none d-md-block'>Lavoro</p>
+                </Nav.Link>
 
+                <Nav.Link
+                  href='#messaging'
+                  className='d-flex flex-column align-items-center mx-3 mx-lg-4 '
+                >
+                  <ChatDotsFill className='HomeIcons' />
+                  <p className='SubsIcon d-none d-md-block'>Messaggistica</p>
+                </Nav.Link>
                 <Nav.Link
                   href='#messaging'
                   className='d-flex flex-column align-items-center mx-3 mx-lg-4 '
@@ -112,7 +159,15 @@ const NavBarComponent = function () {
                   <Bell className='HomeIcons' />
                   <p className='SubsIcon d-none d-md-block'>Notifiche</p>
                 </Nav.Link>
+                <Nav.Link
+                  href='#notifications'
+                  className='d-flex flex-column align-items-center mx-3 mx-lg-4 '
+                >
+                  <Bell className='HomeIcons' />
+                  <p className='SubsIcon d-none d-md-block'>Notifiche</p>
+                </Nav.Link>
 
+                {/* Profilo Utente */}
                 {/* Profilo Utente */}
 
                 <div className='d-flex justify-content-center align-items-center'>
@@ -125,6 +180,10 @@ const NavBarComponent = function () {
                         width='20'
                         height='20'
                       />
+                    )}
+                  </div>
+                  <span className=' nameTab'>Tu</span>
+                </div>
                     )}
                   </div>
                   <span className=' nameTab'>Tu</span>
@@ -554,6 +613,14 @@ const NavBarComponent = function () {
                           </p>
                         </a>
                       </div>
+                      <div className='my-3'>
+                        <a href='#' className='linksChange'>
+                          Offerta di lavoro gratuita
+                          <p className='smallerTitle'>
+                            Ottieni rapidamente candidati qualificati
+                          </p>
+                        </a>
+                      </div>
 
                       <div className='my-3'>
                         <a href='#' className='linksChange'>
@@ -572,6 +639,14 @@ const NavBarComponent = function () {
                           </p>
                         </a>
                       </div>
+                      <div className='my-3'>
+                        <a href='#' className='linksChange'>
+                          Inizia con Premium
+                          <p className='smallerTitle'>
+                            Amplia e sfrutta la tua rete
+                          </p>
+                        </a>
+                      </div>
 
                       <div className='my-3'>
                         <a href='#' className='linksChange'>
@@ -581,7 +656,23 @@ const NavBarComponent = function () {
                           </p>
                         </a>
                       </div>
+                      <div className='my-3'>
+                        <a href='#' className='linksChange'>
+                          Impara con Linkedin
+                          <p className='smallerTitle'>
+                            Corsi per formare i tuoi dipendenti
+                          </p>
+                        </a>
+                      </div>
 
+                      <div className='my-3'>
+                        <a href='#' className='linksChange'>
+                          Admin Center
+                          <p className='smallerTitle'>
+                            Gestisci i dettagli di fatturazione e account
+                          </p>
+                        </a>
+                      </div>
                       <div className='my-3'>
                         <a href='#' className='linksChange'>
                           Admin Center

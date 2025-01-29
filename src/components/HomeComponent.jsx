@@ -7,7 +7,7 @@ function HomeComponent() {
         <Container className='mt-5'>
             <Row className='justify-content-center'>
                 <Col xs={12} md={2} className=' p-0 mt-4'>
-                    <Container fluid className=' p-3 bg-white mb-2'>
+                    <Container fluid className='p-3 bg-white mb-2 cards-home'>
                         <h1>ciaooo</h1>
                         <h2>ciaooo</h2>
                         <h3>ciaooo</h3>
@@ -15,7 +15,7 @@ function HomeComponent() {
                     </Container>
                 </Col>
                 <Col xs={12} md={7} className=' p-0 mt-4 px-3'>
-                    <Container fluid className=' p-3 bg-white mb-2'>
+                    <Container fluid className=' p-3 bg-white mb-2 cards-home'>
                         <h1>ciaooo</h1>
                         <h2>ciaooo</h2>
                         <h3>ciaooo</h3>

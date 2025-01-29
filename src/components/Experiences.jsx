@@ -1,8 +1,9 @@
 import { Card, Col, Container, Row } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { GoPencil, GoPlus } from 'react-icons/go';
 import { useState, useEffect } from 'react';
 import GetExperiences from './GetExperiences';
+import { RetrieveExperiencesAction } from '../actions/setProfileAction';
 
 function Experiences() {
   const [show, setShow] = useState(false);
@@ -12,36 +13,26 @@ function Experiences() {
   const token = useSelector((state) => state.token.token);
   const user = useSelector((state) => state.user.user_logged);
   const profile = useSelector((state) => state.user.profile);
+  const dispatch = useDispatch();
+  const experiences = useSelector((state) => state.experiences.exp_list);
+  const userid = useSelector((state) => state.profile);
 
   useEffect(() => {
-    if (profile) {
-      fetchExperiences(); // Carica le esperienze all'avvio
+    if (userid) {
+      console.log(userid.profileInfo);
+      dispatch(RetrieveExperiencesAction(token, userid.profileInfo)); // Carica le esperienze all'avvio
     }
-  }, [profile]);
+  }, [userid.profileInfo]);
 
-  const fetchExperiences = async () => {
-    try {
-      const response = await fetch(
-        `https://striveschool-api.herokuapp.com/api/profile/${profile.profile._id}/experiences`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      if (response.ok) {
-        const data = await response.json();
-        setExpList(data);
-      } else {
-        throw new Error('Errore nel recuperare le esperienze');
-      }
-    } catch (err) {
-      console.error(err);
+  useEffect(() => {
+    if (experiences) {
+      setExpList(experiences);
+      console.log(experiences);
     }
-  };
+  }, []);
 
   const handleSave = () => {
-    fetchExperiences(); // Aggiorna la lista quando viene salvata/modificata un'esperienza
+    RetrieveExperiencesAction(token, userid.profile._id); // Aggiorna la lista quando viene salvata/modificata un'esperienza
     setShow(false); // Chiudi il modal
   };
 
@@ -99,12 +90,12 @@ function Experiences() {
           <Card className='p-4'>
             <Row className=' align-items-end mb-3'>
               <Col xs={'auto'}>
-                <h4>Esperienze</h4>
+                <h5>Esperienze</h5>
               </Col>
               <Col xs={'auto'} className='ms-auto'>
                 {user && profile && user._id === profile._id && (
                   <button
-                    className='btn-experience bg-white border-0 rounded-circle p-1'
+                    className='pencil-icon d-flex align-items-center justify-content-center border-none bg-white'
                     onClick={() => setShow(true)}
                   >
                     <GoPlus className='fs-2 text-decoration-none text-black' />
@@ -113,7 +104,7 @@ function Experiences() {
               </Col>
             </Row>
             <div id='experiences'>
-              {expList.map((exp) => {
+              {experiences && expList.map((exp) => {
                 return (
                   <Row key={exp._id} className='mb-3 g-1'>
                     <Col xs={2} xl={1}>

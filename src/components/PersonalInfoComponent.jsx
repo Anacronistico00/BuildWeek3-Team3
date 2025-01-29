@@ -1,5 +1,4 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { setProfile } from '../actions/setProfileAction';
 import {
   Button,
   Card,
@@ -28,6 +27,7 @@ import {
 } from 'react-bootstrap-icons';
 import { useEffect, useRef, useState } from 'react';
 import { HiOutlinePencil } from 'react-icons/hi2';
+import { getProfileInfo } from '../actions/profileInfo';
 
 const PersonalInfoComponent = () => {
   const dispatch = useDispatch();
@@ -96,7 +96,7 @@ const PersonalInfoComponent = () => {
     if (selectedFile) {
       try {
         await uploadProfilePic(selectedFile);
-        await getProfileInfo();
+        dispatch(getProfileInfo(token));
         handleProfilePicModalClose();
       } catch (error) {
         console.error("Errore nel caricamento dell'immagine:", error);
@@ -151,27 +151,6 @@ const PersonalInfoComponent = () => {
     }, 'image/jpeg');
   };
 
-  const getProfileInfo = async () => {
-    try {
-      const response = await fetch(
-        'https://striveschool-api.herokuapp.com/api/profile/me',
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      const data = await response.json();
-      console.log(data);
-      dispatch(setProfile(data));
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   const uploadProfilePic = async (file) => {
     const url = `https://striveschool-api.herokuapp.com/api/profile/${profile.profile._id}/picture`;
 
@@ -199,12 +178,6 @@ const PersonalInfoComponent = () => {
       throw error;
     }
   };
-
-  useEffect(() => {
-    console.log('Fetching profile info');
-
-    getProfileInfo();
-  }, [dispatch]);
 
   return (
     <>

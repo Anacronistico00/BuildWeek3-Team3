@@ -24,13 +24,12 @@ import {
 } from 'react-bootstrap-icons';
 import { GoPlus } from 'react-icons/go';
 import { useDispatch, useSelector } from 'react-redux';
-import { getProfileInfo } from '../actions/profileInfo';
-const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Nzk3NDI1ZTE2ZjYzNTAwMTVmZWNiNzYiLCJpYXQiOjE3Mzc5NjYxNzQsImV4cCI6MTczOTE3NTc3NH0.C54YDV4poWgVTe4vEBdnfY19L0nYPNupc4t-FcJn1m8';
+import { getProfileInfo } from '../actions/profileinfo';
 
 const NavBarComponent = function () {
-  const profile = useSelector((state) => state.profileInfo);
+  const profile = useSelector((state) => state.profile);
   const dispatch = useDispatch();
+  const token = useSelector((state) => state.token.token);
 
   useEffect(() => {
     console.log('Fetching profile info');
@@ -114,10 +113,11 @@ const NavBarComponent = function () {
                 </Nav.Link>
 
                 {/* Profilo Utente */}
+                {/* Profilo Utente */}
 
                 <div className='d-flex justify-content-center align-items-center'>
                   <div className='ImgProfile'>
-                    {profile.profileInfo && (
+                    {profile.profile && (
                       <img
                         src={profile.profileInfo.image}
                         alt='imagine profilo'
@@ -137,7 +137,7 @@ const NavBarComponent = function () {
                 >
                   <Dropdown.Item>
                     <div style={{ display: 'flex', alignItems: 'center' }}>
-                      {profile.profileInfo && (
+                      {profile.profile && (
                         <img
                           src={profile.profileInfo.image}
                           alt='Profile'
@@ -191,7 +191,7 @@ const NavBarComponent = function () {
                     <h6>Gestisci</h6>
                   </DropdownItemText>
                   <Dropdown.Item href='#/Post' className='Underlined'>
-                    Post e attivitÃ
+                    Post e attività
                   </Dropdown.Item>
                   <Dropdown.Item href='#/Account' className='Underlined'>
                     Account per la pubblicazione di offerte di lavoro
@@ -541,7 +541,7 @@ const NavBarComponent = function () {
                         <a href='#' className='linksChange'>
                           Vendi con Linkedin
                           <p className='smallerTitle'>
-                            Sblocca nuove opportunitÃ di vendita
+                            Sblocca nuove opportunità di vendita
                           </p>
                         </a>
                       </div>
@@ -557,7 +557,7 @@ const NavBarComponent = function () {
 
                       <div className='my-3'>
                         <a href='#' className='linksChange'>
-                          Fai pubblicitÃ su Linkedin
+                          Fai pubblicità su Linkedin
                           <p className='smallerTitle'>
                             Acquisisci clienti e fai conoscere la tua azienda
                           </p>

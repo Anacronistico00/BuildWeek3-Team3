@@ -21,7 +21,7 @@ const ProfileComponent = () => {
           <Study />
           <Skills />
         </Col>
-        <Col xs={12} md={3} className=' p-0 side-bar mt-4'>
+        <Col xs={12} md={3} className=' p-0 mt-4'>
           <SideBar />
         </Col>
       </Row>

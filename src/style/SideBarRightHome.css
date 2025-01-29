@@ -1,0 +1,68 @@
+.cards-home {
+    border: 1px #DFDEDB solid !important;
+    border-radius: 10px;
+}
+
+.testo-interrotto {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 90%;
+}
+
+.cards-home .list-group-item {
+    border-bottom: none;
+}
+
+.info-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    width: 14px;
+    height: 14px;
+    border-radius: 5px;
+}
+
+.cards-home h2 {
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.cards-home h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #666666;
+}
+
+.cards-home h6 {
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.cards-home p,
+.grigiolino {
+    font-size: 0.8rem;
+    color: #666666;
+}
+
+.normal-p {
+    font-size: 1rem !important;
+    color: #4C4C4C !important;
+    font-weight: normal !important;
+}
+
+.cards-home-last {
+    position: sticky;
+    top: 70px;
+}
+
+.normal-p2 {
+    font-size: 0.8rem !important;
+    color: #4C4C4C !important;
+    font-weight: normal !important;
+}
+
+.normal-p2 svg {
+    vertical-align: text-top !important;
+}

@@ -24,10 +24,10 @@ import {
 } from 'react-bootstrap-icons';
 import { GoPlus } from 'react-icons/go';
 import { useDispatch, useSelector } from 'react-redux';
-import { getProfileInfo } from '../actions/profileinfo';
+import { getProfileInfo } from '../actions/profileInfo';
 
 const NavBarComponent = function () {
-  const profile = useSelector((state) => state.profile);
+  const profile = useSelector((state) => state.profileInfo);
   const dispatch = useDispatch();
   const token = useSelector((state) => state.token.token);
 

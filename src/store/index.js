@@ -9,7 +9,7 @@ const mainReducer = combineReducers({
   experiences: experiencesReducer,
   token: tokenReducer,
   user: userReducer,
-  profile: setProfileReducer,
+  profileInfo: setProfileReducer,
   text: submitTextReducer,
 });
 

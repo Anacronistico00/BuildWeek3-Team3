@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import postComment from '../actions/postcomment';
 
 const ModalPost = ({ show, handleClose }) => {
-  const profile = useSelector((state) => state.profile);
+  const profile = useSelector((state) => state.profileInfo);
   const dispatch = useDispatch();
   const text = useSelector((state) => state.text);
 

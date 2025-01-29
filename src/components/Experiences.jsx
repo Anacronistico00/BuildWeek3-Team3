@@ -74,6 +74,16 @@ function Experiences() {
     return `${mese} ${anno}`;
   }
 
+  const [visibleCount, setVisibleCount] = useState(3);
+
+  const showMore = () => {
+    setVisibleCount(expList.length); // Mostra tutti gli elementi
+  };
+
+  const showLess = () => {
+    setVisibleCount(3); // Mostra solo i primi 3 elementi
+  };
+
   return (
     <Container className='px-0 mt-3'>
       <GetExperiences
@@ -101,9 +111,9 @@ function Experiences() {
                 )}
               </Col>
             </Row>
-            <div id='experiences' className=' overflow-scroll'>
+            <div id='experiences'>
               {experiences &&
-                expList.map((exp) => {
+                expList.slice(0, visibleCount).map((exp) => {
                   return (
                     <Row key={exp._id} className='mb-3 g-1'>
                       <Col xs={2} xl={1}>
@@ -139,6 +149,12 @@ function Experiences() {
                     </Row>
                   );
                 })}
+              {visibleCount < expList.length && (
+                <button onClick={showMore}>Mostra di più</button>
+              )}
+              {visibleCount >= expList.length && expList.length > 3 && (
+                <button onClick={showLess}>Mostra meno</button>
+              )}
             </div>
           </Card>
         </Col>

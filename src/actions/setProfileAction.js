@@ -3,13 +3,6 @@ export const SET_TOKEN = 'SET_TOKEN';
 export const RETRIEVE_USER = 'RETRIEVE_USER';
 export const RETRIEVE_PROFILE = 'RETRIEVE_PROFILE';
 
-const SET_PROFILE = 'SET_PROFILE';
-
-export const setProfile = (profile) => ({
-  type: SET_PROFILE,
-  payload: profile,
-});
-
 export const RetrieveUserAction = (token) => {
   return async (dispatch) => {
     try {

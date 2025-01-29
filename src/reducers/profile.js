@@ -1,13 +1,15 @@
+import { SET_PROFILE } from '../actions/profileInfo';
+
 const initialState = {
-  profile: null,
+  profileInfo: null,
 };
 
 const setProfileReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'SET_PROFILE':
+    case SET_PROFILE:
       return {
         ...state,
-        profile: action.payload,
+        profileInfo: action.payload,
       };
     default:
       return state;

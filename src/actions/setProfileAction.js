@@ -34,7 +34,7 @@ export const RetrieveExperiencesAction = (token, user) => {
   return async (dispatch) => {
     try {
       const response = await fetch(
-        `https://striveschool-api.herokuapp.com/api/profile/${user}/experiences`,
+        `https://striveschool-api.herokuapp.com/api/profile/${user._id}/experiences`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

@@ -31,7 +31,7 @@ import { getProfileInfo } from '../actions/profileInfo';
 
 const PersonalInfoComponent = () => {
   const dispatch = useDispatch();
-  const profile = useSelector((state) => state.profile);
+  const profile = useSelector((state) => state.profileInfo);
 
   const [showProfileModal, setShowProfileModal] = useState(false);
   const [showContactsModal, setShowProfile] = useState(false);
@@ -152,7 +152,7 @@ const PersonalInfoComponent = () => {
   };
 
   const uploadProfilePic = async (file) => {
-    const url = `https://striveschool-api.herokuapp.com/api/profile/${profile.profile._id}/picture`;
+    const url = `https://striveschool-api.herokuapp.com/api/profile/${profile.profileInfo._id}/picture`;
     const formData = new FormData();
     formData.append('profile', file);
 
@@ -195,7 +195,7 @@ const PersonalInfoComponent = () => {
 
   return (
     <>
-      {profile.profile && (
+      {profile.profileInfo && (
         <Card className='rounded-4 mt-4 position-relative'>
           <Card.Img
             variant='top'
@@ -209,7 +209,7 @@ const PersonalInfoComponent = () => {
                 <img
                   onClick={handleProfilePicModalShow}
                   style={{ cursor: 'pointer' }}
-                  src={profile.profile.image}
+                  src={profile.profileInfo.image}
                   alt='Profile Image'
                   className='profileImage'
                 />
@@ -227,9 +227,11 @@ const PersonalInfoComponent = () => {
                   <Col>
                     <div>
                       <h2 className='name'>
-                        {profile.profile.name} {profile.profile.surname}
+                        {profile.profileInfo.name} {profile.profileInfo.surname}
                       </h2>
-                      <p className='username'>@{profile.profile.username}</p>
+                      <p className='username'>
+                        @{profile.profileInfo.username}
+                      </p>
                       <p>--</p>
                     </div>
                   </Col>
@@ -254,7 +256,7 @@ const PersonalInfoComponent = () => {
                   <Col>
                     <div className='areaInfo'>
                       <span className='text-secondary'>
-                        {profile.profile.area}{' '}
+                        {profile.profileInfo.area}{' '}
                       </span>
                       <span
                         onClick={handleContactsModalShow}
@@ -355,11 +357,11 @@ const PersonalInfoComponent = () => {
         </Card>
       )}
 
-      {profile.profile && (
+      {profile.profileInfo && (
         <Modal show={showContactsModal} onHide={handleContactsModalClose}>
           <Modal.Header closeButton>
             <Modal.Title>
-              {profile.profile.name} {profile.profile.surname}
+              {profile.profileInfo.name} {profile.profileInfo.surname}
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
@@ -373,8 +375,8 @@ const PersonalInfoComponent = () => {
                 <div className='ms-2 mb-3'>
                   <h6>Il tuo profilo</h6>
                   <p className='profileLink text-primary'>
-                    Linkedin.com/in/{profile.profile.name}-
-                    {profile.profile.surname}-{profile.profile._id}
+                    Linkedin.com/in/{profile.profileInfo.name}-
+                    {profile.profileInfo.surname}-{profile.profileInfo._id}
                   </p>
                 </div>
               </div>
@@ -383,7 +385,7 @@ const PersonalInfoComponent = () => {
                 <div className='ms-2'>
                   <h6>Email</h6>
                   <p className='profileLink text-primary'>
-                    {profile.profile.email}
+                    {profile.profileInfo.email}
                   </p>
                 </div>
               </div>
@@ -512,7 +514,7 @@ const PersonalInfoComponent = () => {
         </Modal.Body>
       </Modal>
 
-      {profile.profile && (
+      {profile.profileInfo && (
         <Modal
           class
           show={showProfilePicModal}
@@ -524,7 +526,7 @@ const PersonalInfoComponent = () => {
           </Modal.Header>
           <Modal.Body className='d-flex justify-content-center align-items-center'>
             <img
-              src={profile.profile.image}
+              src={profile.profileInfo.image}
               alt='Profile'
               className='profilePic'
             />
@@ -570,7 +572,7 @@ const PersonalInfoComponent = () => {
         </Modal>
       )}
 
-      {profile.profile && (
+      {profile.profileInfo && (
         <Modal
           show={showProfilePicModalModify}
           onHide={handleProfilePicModalModifyClose}
@@ -581,9 +583,11 @@ const PersonalInfoComponent = () => {
           </Modal.Header>
           {!showCamera && (
             <Modal.Body className='d-flex flex-column justify-content-center align-items-center text-secondary'>
-              <h5>{profile.profile.name}, aiuta gli altri a riconoscerti!</h5>
+              <h5>
+                {profile.profileInfo.name}, aiuta gli altri a riconoscerti!
+              </h5>
               <img
-                src={profile.profile.image}
+                src={profile.profileInfo.image}
                 alt='Profile'
                 className='profilePic'
               />

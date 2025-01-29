@@ -29,7 +29,7 @@ const token =
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Nzk3NDI1ZTE2ZjYzNTAwMTVmZWNiNzYiLCJpYXQiOjE3Mzc5NjYxNzQsImV4cCI6MTczOTE3NTc3NH0.C54YDV4poWgVTe4vEBdnfY19L0nYPNupc4t-FcJn1m8';
 
 const NavBarComponent = function () {
-  const profile = useSelector((state) => state.profile);
+  const profile = useSelector((state) => state.profileInfo);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -117,9 +117,9 @@ const NavBarComponent = function () {
 
                 <div className='d-flex justify-content-center align-items-center'>
                   <div className='ImgProfile'>
-                    {profile.profile && (
+                    {profile.profileInfo && (
                       <img
-                        src={profile.profile.image}
+                        src={profile.profileInfo.image}
                         alt='imagine profilo'
                         className='rounded-circle'
                         width='20'
@@ -137,9 +137,9 @@ const NavBarComponent = function () {
                 >
                   <Dropdown.Item>
                     <div style={{ display: 'flex', alignItems: 'center' }}>
-                      {profile.profile && (
+                      {profile.profileInfo && (
                         <img
-                          src={profile.profile.image}
+                          src={profile.profileInfo.image}
                           alt='Profile'
                           style={{
                             width: '50px',
@@ -151,10 +151,10 @@ const NavBarComponent = function () {
 
                       <div>
                         <strong>
-                          {profile.profile && profile.profile.name}{' '}
-                          {profile.profile && profile.profile.surname}
+                          {profile.profileInfo && profile.profileInfo.name}{' '}
+                          {profile.profileInfo && profile.profileInfo.surname}
                         </strong>
-                        <p>{profile.profile && profile.profile.bio}</p>
+                        <p>{profile.profileInfo && profile.profileInfo.bio}</p>
                       </div>
                     </div>
                   </Dropdown.Item>

@@ -1,9 +1,4 @@
-const SET_PROFILE = 'SET_PROFILE';
-
-export const setProfile = (profile) => ({
-  type: SET_PROFILE,
-  payload: profile,
-});
+export const SET_PROFILE = 'SET_PROFILE';
 
 export const getProfileInfo = (token) => {
   return async (dispatch) => {
@@ -22,7 +17,10 @@ export const getProfileInfo = (token) => {
       const data = await response.json();
       console.log(data);
 
-      dispatch(setProfile(data));
+      dispatch({
+        type: SET_PROFILE,
+        payload: data,
+      });
     } catch (error) {
       console.error(error);
     }

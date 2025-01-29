@@ -1,8 +1,9 @@
 import { Card, Col, Container, Row } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { GoPencil, GoPlus } from 'react-icons/go';
 import { useState, useEffect } from 'react';
 import GetExperiences from './GetExperiences';
+import { RetrieveExperiencesAction } from '../actions/setProfileAction';
 
 function Experiences() {
   const [show, setShow] = useState(false);
@@ -12,36 +13,24 @@ function Experiences() {
   const token = useSelector((state) => state.token.token);
   const user = useSelector((state) => state.user.user_logged);
   const profile = useSelector((state) => state.user.profile);
+  const experiences = useSelector((state) => state.experiences.exp_list);
+  const dispatch = useDispatch();
+  const userid = useSelector((state) => state.profileInfo);
 
   useEffect(() => {
-    if (profile) {
-      fetchExperiences(); // Carica le esperienze all'avvio
+    if (userid) {
+      console.log(userid.profileInfo);
+      dispatch(RetrieveExperiencesAction(token, userid.profileInfo)); // Carica le esperienze all'avvio
     }
-  }, [profile]);
+  }, [userid.profileInfo]);
 
-  const fetchExperiences = async () => {
-    try {
-      const response = await fetch(
-        `https://striveschool-api.herokuapp.com/api/profile/${profile.profile._id}/experiences`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      if (response.ok) {
-        const data = await response.json();
-        setExpList(data);
-      } else {
-        throw new Error('Errore nel recuperare le esperienze');
-      }
-    } catch (err) {
-      console.error(err);
-    }
-  };
+  useEffect(() => {
+    setExpList(experiences);
+    console.log(experiences);
+  }, [experiences]);
 
   const handleSave = () => {
-    fetchExperiences(); // Aggiorna la lista quando viene salvata/modificata un'esperienza
+    dispatch(RetrieveExperiencesAction(token, userid.profileInfo)); // Aggiorna la lista quando viene salvata/modificata un'esperienza
     setShow(false); // Chiudi il modal
   };
 
@@ -112,43 +101,44 @@ function Experiences() {
                 )}
               </Col>
             </Row>
-            <div id='experiences'>
-              {expList.map((exp) => {
-                return (
-                  <Row key={exp._id} className='mb-3 g-1'>
-                    <Col xs={2} xl={1}>
-                      <img src={exp.image} alt='' width={50} height={50} />
-                    </Col>
-                    <Col xs={9} xl={10}>
-                      <h6 className='mb-0'>{exp.role}</h6>
-                      <p className='mb-0'>
-                        {exp.company} • {exp.area}
-                      </p>
-                      <p className='text-muted'>
-                        {`${formatoDataBreve(
-                          exp.startDate
-                        )} - ${formatoDataBreve(
-                          exp.endDate
-                        )} • ${differenzaDate(exp.startDate, exp.endDate)}`}
-                      </p>
-                    </Col>
-                    <Col xs={1} className='text-start'>
-                      {user._id === profile._id && (
-                        <button
-                          className='btn-experience bg-white border-0 rounded-circle p-1 p-lg-2'
-                          onClick={() => {
-                            setisModifing(true);
-                            setElementToModify(exp._id);
-                            setShow(true);
-                          }}
-                        >
-                          <GoPencil className='fs-4' />
-                        </button>
-                      )}
-                    </Col>
-                  </Row>
-                );
-              })}
+            <div id='experiences' className=' overflow-scroll'>
+              {experiences &&
+                expList.map((exp) => {
+                  return (
+                    <Row key={exp._id} className='mb-3 g-1'>
+                      <Col xs={2} xl={1}>
+                        <img src={exp.image} alt='' width={50} height={50} />
+                      </Col>
+                      <Col xs={9} xl={10}>
+                        <h6 className='mb-0'>{exp.role}</h6>
+                        <p className='mb-0'>
+                          {exp.company} • {exp.area}
+                        </p>
+                        <p className='text-muted'>
+                          {`${formatoDataBreve(
+                            exp.startDate
+                          )} - ${formatoDataBreve(
+                            exp.endDate
+                          )} • ${differenzaDate(exp.startDate, exp.endDate)}`}
+                        </p>
+                      </Col>
+                      <Col xs={1} className='text-start'>
+                        {user._id === profile._id && (
+                          <button
+                            className='btn-experience bg-white border-0 rounded-circle p-1 p-lg-2'
+                            onClick={() => {
+                              setisModifing(true);
+                              setElementToModify(exp._id);
+                              setShow(true);
+                            }}
+                          >
+                            <GoPencil className='fs-4' />
+                          </button>
+                        )}
+                      </Col>
+                    </Row>
+                  );
+                })}
             </div>
           </Card>
         </Col>

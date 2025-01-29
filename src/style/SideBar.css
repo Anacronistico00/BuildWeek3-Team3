@@ -45,6 +45,16 @@
     color: #181818;
 }
 
+.cards-home button {
+    color: #0B66C2;
+    font-weight: 600;
+    background-color: transparent;
+    border: 1px #0B66C2 solid;
+    border-radius: 20px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
 hr {
     border-color: #9f9e9e !important;
 }

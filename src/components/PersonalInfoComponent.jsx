@@ -382,7 +382,9 @@ const PersonalInfoComponent = () => {
                 <Envelope className='fs-4'></Envelope>
                 <div className='ms-2'>
                   <h6>Email</h6>
-                  <p className='profileLink text-primary'>{profile.email}</p>
+                  <p className='profileLink text-primary'>
+                    {profile.profile.email}
+                  </p>
                 </div>
               </div>
             </div>

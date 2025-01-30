@@ -1,9 +1,10 @@
 import { Card, Col, Container, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { GoPencil, GoPlus } from 'react-icons/go';
+import {  GoPlus } from 'react-icons/go';
 import { useState, useEffect } from 'react';
 import GetExperiences from './GetExperiences';
 import { RetrieveExperiencesAction } from '../actions/setProfileAction';
+import { HiOutlinePencil } from 'react-icons/hi';
 
 function Experiences() {
   const [show, setShow] = useState(false);
@@ -135,14 +136,14 @@ function Experiences() {
                       <Col xs={1} className='text-start'>
                         {user._id === profile._id && (
                           <button
-                            className='btn-experience bg-white border-0 rounded-circle p-1 p-lg-2'
+                            className='btn-experience bg-white border-0 rounded-circle pencil-icon'
                             onClick={() => {
                               setisModifing(true);
                               setElementToModify(exp._id);
                               setShow(true);
                             }}
                           >
-                            <GoPencil className='fs-4' />
+                            <HiOutlinePencil className='fs-4' />
                           </button>
                         )}
                       </Col>

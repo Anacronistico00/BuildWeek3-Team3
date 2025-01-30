@@ -183,11 +183,6 @@
   left: 0;
 }
 
-/* .cardSide {
-  border-radius: 10px;
-  margin-left: 30%;
-} */
-
 .username {
   font-size: 0.8em;
   margin-top: 0;
@@ -539,9 +534,6 @@ select {
 
 /* ----- css del CreateNewPostComponent-------*/
 
-.NewPostCard {
-  margin-top: 4em;
-}
 .HomeIcons {
   width: 24px;
   height: 24px;
@@ -1076,6 +1068,6 @@ select {
   color: rgba(0, 0, 0, 0.736);
 }
 
-.NewPostCard {
+.Card {
   margin-top: 4em;
 }

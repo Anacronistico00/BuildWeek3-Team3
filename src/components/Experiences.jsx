@@ -136,7 +136,7 @@ function Experiences() {
                       <Col xs={1} className='text-start'>
                         {user._id === profile._id && (
                           <button
-                            className='btn-experience bg-white border-0 rounded-circle pencil-icon'
+                            className='btn-experience bg-white border-0 rounded-circle d-flex'
                             onClick={() => {
                               setisModifing(true);
                               setElementToModify(exp._id);

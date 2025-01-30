@@ -1,4 +1,4 @@
-import { AGENCY_SEARCH } from "../actions/Jobs";
+import { AGENCY_SEARCH } from '../actions/Jobs';
 
 const initialState = { jobs: [] };
 

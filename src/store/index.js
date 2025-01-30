@@ -1,12 +1,12 @@
-import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import experiencesReducer from "../reducers/experiences";
-import tokenReducer from "../reducers/token";
-import userReducer from "../reducers/user";
-import setProfileReducer from "../reducers/profile";
-import { submitTextReducer } from "../reducers/submitTextReducer";
-import jobsReducer from "../reducers/jobsReducer";
-import jobsCategoryReducer from "../reducers/jobsCategoryReducer";
-import jobsAgencyReducer from "../reducers/jobAgencySearch";
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import experiencesReducer from '../reducers/experiences';
+import tokenReducer from '../reducers/token';
+import userReducer from '../reducers/user';
+import setProfileReducer from '../reducers/profile';
+import { submitTextReducer } from '../reducers/submitTextReducer';
+import jobsReducer from '../reducers/jobsReducer';
+import jobsCategoryReducer from '../reducers/jobsCategoryReducer';
+import jobsAgencyReducer from '../reducers/jobAgencySearch';
 
 const mainReducer = combineReducers({
   experiences: experiencesReducer,

@@ -1,10 +1,9 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Navbar,
   Form,
   Container,
   FormControl,
-  Nav,
   NavDropdown,
   Col,
   Row,
@@ -25,11 +24,47 @@ import {
 import { GoPlus } from 'react-icons/go';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProfileInfo } from '../actions/profileInfo';
+import { Link, useNavigate } from 'react-router-dom';
+import { GET_JOBS } from '../actions/Jobs';
+
+const url = "https://strive-benchmark.herokuapp.com/api/jobs"
 
 const NavBarComponent = function () {
   const profile = useSelector((state) => state.profileInfo);
   const dispatch = useDispatch();
   const token = useSelector((state) => state.token.token);
+  const [search, setSearch] = useState('')
+  const navigate = useNavigate()
+
+
+  const getSearchTitle = async () => {
+    try {
+      const res = await fetch(`${url}?search=${search}`, {
+        method: 'GET',
+        authorization: `Bearer ${token}`,
+      })
+      if (!res.ok) {
+        throw new Error('La chiamata non è andata a buon fine!')
+      }
+      const data = await res.json()
+      console.log("Titoli trovati: ", data)
+      dispatch({
+        type: GET_JOBS,
+        payload: data.data,
+      });
+      navigate('/jobs')
+    }
+    catch (error) {
+      console.log('Errore: ', error)
+    }
+  }
+
+  const HandleSeacrh = (e) => {
+    e.preventDefault()
+    if (search !== '') {
+      getSearchTitle()
+    }
+  }
 
   useEffect(() => {
     console.log('Fetching profile info');
@@ -59,13 +94,17 @@ const NavBarComponent = function () {
               </Navbar.Brand>
 
               {/* Barra di ricerca */}
-              <Form className='mr-auto d-flex align-items-center'>
+              <Form className='mr-auto d-flex align-items-center' onSubmit={HandleSeacrh}>
                 <div className='input-group'>
                   <Search className='search-icon' />
                   <FormControl
                     type='text'
                     placeholder='Search'
                     className='d-none d-md-block me-2'
+                    value={search}
+                    onChange={(e) => {
+                      setSearch(e.target.value)
+                    }}
                   />
                 </div>
               </Form>
@@ -73,49 +112,49 @@ const NavBarComponent = function () {
             <Col
               xs={8}
               lg={6}
-              className=' d-flex justify-content-evenly justify-content-lg-between'
+              className=" d-flex justify-content-evenly justify-content-lg-between"
             >
               {/* Menu di navigazione */}
-              <div className='d-flex flex-row align-items-center justify-content-between mx-3  '>
-                <Nav.Link
-                  href='#home'
-                  className='d-flex flex-column align-items-center mx-3 mx-lg-4 '
+              <div className="d-flex flex-row align-items-center justify-content-between mx-3  ">
+                <Link
+                  to="/"
+                  className="d-flex flex-column align-items-center mx-3 mx-lg-4 "
                 >
-                  <HouseDoorFill className='HomeIcons' />
-                  <p className='SubsIcon d-none d-md-block'>Home</p>
-                </Nav.Link>
+                  <HouseDoorFill className="HomeIcons" />
+                  <p className="SubsIcon d-none d-md-block">Home</p>
+                </Link>
 
-                <Nav.Link
-                  href='#network'
-                  className='d-flex flex-column align-items-center mx-3 mx-lg-4 '
+                <Link
+                  to="/network"
+                  className="d-flex flex-column align-items-center mx-3 mx-lg-4 "
                 >
-                  <PeopleFill className='HomeIcons' />
-                  <p className='SubsIcon d-none d-md-block'>Rete</p>
-                </Nav.Link>
+                  <PeopleFill className="HomeIcons" />
+                  <p className="SubsIcon d-none d-md-block">Rete</p>
+                </Link>
 
-                <Nav.Link
-                  href='#jobs'
-                  className='d-flex flex-column align-items-center mx-3 mx-lg-4 '
+                <Link
+                  to="/jobs"
+                  className="d-flex flex-column align-items-center mx-3 mx-lg-4 "
                 >
-                  <BriefcaseFill className='HomeIcons' />
-                  <p className='SubsIcon d-none d-md-block'>Lavoro</p>
-                </Nav.Link>
+                  <BriefcaseFill className="HomeIcons" />
+                  <p className="SubsIcon d-none d-md-block">Lavoro</p>
+                </Link>
 
-                <Nav.Link
-                  href='#messaging'
-                  className='d-flex flex-column align-items-center mx-3 mx-lg-4 '
+                <Link
+                  to="/messaging"
+                  className="d-flex flex-column align-items-center mx-3 mx-lg-4 "
                 >
-                  <ChatDotsFill className='HomeIcons' />
-                  <p className='SubsIcon d-none d-md-block'>Messaggistica</p>
-                </Nav.Link>
+                  <ChatDotsFill className="HomeIcons" />
+                  <p className="SubsIcon d-none d-md-block">Messaggistica</p>
+                </Link>
 
-                <Nav.Link
-                  href='#notifications'
-                  className='d-flex flex-column align-items-center mx-3 mx-lg-4 '
+                <Link
+                  to="/notifications"
+                  className="d-flex flex-column align-items-center mx-3 mx-lg-4 "
                 >
-                  <Bell className='HomeIcons' />
-                  <p className='SubsIcon d-none d-md-block'>Notifiche</p>
-                </Nav.Link>
+                  <Bell className="HomeIcons" />
+                  <p className="SubsIcon d-none d-md-block">Notifiche</p>
+                </Link>
 
                 {/* Profilo Utente */}
                 {/* Profilo Utente */}

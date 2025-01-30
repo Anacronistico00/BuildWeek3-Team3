@@ -13,6 +13,7 @@
     width: 20px;
     height: 20px;
   }
+
   .nameTab {
     display: none;
   }
@@ -107,6 +108,7 @@
     right: 6%;
     top: 25%;
   }
+
   .navbar-dropdown .dropdown-menu {
     width: 300px;
   }
@@ -291,6 +293,7 @@
   padding: 0.5rem;
   font-size: 0.8rem;
 }
+
 .dropdown-item {
   white-space: normal;
 }
@@ -307,6 +310,7 @@
   .container {
     padding: 0;
   }
+
   .coverImage {
     height: 15vh;
   }
@@ -316,6 +320,7 @@
   .btnResource {
     font-size: 0;
   }
+
   .btnResource::before {
     content: '⋯';
     font-size: 1rem;
@@ -326,6 +331,7 @@
   .btnResource {
     font-size: 0;
   }
+
   .btnResource::before {
     content: '⋯';
     font-size: 1rem;
@@ -378,15 +384,18 @@
 .sectionpadding {
   padding: 0.5rem 1rem;
 }
+
 .footer {
   background-color: ghostwhite;
   font-size: 12px;
 }
+
 .sbfooter {
   display: flex;
   flex-direction: column;
   padding: -1;
 }
+
 .sbfooter-links {
   display: flex;
   justify-content: space-between;
@@ -395,6 +404,7 @@
   width: 100%;
   margin: 0.2rem 0;
 }
+
 .sbfooter-links_div {
   width: 120px;
   margin: 0.2rem;
@@ -404,21 +414,25 @@
   color: black;
   align-items: flex-start;
 }
-a {
+
+.footer a {
   color: black;
   text-decoration: none;
   font-size: 8px;
 }
+
 .sbfooter_links_div h4 {
   font-size: 10px;
   line-height: 10px;
   margin-bottom: 0.5rem;
 }
+
 .sbfooter-links_div p {
   font-size: 10px;
   line-height: 10px;
   margin: 0.2rem 0;
 }
+
 .icons-dgt {
   display: flex;
   align-items: center;
@@ -435,27 +449,32 @@ a {
   width: 16px;
   height: 12px;
 }
+
 .Ask-Modi {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
+
 .Ask-Modi h5 {
   font-size: 10px;
   margin: 0;
   line-height: 12px;
 }
+
 .Ask-Modi p {
   font-size: 10px;
   margin: 0;
   padding: 0.2rem;
   line-height: 12px;
 }
+
 select {
   font-size: 10px;
   padding: 0.2rem;
   margin-top: 0.5rem;
 }
+
 .absolute {
   text-align: center;
   font-size: 10px;
@@ -526,6 +545,7 @@ select {
   font-size: 0.8rem;
   color: #000000a9;
 }
+
 .linkAlbero:hover,
 .espandi:hover,
 .collegamenti:hover {
@@ -553,6 +573,7 @@ select {
     width: 20px;
     height: 20px;
   }
+
   .nameTab {
     display: none;
   }
@@ -647,6 +668,7 @@ select {
     right: 6%;
     top: 25%;
   }
+
   .navbar-dropdown .dropdown-menu {
     width: 300px;
   }
@@ -831,6 +853,7 @@ select {
   padding: 0.5rem;
   font-size: 0.8rem;
 }
+
 .dropdown-item {
   white-space: normal;
 }
@@ -847,6 +870,7 @@ select {
   .container {
     padding: 0;
   }
+
   .coverImage {
     height: 15vh;
   }
@@ -856,6 +880,7 @@ select {
   .btnResource {
     font-size: 0;
   }
+
   .btnResource::before {
     content: '⋯';
     font-size: 1rem;
@@ -866,6 +891,7 @@ select {
   .btnResource {
     font-size: 0;
   }
+
   .btnResource::before {
     content: '⋯';
     font-size: 1rem;
@@ -918,15 +944,18 @@ select {
 .sectionpadding {
   padding: 0.5rem 1rem;
 }
+
 .footer {
   background-color: ghostwhite;
   font-size: 12px;
 }
+
 .sbfooter {
   display: flex;
   flex-direction: column;
   padding: -1;
 }
+
 .sbfooter-links {
   display: flex;
   justify-content: space-between;
@@ -935,6 +964,7 @@ select {
   width: 100%;
   margin: 0.2rem 0;
 }
+
 .sbfooter-links_div {
   width: 120px;
   margin: 0.2rem;
@@ -944,21 +974,26 @@ select {
   color: black;
   align-items: flex-start;
 }
-a {
+
+/* 
+.footer a {
   color: black;
   text-decoration: none;
   font-size: 8px;
-}
+} */
+
 .sbfooter_links_div h4 {
   font-size: 10px;
   line-height: 10px;
   margin-bottom: 0.5rem;
 }
+
 .sbfooter-links_div p {
   font-size: 10px;
   line-height: 10px;
   margin: 0.2rem 0;
 }
+
 .icons-dgt {
   display: flex;
   align-items: center;
@@ -975,27 +1010,32 @@ a {
   width: 16px;
   height: 12px;
 }
+
 .Ask-Modi {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
+
 .Ask-Modi h5 {
   font-size: 10px;
   margin: 0;
   line-height: 12px;
 }
+
 .Ask-Modi p {
   font-size: 10px;
   margin: 0;
   padding: 0.2rem;
   line-height: 12px;
 }
+
 select {
   font-size: 10px;
   padding: 0.2rem;
   margin-top: 0.5rem;
 }
+
 .absolute {
   text-align: center;
   font-size: 10px;
@@ -1066,6 +1106,7 @@ select {
   font-size: 0.8rem;
   color: #000000a9;
 }
+
 .linkAlbero:hover,
 .espandi:hover,
 .collegamenti:hover {

@@ -22,6 +22,7 @@ function App() {
 
         <Route path='/jobs' element={<JobPageComponent />} />
         {/* <Route path='*' element={<ErrorComponent />} />  */}
+
       </Routes>
 
       {<Footer />}

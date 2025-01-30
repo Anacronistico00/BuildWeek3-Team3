@@ -40,7 +40,7 @@ const Study = () => {
                   </a>
                 </Col>
                 <Col xs={9} xl={10}>
-                  <a href='#' className='mb-0 fw-bolder study-link'>
+                  <a href='#' className='mb-0 fw-bolder fs-6 study-link'>
                     Università
                   </a>
                   <p className='mb-0'>Data</p>
@@ -61,7 +61,7 @@ const Study = () => {
                   </a>
                 </Col>
                 <Col xs={9} xl={10}>
-                  <a href='#' className='mb-0 study-link fw-bolder'>
+                  <a href='#' className='mb-0 fs-6 study-link fw-bolder'>
                     Liceo
                   </a>
                   <p className='mb-0'>Data</p>

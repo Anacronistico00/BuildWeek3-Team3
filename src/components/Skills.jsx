@@ -30,7 +30,7 @@ const Skills = () => {
             <div id='experiences'>
               <Row className='mb-1 g-1'>
                 <Col xs={9} xl={10}>
-                  <a href='#' className='fw-bolder study-link'>
+                  <a href='#' className='fw-bolder fs-6 study-link'>
                     Leadership
                   </a>
                   <div className='mt-2'>
@@ -51,7 +51,7 @@ const Skills = () => {
             <div id='experiences'>
               <Row className='mb-1 g-1'>
                 <Col xs={9} xl={10}>
-                  <a href='#' className='fw-bolder study-link'>
+                  <a href='#' className='fw-bolder study-link fs-6'>
                     Microsoft Office
                   </a>
                   <div className='mt-2'>

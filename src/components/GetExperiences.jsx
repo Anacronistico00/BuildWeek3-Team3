@@ -227,7 +227,7 @@ function GetExperiences(props) {
           <Form.Group className='mb-3'>
             <Form.Label>Data di inizio</Form.Label>
             <Form.Control
-              type='datetime-local'
+              type='date'
               required
               value={exp.startDate}
               onChange={(e) => setExp({ ...exp, startDate: e.target.value })}
@@ -236,7 +236,7 @@ function GetExperiences(props) {
           <Form.Group className='mb-3'>
             <Form.Label>Data fine</Form.Label>
             <Form.Control
-              type='datetime-local'
+              type='date'
               value={exp.endDate}
               onChange={(e) => setExp({ ...exp, endDate: e.target.value })}
             />

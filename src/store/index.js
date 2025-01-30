@@ -5,6 +5,7 @@ import userReducer from '../reducers/user';
 import setProfileReducer from '../reducers/profile';
 import { submitTextReducer } from '../reducers/submitTextReducer';
 import jobsReducer from '../reducers/jobsReducer';
+import jobsCategoryReducer from '../reducers/jobsCategoryReducer';
 
 const mainReducer = combineReducers({
   experiences: experiencesReducer,
@@ -13,6 +14,7 @@ const mainReducer = combineReducers({
   profileInfo: setProfileReducer,
   text: submitTextReducer,
   jobs: jobsReducer,
+  jobsCategory: jobsCategoryReducer,
 });
 
 const store = configureStore({

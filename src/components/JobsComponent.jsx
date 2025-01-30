@@ -4,7 +4,6 @@ import { GetJobs } from "../actions/Jobs";
 import { Card, Row, Col } from "react-bootstrap";
 
 const JobsComponent = () => {
-  const dispatch = useDispatch();
   const jobs = useSelector((state) => state.jobs.jobs);
   const [job, setJob] = useState(false); // Usa stato locale per il singolo lavoro
   useEffect(() => {

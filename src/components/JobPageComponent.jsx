@@ -1,6 +1,7 @@
 import { Col, Container, Row } from 'react-bootstrap';
 import JobsComponent from './JobsComponent';
 import JobsAside from './JobsAsideComponent';
+import JobsCategory from './JobsCategory';
 
 const JobPageComponent = () => {
   return (
@@ -10,6 +11,7 @@ const JobPageComponent = () => {
           <JobsAside />
         </Col>
         <Col xs={12} md={9}>
+        <JobsCategory />
           <JobsComponent />
         </Col>
       </Row>

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { GetJobs } from "../actions/Jobs";
 import { Card, Row, Col } from "react-bootstrap";
+import SearchAgency from "./JobsAgencyComponent";
 
 const JobsComponent = () => {
   const jobs = useSelector((state) => state.jobs.jobs);
@@ -102,6 +103,7 @@ const JobsComponent = () => {
           )}
         </div>
       </Card>
+      <SearchAgency />
     </div>
   );
 };

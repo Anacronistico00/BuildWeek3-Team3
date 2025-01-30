@@ -13,7 +13,7 @@ function GetExperiences(props) {
   });
 
   const [img, setImg] = useState(undefined);
-  const profile = useSelector((state) => state.profile);
+  const profile = useSelector((state) => state.profileInfo);
   const user = useSelector((state) => state.user.user_logged);
   const token = useSelector((state) => state.token.token);
 
@@ -59,7 +59,7 @@ function GetExperiences(props) {
     e.preventDefault();
     try {
       const response = await fetch(
-        `https://striveschool-api.herokuapp.com/api/profile/${profile.profile._id}/experiences`,
+        `https://striveschool-api.herokuapp.com/api/profile/${profile.profileInfo._id}/experiences`,
         {
           method: 'POST',
           body: JSON.stringify(exp),
@@ -78,7 +78,7 @@ function GetExperiences(props) {
           let formData = new FormData();
           formData.append('experience', img);
           const response2 = await fetch(
-            `https://striveschool-api.herokuapp.com/api/profile/${profile.profile._id}/experiences/${data._id}/picture`,
+            `https://striveschool-api.herokuapp.com/api/profile/${profile.profileInfo._id}/experiences/${data._id}/picture`,
             {
               method: 'POST',
               body: formData,

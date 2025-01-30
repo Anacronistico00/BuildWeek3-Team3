@@ -16,6 +16,9 @@
   .nameTab {
     display: none;
   }
+  .btnProfile {
+    font-size: small;
+  }
 }
 
 .input-group {
@@ -269,6 +272,7 @@
   color: blue !important;
   background-color: rgb(224, 224, 253);
 }
+
 
 .btnResource:hover {
   border: 2px solid black !important;
@@ -799,15 +803,6 @@ select {
 .footerButtons button:hover {
   background-color: #6d6c6c;
   cursor: pointer;
-}
-
-.btnProfile:hover,
-.btnProfileModify:hover,
-.btnTakePicture:hover,
-.btnClosePhoto:hover {
-  border: 2px solid blue !important;
-  color: blue !important;
-  background-color: rgb(224, 224, 253);
 }
 
 .btnResource:hover {

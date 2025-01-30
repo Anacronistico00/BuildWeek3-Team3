@@ -1,6 +1,12 @@
 .HomeIcons {
   width: 24px;
   height: 24px;
+  color: gray;
+}
+
+.toTheNextPage:hover {
+  color: rgb(0, 0, 0) !important;
+  text-decoration: none;
 }
 
 .nameTab {
@@ -46,6 +52,7 @@
   font-size: 0.85em;
   margin: 0;
   padding: 0;
+  color: gray;
 }
 
 .ImgProfile {
@@ -86,32 +93,46 @@
 .navbar-dropdown .dropdown-menu {
   width: 550px;
   height: 550px;
-  padding: 10px;
+  padding: 2px;
   overflow: scroll;
+  position: absolute;
+  left: 35%;
 }
 
-.custom-dropdown-1 .dropdown-menu {
-  width: 300px;
+#dropdownMenu1 button {
+  background-color: transparent;
+  border: none;
+  color: black;
+}
+
+#dropdownMenu1 .dropdown-menu {
+  width: 280px;
   overflow: hidden;
   line-height: 1.2;
-}
-
-.navbar-dropdown {
   position: absolute;
-  top: 55%;
-  right: 10%;
-  z-index: 2;
+  left: 50%;
 }
 
 @media screen and (max-width: 767px) {
-  .navbar-dropdown {
-    right: 6%;
-    top: 25%;
-  }
-
   .navbar-dropdown .dropdown-menu {
     width: 300px;
   }
+}
+
+@media screen and (max-width: 992px) {
+  .toggleIcon {
+    display: none;
+  }
+}
+
+.toggleIcon {
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  right: 22%;
+  top: 90%;
 }
 
 .Underlined {
@@ -316,7 +337,7 @@
   }
 
   .btnResource::before {
-    content: '⋯';
+    content: "⋯";
     font-size: 1rem;
   }
 }
@@ -327,7 +348,7 @@
   }
 
   .btnResource::before {
-    content: '⋯';
+    content: "⋯";
     font-size: 1rem;
   }
 }
@@ -558,7 +579,7 @@ select {
   text-decoration: underline;
 }
 
-.jobFooter p,
+/* .jobFooter p,
 .jobFooter span {
   font-size: 0.7rem !important;
 }
@@ -567,7 +588,7 @@ select {
   text-decoration: underline;
   color: #0a66c2 !important;
   cursor: pointer;
-}
+} */
 
 .workImage {
   width: 56px;

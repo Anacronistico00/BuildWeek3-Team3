@@ -7,7 +7,7 @@ import { HiUserGroup } from "react-icons/hi";
 import { BiNews } from "react-icons/bi";
 import { MdEvent } from "react-icons/md";
 function RightSide() {
-  const profile = useSelector((state) => state.profile);
+  const profile = useSelector((state) => state.profileInfo);
 
   return (
     <>
@@ -26,7 +26,7 @@ function RightSide() {
                 <Link to={"/profile"}>
                   <img
                     style={{ cursor: "pointer" }}
-                    src={profile.profile.image}
+                    src={profile.profileInfo.image}
                     alt="Profile Image"
                     className="profileImage2"
                   />
@@ -39,11 +39,11 @@ function RightSide() {
                 <Link to={"/profile"}>
                   <div className=" mb-2">
                     <h3 className="nameCardSide">
-                      {profile.profile.name} {profile.profile.surname}
+                      {profile.profileInfo.name} {profile.profileInfo.surname}
                     </h3>
-                    <p className="bioText">{profile.profile.bio}</p>
+                    <p className="bioText">{profile.profileInfo.bio}</p>
                     <p className=" fs-6 text-secondary">
-                      {profile.profile.area}
+                      {profile.profileInfo.area}
                     </p>
                     <a className="p-2 text-start azienda">
                       <p>

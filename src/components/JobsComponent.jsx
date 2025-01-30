@@ -19,7 +19,8 @@ const JobsComponent = () => {
         {job ? (
           jobs.slice(0, 10).map((job) => (
             <div key={job._id}>
-              <h2>{job.title}</h2>
+              <h2 id='jobTitle'>{job.title}</h2>
+              <p dangerouslySetInnerHTML={{ __html: job.description }}></p>
               <hr />
             </div>
           ))

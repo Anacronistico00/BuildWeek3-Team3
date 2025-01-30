@@ -532,8 +532,6 @@ select {
   color: rgba(0, 0, 0, 0.736);
 }
 
-/* ----- css del CreateNewPostComponent-------*/
-
 .HomeIcons {
   width: 24px;
   height: 24px;
@@ -1066,10 +1064,6 @@ select {
 .bioText {
   font-size: 0.8rem;
   color: rgba(0, 0, 0, 0.736);
-}
-
-.Card {
-  margin-top: 4em;
 }
 
 .jobAside:hover {

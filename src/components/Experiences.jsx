@@ -1,6 +1,6 @@
 import { Card, Col, Container, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import {  GoPlus } from 'react-icons/go';
+import { GoPlus } from 'react-icons/go';
 import { useState, useEffect } from 'react';
 import GetExperiences from './GetExperiences';
 import { RetrieveExperiencesAction } from '../actions/setProfileAction';

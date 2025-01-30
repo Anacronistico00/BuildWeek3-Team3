@@ -7,10 +7,10 @@ function HomeComponent() {
   return (
     <Container className='mt-5'>
       <Row className='justify-content-center'>
-        <Col xs={12} md={3} className=' p-0 mt-4'>
+        <Col xs={12} md={2} className=' p-0 mt-4'>
           <RightSide />
         </Col>
-        <Col xs={12} md={6} className=' p-0 mt-4 px-3'>
+        <Col xs={12} md={7} className=' p-0 mt-4 px-3'>
           <PostsComponent />
         </Col>
         <Col xs={12} md={3} className=' p-0 mt-4'>

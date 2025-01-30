@@ -13,7 +13,7 @@ function RightSide() {
   return (
     <>
       {profile.profileInfo && (
-        <Card className='cardSide'>
+        <Card className=''>
           <Link to={'/profile'}>
             <Card.Img
               variant='top'
@@ -95,7 +95,7 @@ function RightSide() {
           </Card.Body>
         </Card>
       )}
-      <Card className='cardSide mt-2 p-3'>
+      <Card className='mt-2 p-3'>
         <ul className=' list-unstyled'>
           <li>
             <a className='linkAlbero'>

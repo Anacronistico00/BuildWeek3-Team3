@@ -1,5 +1,7 @@
 import { Col, Container, Row } from 'react-bootstrap';
 import SideBarRightHome from './SideBarRightHome';
+import PostsComponent from './PostsComponent';
+import RightSide from './RightSideHome';
 
 function HomeComponent() {
   return (

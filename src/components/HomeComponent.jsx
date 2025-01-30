@@ -1,5 +1,7 @@
 import { Col, Container, Row } from 'react-bootstrap';
 import SideBarRightHome from './SideBarRightHome';
+import PostsComponent from './PostsComponent';
+import RightSideHome from './RightSideHome';
 
 function HomeComponent() {
   return (
@@ -7,54 +9,12 @@ function HomeComponent() {
       <Row className='justify-content-center'>
         <Col xs={12} md={2} className=' p-0 mt-4'>
           <Container fluid className='p-3 bg-white mb-2 cards-home'>
-            <h1>ciaooo</h1>
-            <h2>ciaooo</h2>
-            <h3>ciaooo</h3>
-            <h4>ciaooo</h4>
+            <RightSideHome />
           </Container>
         </Col>
         <Col xs={12} md={7} className=' p-0 mt-4 px-3'>
           <Container fluid className=' p-3 bg-white mb-2 cards-home'>
-            <h1>ciaooo</h1>
-            <h2>ciaooo</h2>
-            <h3>ciaooo</h3>
-            <h4>ciaooo</h4>
-            <h1>ciaooo</h1>
-            <h2>ciaooo</h2>
-            <h3>ciaooo</h3>
-            <h4>ciaooo</h4>
-            <h1>ciaooo</h1>
-            <h2>ciaooo</h2>
-            <h3>ciaooo</h3>
-            <h4>ciaooo</h4>
-            <h1>ciaooo</h1>
-            <h2>ciaooo</h2>
-            <h3>ciaooo</h3>
-            <h4>ciaooo</h4>
-            <h1>ciaooo</h1>
-            <h2>ciaooo</h2>
-            <h3>ciaooo</h3>
-            <h4>ciaooo</h4>
-            <h1>ciaooo</h1>
-            <h2>ciaooo</h2>
-            <h3>ciaooo</h3>
-            <h4>ciaooo</h4>
-            <h1>ciaooo</h1>
-            <h2>ciaooo</h2>
-            <h3>ciaooo</h3>
-            <h4>ciaooo</h4>
-            <h1>ciaooo</h1>
-            <h2>ciaooo</h2>
-            <h3>ciaooo</h3>
-            <h4>ciaooo</h4>
-            <h1>ciaooo</h1>
-            <h2>ciaooo</h2>
-            <h3>ciaooo</h3>
-            <h4>ciaooo</h4>
-            <h1>ciaooo</h1>
-            <h2>ciaooo</h2>
-            <h3>ciaooo</h3>
-            <h4>ciaooo</h4>
+            <PostsComponent />
           </Container>
         </Col>
         <Col xs={12} md={3} className=' p-0 mt-4'>

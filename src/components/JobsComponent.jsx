@@ -5,21 +5,18 @@ import { useSelector } from 'react-redux';
 import { Card } from 'react-bootstrap';
 
 const JobsComponent = () => {
-
   const jobs = useSelector((state) => state.jobs.jobs);
 
   return (
     <div>
       <Card>
-        {
-          jobs.slice(0, 10).map((job) => (
-            <div key={job._id}>
-              <h2 id='jobTitle'>{job.title}</h2>
-              <p dangerouslySetInnerHTML={{ __html: job.description }}></p>
-              <hr />
-            </div>
-          ))
-        }
+        {jobs.slice(0, 10).map((job) => (
+          <div key={job._id}>
+            <h2 id='jobTitle'>{job.title}</h2>
+            <p dangerouslySetInnerHTML={{ __html: job.description }}></p>
+            <hr />
+          </div>
+        ))}
       </Card>
     </div>
   );

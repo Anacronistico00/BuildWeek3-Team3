@@ -6,14 +6,13 @@ import { FaBookmark } from 'react-icons/fa';
 import { HiUserGroup } from 'react-icons/hi';
 import { BiNews } from 'react-icons/bi';
 import { MdEvent } from 'react-icons/md';
-
-function RightSideHome() {
-  const profile = useSelector((state) => state.profile);
+function RightSide() {
+  const profile = useSelector((state) => state.profileInfo);
 
   return (
     <>
-      {profile.profile && (
-        <Card className='cardSide'>
+      {profile.profileInfo && (
+        <Card className=''>
           <Link to={'/profile'}>
             <Card.Img
               variant='top'
@@ -27,7 +26,7 @@ function RightSideHome() {
                 <Link to={'/profile'}>
                   <img
                     style={{ cursor: 'pointer' }}
-                    src={profile.profile.image}
+                    src={profile.profileInfo.image}
                     alt='Profile Image'
                     className='profileImage2'
                   />
@@ -40,11 +39,11 @@ function RightSideHome() {
                 <Link to={'/profile'}>
                   <div className=' mb-2'>
                     <h3 className='nameCardSide'>
-                      {profile.profile.name} {profile.profile.surname}
+                      {profile.profileInfo.name} {profile.profileInfo.surname}
                     </h3>
-                    <p className='bioText'>{profile.profile.bio}</p>
+                    <p className='bioText'>{profile.profileInfo.bio}</p>
                     <p className=' fs-6 text-secondary'>
-                      {profile.profile.area}
+                      {profile.profileInfo.area}
                     </p>
                     <a className='p-2 text-start azienda'>
                       <p>
@@ -95,7 +94,7 @@ function RightSideHome() {
           </Card.Body>
         </Card>
       )}
-      <Card className='cardSide mt-2 p-3'>
+      <Card className='mt-2 p-3'>
         <ul className=' list-unstyled'>
           <li>
             <a className='linkAlbero'>
@@ -123,4 +122,4 @@ function RightSideHome() {
   );
 }
 
-export default RightSideHome;
+export default RightSide;

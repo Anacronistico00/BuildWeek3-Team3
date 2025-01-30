@@ -14,7 +14,14 @@ function App() {
   return (
     <BrowserRouter>
       <NavBarComponent />
-      <ProfileComponent />
+      <Routes>
+        <Route path="/" element={<HomeComponent />} />
+        <Route path="/profile" element={<ProfileComponent />} />
+
+        {/* <Route path='/jobs' element={<JobsComponent />} />
+        <Route path='*' element={<ErrorComponent />} /> */}
+      </Routes>
+
       <Footer />
     </BrowserRouter>
   );

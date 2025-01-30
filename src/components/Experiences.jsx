@@ -1,76 +1,160 @@
-import { Container, Row, Col, Card } from 'react-bootstrap';
-import { HiOutlinePencil } from 'react-icons/hi2';
-import { GoPlus } from 'react-icons/go';
+import { Card, Col, Container, Row } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
+import { GoPencil, GoPlus } from 'react-icons/go';
+import { useState, useEffect } from 'react';
+import GetExperiences from './GetExperiences';
 
-const Experiences = () => {
+function Experiences() {
+  const [show, setShow] = useState(false);
+  const [isModifing, setisModifing] = useState(false);
+  const [elementToModify, setElementToModify] = useState('');
+  const [expList, setExpList] = useState([]); // Usa stato locale per la lista delle esperienze
+  const token = useSelector((state) => state.token.token);
+  const user = useSelector((state) => state.user.user_logged);
+  const profile = useSelector((state) => state.user.profile);
+
+  useEffect(() => {
+    if (profile) {
+      fetchExperiences(); // Carica le esperienze all'avvio
+    }
+  }, [profile]);
+
+  const fetchExperiences = async () => {
+    try {
+      const response = await fetch(
+        `https://striveschool-api.herokuapp.com/api/profile/${profile.profile._id}/experiences`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (response.ok) {
+        const data = await response.json();
+        setExpList(data);
+      } else {
+        throw new Error('Errore nel recuperare le esperienze');
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const handleSave = () => {
+    fetchExperiences(); // Aggiorna la lista quando viene salvata/modificata un'esperienza
+    setShow(false); // Chiudi il modal
+  };
+
+  const handleClose = () => {
+    setShow(false);
+  };
+
+  const differenzaDate = (date1, date2) => {
+    let dataInizio = new Date(date1);
+    let dataFine = new Date(date2);
+    let anni = dataFine.getFullYear() - dataInizio.getFullYear();
+    let mesi = dataFine.getMonth() - dataInizio.getMonth();
+    if (mesi < 0) {
+      anni--;
+      mesi += 12;
+    }
+    return `${
+      anni === 0 ? '' : anni === 1 ? `${anni} anno ` : `${anni} anni `
+    }${mesi === 0 ? '' : mesi === 1 ? `${mesi} mese ` : `${mesi} mesi `}`;
+  };
+
+  function formatoDataBreve(dataStr) {
+    const mesi = [
+      'gen',
+      'feb',
+      'mar',
+      'apr',
+      'mag',
+      'giu',
+      'lug',
+      'ago',
+      'set',
+      'ott',
+      'nov',
+      'dic',
+    ];
+    let data = new Date(dataStr);
+    let mese = mesi[data.getMonth()];
+    let anno = data.getFullYear();
+
+    return `${mese} ${anno}`;
+  }
+
   return (
     <Container className='px-0 mt-3'>
+      <GetExperiences
+        show={show}
+        handleClose={handleClose}
+        mod={isModifing}
+        elementId={elementToModify}
+        onSave={handleSave} // Passa la callback per aggiornare la lista
+      />
       <Row>
         <Col xs={12}>
           <Card className='p-4'>
             <Row className=' align-items-end mb-3'>
               <Col xs={'auto'}>
-                <h5>Esperienza</h5>
+                <h4>Esperienze</h4>
               </Col>
-              <Col xs={'auto'} className='ms-auto d-flex'>
-                <a
-                  href='#'
-                  className='pencil-icon d-flex align-items-center justify-content-center'
-                >
-                  <GoPlus className='fs-2 text-decoration-none text-black' />
-                </a>
-                <a
-                  href='#'
-                  className='pencil-icon d-flex align-items-center justify-content-center'
-                >
-                  <HiOutlinePencil className='fs-4 text-decoration-none text-black' />
-                </a>
+              <Col xs={'auto'} className='ms-auto'>
+                {user && profile && user._id === profile._id && (
+                  <button
+                    className='btn-experience bg-white border-0 rounded-circle p-1'
+                    onClick={() => setShow(true)}
+                  >
+                    <GoPlus className='fs-2 text-decoration-none text-black' />
+                  </button>
+                )}
               </Col>
             </Row>
             <div id='experiences'>
-              <Row className='mb-3 g-1'>
-                <Col xs={2} xl={1}>
-                  <a href='#'>
-                    <img
-                      src='../../public/assets/images/apple.png'
-                      alt=''
-                      width={50}
-                      height={50}
-                    />
-                  </a>
-                </Col>
-                <Col xs={9} xl={10}>
-                  <h6 className='mb-0'>Ruolo</h6>
-                  <p className='mb-0'>Nome Azienda</p>
-                  <p className='text-muted'> Data</p>
-                </Col>
-              </Row>
-            </div>
-            <hr />
-            <div id='experiences'>
-              <Row className='mb-3 g-1'>
-                <Col xs={2} xl={1}>
-                  <a href='#'>
-                    <img
-                      src='../../public/assets/images/apple.png'
-                      alt=''
-                      width={50}
-                      height={50}
-                    />
-                  </a>
-                </Col>
-                <Col xs={9} xl={10}>
-                  <h6 className='mb-0'>Ruolo</h6>
-                  <p className='mb-0'>Nome Azienda</p>
-                  <p className='text-muted'> Data</p>
-                </Col>
-              </Row>
+              {expList.map((exp) => {
+                return (
+                  <Row key={exp._id} className='mb-3 g-1'>
+                    <Col xs={2} xl={1}>
+                      <img src={exp.image} alt='' width={50} height={50} />
+                    </Col>
+                    <Col xs={9} xl={10}>
+                      <h6 className='mb-0'>{exp.role}</h6>
+                      <p className='mb-0'>
+                        {exp.company} • {exp.area}
+                      </p>
+                      <p className='text-muted'>
+                        {`${formatoDataBreve(
+                          exp.startDate
+                        )} - ${formatoDataBreve(
+                          exp.endDate
+                        )} • ${differenzaDate(exp.startDate, exp.endDate)}`}
+                      </p>
+                    </Col>
+                    <Col xs={1} className='text-start'>
+                      {user._id === profile._id && (
+                        <button
+                          className='btn-experience bg-white border-0 rounded-circle p-1 p-lg-2'
+                          onClick={() => {
+                            setisModifing(true);
+                            setElementToModify(exp._id);
+                            setShow(true);
+                          }}
+                        >
+                          <GoPencil className='fs-4' />
+                        </button>
+                      )}
+                    </Col>
+                  </Row>
+                );
+              })}
             </div>
           </Card>
         </Col>
       </Row>
     </Container>
   );
-};
+}
 
 export default Experiences;

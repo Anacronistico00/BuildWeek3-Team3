@@ -1082,3 +1082,31 @@ select {
   color: #0a66c2 !important;
   cursor: pointer;
 }
+
+.workImage {
+  width: 56px;
+  height: 56px;
+}
+
+.titleJobCards {
+  font-size: 1.4rem !important;
+  line-height: 1.4 !important;
+  font-weight: 600 !important;
+}
+
+.subtitleJobsCard {
+  font-size: 1rem;
+  line-height: 1.42857;
+  color: #0000009e;
+}
+
+.divAcaso {
+  margin-bottom: 15px;
+  margin-top: 15px;
+}
+
+#jobTitle:hover {
+  text-decoration: underline;
+  color: #0a66c2;
+  cursor: pointer;
+}

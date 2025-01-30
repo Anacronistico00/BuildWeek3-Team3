@@ -6,14 +6,13 @@ import { FaBookmark } from 'react-icons/fa';
 import { HiUserGroup } from 'react-icons/hi';
 import { BiNews } from 'react-icons/bi';
 import { MdEvent } from 'react-icons/md';
-
 function RightSide() {
-  const profile = useSelector((state) => state.profileInfo);
+  const profile = useSelector((state) => state.profile);
 
   return (
     <>
       {profile.profileInfo && (
-        <Card className='cardSide'>
+        <Card className=''>
           <Link to={'/profile'}>
             <Card.Img
               variant='top'
@@ -27,7 +26,7 @@ function RightSide() {
                 <Link to={'/profile'}>
                   <img
                     style={{ cursor: 'pointer' }}
-                    src={profile.profileInfo.image}
+                    src={profile.profile.image}
                     alt='Profile Image'
                     className='profileImage2'
                   />
@@ -40,11 +39,11 @@ function RightSide() {
                 <Link to={'/profile'}>
                   <div className=' mb-2'>
                     <h3 className='nameCardSide'>
-                      {profile.profileInfo.name} {profile.profileInfo.surname}
+                      {profile.profile.name} {profile.profile.surname}
                     </h3>
-                    <p className='bioText'>{profile.profileInfo.bio}</p>
+                    <p className='bioText'>{profile.profile.bio}</p>
                     <p className=' fs-6 text-secondary'>
-                      {profile.profileInfo.area}
+                      {profile.profile.area}
                     </p>
                     <a className='p-2 text-start azienda'>
                       <p>
@@ -95,7 +94,7 @@ function RightSide() {
           </Card.Body>
         </Card>
       )}
-      <Card className='cardSide mt-2 p-3'>
+      <Card className='mt-2 p-3'>
         <ul className=' list-unstyled'>
           <li>
             <a className='linkAlbero'>

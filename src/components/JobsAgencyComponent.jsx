@@ -13,13 +13,11 @@ const SearchAgency = () => {
     },
     [setAgencyResearch]
   );
+
   useEffect(() => {
-    dispatch(AgencySearch(agencyResearch));
-  }, [agencyResearch]);
-  useEffect(() => {
-    dispatch(AgencySearch()); // Assicurati che dispatch venga chiamato correttamente
+    dispatch(AgencySearch(agencyResearch)); // Assicurati che dispatch venga chiamato correttamente
     console.log(jobsAgency);
-  }, [dispatch]);
+  }, [agencyResearch]);
 
   return (
     <>
@@ -32,51 +30,19 @@ const SearchAgency = () => {
               </h2>
             </Col>
             <Col xs={4}>
-              <Form.Select>
-                <option
-                  value='Olla'
-                  onClick={() => setAgencyResearchCallback('Olla')}
-                >
-                  Olla
-                </option>
-                <option
-                  value='CYOS Solutions'
-                  onClick={() => setAgencyResearchCallback('CYOS Solutions')}
-                >
-                  CYOS Solutions
-                </option>
-                <option
-                  value='Antidote'
-                  onClick={() => setAgencyResearchCallback('Antidote')}
-                >
-                  Antidote
-                </option>
-                <option
-                  value='Live Graphic Systems Pty Ltd'
-                  onClick={() =>
-                    setAgencyResearchCallback('Live Graphic Systems Pty Ltd')
-                  }
-                >
+              <Form.Select
+                value={agencyResearch}
+                onChange={(e) => setAgencyResearchCallback(e.target.value)}
+              >
+                <option value='Olla'>Olla</option>
+                <option value='CYOS Solutions'>CYOS Solutions</option>
+                <option value='Antidote'>Antidote</option>
+                <option value='Live Graphic Systems Pty Ltd'>
                   Live Graphic Systems Pty Ltd
                 </option>
-                <option
-                  value='Robots & Pencils'
-                  onClick={() => setAgencyResearchCallback('Robots & Pencils')}
-                >
-                  Robots & Pencils
-                </option>
-                <option
-                  value='Nordcloud Global'
-                  onClick={() => setAgencyResearchCallback('Nordcloud Global')}
-                >
-                  Nordcloud Global
-                </option>
-                <option
-                  value='Fugue, Inc'
-                  onClick={() => setAgencyResearchCallback('Fugue, Inc')}
-                >
-                  Fugue, Inc
-                </option>
+                <option value='Robots & Pencils'>Robots & Pencils</option>
+                <option value='Nordcloud Global'>Nordcloud Global</option>
+                <option value='Fugue, Inc'>Fugue, Inc</option>
               </Form.Select>
             </Col>
           </Row>

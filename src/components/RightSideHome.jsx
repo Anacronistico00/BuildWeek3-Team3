@@ -6,14 +6,13 @@ import { FaBookmark } from 'react-icons/fa';
 import { HiUserGroup } from 'react-icons/hi';
 import { BiNews } from 'react-icons/bi';
 import { MdEvent } from 'react-icons/md';
-
 function RightSide() {
   const profile = useSelector((state) => state.profileInfo);
 
   return (
     <>
       {profile.profileInfo && (
-        <Card className='cardSide'>
+        <Card className=''>
           <Link to={'/profile'}>
             <Card.Img
               variant='top'
@@ -95,7 +94,7 @@ function RightSide() {
           </Card.Body>
         </Card>
       )}
-      <Card className='cardSide mt-2 p-3'>
+      <Card className='mt-2 p-3'>
         <ul className=' list-unstyled'>
           <li>
             <a className='linkAlbero'>

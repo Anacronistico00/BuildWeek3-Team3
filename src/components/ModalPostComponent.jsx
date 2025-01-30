@@ -1,8 +1,12 @@
 import { Button, Modal, Row, Col, FloatingLabel, Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import postComment from '../actions/postcomment';
+import { EmojiSmile, Youtube } from 'react-bootstrap-icons';
+import { FaRegCalendarAlt, FaRegImage } from 'react-icons/fa';
+import { LuPlus } from 'react-icons/lu';
+import { useRef, useState } from 'react';
 
-const ModalPost = ({ show, handleClose }) => {
+const ModalPost = ({ show, handleClose, fetchPosts }) => {
   const profile = useSelector((state) => state.profileInfo);
   const dispatch = useDispatch();
   const text = useSelector((state) => state.text);
@@ -10,8 +14,21 @@ const ModalPost = ({ show, handleClose }) => {
   const token = useSelector((state) => state.token);
 
   const handleSubmit = () => {
-    dispatch(postComment(token.token, text.text));
+    dispatch(postComment(token.token, text.text, selectedFile));
+    fetchPosts();
+    handleClose();
   };
+
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [previewSrc, setPreviewSrc] = useState(null);
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setSelectedFile(file);
+    setPreviewSrc(URL.createObjectURL(file));
+  };
+
+  const fileInputRef = useRef(null);
 
   return (
     <>
@@ -61,6 +78,25 @@ const ModalPost = ({ show, handleClose }) => {
                 }}
               />
             </FloatingLabel>
+            <EmojiSmile className='fs-3 mt-2 text-secondary'></EmojiSmile>
+            <div className='fs-3 text-secondary'>
+              <input
+                type='file'
+                id='fileInput'
+                onChange={handleFileChange}
+                ref={fileInputRef}
+                style={{ display: 'none' }}
+              />
+              <label htmlFor='fileInput'>
+                <FaRegImage />
+              </label>
+              <Youtube className='ms-3'></Youtube>
+              <FaRegCalendarAlt className='ms-3' />
+              <LuPlus className='ms-3' />
+            </div>
+            {previewSrc && (
+              <img src={previewSrc} alt='Preview' className='profilePic' />
+            )}
           </Modal.Body>
 
           <Modal.Footer>

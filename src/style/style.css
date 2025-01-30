@@ -500,6 +500,7 @@ select {
   text-overflow: ellipsis;
   font-size: 1.2rem !important;
   padding: 0 !important;
+  color: rgba(0, 0, 0, 0.923);
 }
 
 .azienda {
@@ -544,10 +545,12 @@ select {
 .linkAlbero {
   font-size: 1rem;
   cursor: pointer;
+  color: #1b1f23;
 }
 
 .collegamenti {
   font-size: 0.9rem;
+  color: #1b1f23;
 }
 
 .espandi {
@@ -558,7 +561,7 @@ select {
 .linkAlbero:hover,
 .espandi:hover,
 .collegamenti:hover {
-  text-decoration: underline;
+  text-decoration: underline !important;
   cursor: pointer;
 }
 

@@ -94,9 +94,7 @@ const ModalPost = ({ show, handleClose, fetchPosts }) => {
               <FaRegCalendarAlt className='ms-3' />
               <LuPlus className='ms-3' />
             </div>
-            {previewSrc && (
-              <img src={previewSrc} alt='Preview' className='profilePic' />
-            )}
+            {previewSrc && <img src={previewSrc} alt='Preview' />}
           </Modal.Body>
 
           <Modal.Footer>

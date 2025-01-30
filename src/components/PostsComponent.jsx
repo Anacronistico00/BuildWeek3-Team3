@@ -46,7 +46,8 @@ const PostsComponent = () => {
   return (
     <Container>
       <Row>
-        <Col>
+        <Col xs={12} md={2}></Col>
+        <Col xs={12} md={7}>
           <CreateNewPostComponent />
 
           {posts.length === 0 ? (
@@ -94,6 +95,7 @@ const PostsComponent = () => {
             ))
           )}
         </Col>
+        <Col xs={12} md={3}></Col>
       </Row>
     </Container>
   );

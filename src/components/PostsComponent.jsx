@@ -35,30 +35,30 @@ const PostsComponent = () => {
   const [editText, setEditText] = useState('');
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const response = await fetch(URL, {
-          method: 'GET',
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        if (response.ok) {
-          const data = await response.json();
-          console.log('SONO DATA', data);
-          setPosts(data.reverse().slice(0, 30));
-        } else {
-          throw new Error('Errore nel recupero dei dati');
-        }
-      } catch (error) {
-        setError(error.message);
-        console.log('Errore nella fetch dei dati', error);
-      }
-    };
-
     fetchPosts();
   }, []);
+
+  const fetchPosts = async () => {
+    try {
+      const response = await fetch(URL, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log('SONO DATA', data);
+        setPosts(data.reverse().slice(0, 30));
+      } else {
+        throw new Error('Errore nel recupero dei dati');
+      }
+    } catch (error) {
+      setError(error.message);
+      console.log('Errore nella fetch dei dati', error);
+    }
+  };
 
   const deletePost = async (postId) => {
     try {
@@ -143,7 +143,7 @@ const PostsComponent = () => {
     <Container>
       <Row>
         <Col>
-          <CreateNewPostComponent />
+          <CreateNewPostComponent fetchPosts={fetchPosts} />
 
           {posts.length === 0 ? (
             <p>Nessun post disponibile</p>

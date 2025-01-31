@@ -177,7 +177,7 @@ const PostsComponent = () => {
     <Container>
       <Row>
         <Col>
-          <CreateNewPostComponent fetchPosts={fetchPosts} />
+          <CreateNewPostComponent />
 
           {posts.length === 0 ? (
             <p>Nessun post disponibile</p>

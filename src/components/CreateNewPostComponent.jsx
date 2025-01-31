@@ -3,7 +3,7 @@ import { Button, Card, FormControl } from 'react-bootstrap';
 import ModalPost from './ModalPostComponent';
 import { useSelector } from 'react-redux';
 
-const CreateNewPostComponent = ({ fetchPosts }) => {
+const CreateNewPostComponent = () => {
   const profile = useSelector((state) => state.profileInfo);
   const [showModal, setShowModal] = useState(false);
 
@@ -89,11 +89,7 @@ const CreateNewPostComponent = ({ fetchPosts }) => {
           </div>
         </Card.Body>
       </Card>
-      <ModalPost
-        show={showModal}
-        handleClose={handleModalClose}
-        fetchPosts={fetchPosts}
-      />
+      <ModalPost show={showModal} handleClose={handleModalClose} />
     </>
   );
 };

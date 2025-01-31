@@ -151,7 +151,7 @@ const NavBarComponent = function () {
                   <DropdownMenu>
                     <Dropdown.Item>
                       <div style={{ display: "flex", alignItems: "center" }}>
-                        {profile.profile && (
+                        {profile.profileInfo && (
                           <img
                             src={profile.profileInfo.image}
                             alt="Profile"
@@ -175,13 +175,14 @@ const NavBarComponent = function () {
                       </div>
                     </Dropdown.Item>
                     <div>
-                      <Button
-                        variant="transparent"
-                        className="btnProfile rounded-5 border-2 border-primary text-primary fw-bold m-3 py-0"
-                        href="#/Profilo"
-                      >
-                        Visualizza profilo
-                      </Button>
+                      <Link to="/profile" className="text-decoration-none">
+                        <Button
+                          variant="transparent"
+                          className="btnProfile rounded-5 border-2 border-primary text-primary fw-bold m-3 py-0"
+                        >
+                          Visualizza profilo
+                        </Button>
+                      </Link>
                     </div>
 
                     <Dropdown.Divider />

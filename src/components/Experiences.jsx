@@ -126,11 +126,18 @@ function Experiences() {
                           {exp.company} • {exp.area}
                         </p>
                         <p className='text-muted'>
-                          {`${formatoDataBreve(
+                          {`${
                             exp.startDate
-                          )} - ${formatoDataBreve(
+                              ? formatoDataBreve(exp.startDate)
+                              : 'Data non disponibile'
+                          } - ${
                             exp.endDate
-                          )} • ${differenzaDate(exp.startDate, exp.endDate)}`}
+                              ? formatoDataBreve(exp.endDate)
+                              : 'Presente'
+                          } • ${differenzaDate(
+                            exp.startDate,
+                            exp.endDate || new Date()
+                          )}`}
                         </p>
                       </Col>
                       <Col xs={1} className='text-start'>

@@ -37,8 +37,7 @@ const URL = 'https://striveschool-api.herokuapp.com/api/posts/';
 
 const PostsComponent = () => {
   const token = useSelector((state) => state.token.token);
-  const [posts, setPosts] = useState([]);
-  const [error, setError] = useState(null);
+
   const [showModal, setShowModal] = useState(false);
   const [postToDelete, setPostToDelete] = useState(null);
   const [showEditModal, setShowEditModal] = useState(false);
@@ -49,6 +48,12 @@ const PostsComponent = () => {
   const profile = useSelector((state) => state.profileInfo);
   const [commentValues, setCommentValues] = useState({});
   const [isOpen, setIsOpen] = useState(false);
+  const [openComments, setOpenComments] = useState({});
+  const posts = useSelector((state) => state.posts.posts);
+
+  const isOpenFunc = () => {
+    setIsOpen(!isOpen);
+  };
 
   const handleCommentChange = (postId, value) => {
     setCommentValues((prevValues) => ({
@@ -68,36 +73,16 @@ const PostsComponent = () => {
     }
   };
 
-  useEffect(() => {
-    fetchPostsInternal();
-    dispatch(GetComments());
-  }, []);
-
-  useEffect(() => {
-    dispatch(fetchPosts(token));
-  }, [dispatch]);
-
-  const fetchPostsInternal = async () => {
-    try {
-      const response = await fetch(URL, {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        console.log('SONO DATA', data);
-        setPosts(data.reverse().slice(0, 30));
-      } else {
-        throw new Error('Errore nel recupero dei dati');
-      }
-    } catch (error) {
-      setError(error.message);
-      console.log('Errore nella fetch dei dati', error);
-    }
+  const toggleComments = (postId) => {
+    setOpenComments(postId);
+    console.log(openComments);
+    isOpenFunc();
   };
+
+  useEffect(() => {
+    dispatch(GetComments());
+    dispatch(fetchPosts(token));
+  }, []);
 
   const deletePost = async (postId) => {
     try {
@@ -109,15 +94,12 @@ const PostsComponent = () => {
       });
 
       if (response.ok) {
-        setPosts(posts.filter((post) => post._id !== postId));
-        setShowModal(false);
-        setPostToDelete(null);
+        dispatch(fetchPosts(token));
         alert('Post eliminato');
       } else {
         throw new Error('Non puoi eliminare questo post');
       }
     } catch (error) {
-      setError(error.message);
       alert(error.message);
       console.log('Errore nella fetch dei dati', error);
     }
@@ -135,10 +117,7 @@ const PostsComponent = () => {
       });
 
       if (response.ok) {
-        const updatedPost = await response.json();
-        setPosts(
-          posts.map((post) => (post._id === postId ? updatedPost : post))
-        );
+        dispatch(fetchPosts(token));
         setShowEditModal(false);
         setPostToEdit(null);
         setEditText('');
@@ -263,7 +242,7 @@ const PostsComponent = () => {
                     </Button>
                     <Button
                       className=' text-secondary bg-transparent border-0'
-                      onClick={() => setIsOpen(!isOpen)}
+                      onClick={() => toggleComments(post._id)}
                     >
                       <ChatDots /> <span>Commenta</span>
                     </Button>
@@ -275,7 +254,7 @@ const PostsComponent = () => {
                     </Button>
                   </div>
                 </Card.Body>
-                {isOpen && (
+                {isOpen && post._id === openComments && (
                   <Card.Footer>
                     <div className='d-flex align-items-center justify-content-between position-relative'>
                       <img
@@ -307,6 +286,7 @@ const PostsComponent = () => {
                       )}
                     </div>
                     {comments.comments.length > 0 &&
+                      openComments === post._id &&
                       comments.comments
                         .filter((comment) => comment.elementId === post._id)
                         .map((comment) => (
@@ -314,7 +294,7 @@ const PostsComponent = () => {
                             <div className='d-flex align-items-center justify-content-between'>
                               <div className='d-flex align-items-center'>
                                 <img
-                                  src={post.user.image}
+                                  src='public\epicode.png'
                                   alt=''
                                   className='rounded-circle'
                                   style={{ width: '30px', height: '30px' }}

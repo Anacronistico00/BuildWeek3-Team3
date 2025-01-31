@@ -255,27 +255,37 @@ const PostsComponent = () => {
                   <div>
                     <img src={post.image} className=" w-100 img-fluid" />
                   </div>
-                  <div className=" d-flex justify-content-between border-top p-2 mt-4">
-                    <Button className=" text-secondary bg-transparent border-0">
-                      <HandThumbsUp /> <span>Consiglia</span>
-                    </Button>
-                    <Button className=" text-secondary bg-transparent border-0">
-                      <ChatDots /> <span>Commenta</span>
-                    </Button>
-                    <Button className=" text-secondary bg-transparent border-0">
-                      <BiShare /> <span>Diffondi il post</span>
-                    </Button>
-                    <Button className=" text-secondary bg-transparent border-0">
-                      <SendFill /> <span>Invia</span>
-                    </Button>
-                  </div>
+                  <Row className="border-top mt-4">
+                    <Col xs={3}>
+                      <Button className=" text-secondary bg-transparent border-0">
+                        <HandThumbsUp /> <span>Consiglia</span>
+                      </Button>
+                    </Col>
+                    <Col xs={3}>
+                      <Button className=" text-secondary bg-transparent border-0">
+                        <ChatDots /> <span>Commenta</span>
+                      </Button>
+                    </Col>
+                    <Col xs={3}>
+                      {" "}
+                      <Button className=" text-secondary bg-transparent border-0">
+                        <BiShare /> <span>Diffondi il post</span>
+                      </Button>
+                    </Col>
+                    <Col xs={3}>
+                      {" "}
+                      <Button className=" text-secondary bg-transparent border-0">
+                        <SendFill /> <span>Invia</span>
+                      </Button>
+                    </Col>
+                  </Row>
                 </Card.Body>
                 <Card.Footer>
                   <div className="d-flex align-items-center justify-content-between position-relative">
                     <img
                       src={profile.profileInfo.image}
                       alt=""
-                      className="rounded-circle"
+                      className="rounded-circle me-2"
                       style={{ width: "30px", height: "30px" }}
                     />
                     <FormControl
@@ -304,7 +314,7 @@ const PostsComponent = () => {
                     comments.comments
                       .filter((comment) => comment.elementId === post._id)
                       .map((comment) => (
-                        <div key={comment._id}>
+                        <div key={comment._id} className=" mt-2">
                           <div className="d-flex align-items-center justify-content-between">
                             <div className="d-flex align-items-center">
                               <img
@@ -313,18 +323,20 @@ const PostsComponent = () => {
                                 className="rounded-circle"
                                 style={{ width: "30px", height: "30px" }}
                               />
-                              <p className="fw-medium ms-2">{comment.author}</p>
+                              <p className=" fw-bold ms-2">{comment.author}</p>
                             </div>
 
                             <div>
                               <p>
-                                {post.user.createdAt.slice(5, 10)} alle{" "}
+                                {post.user.createdAt.slice(0, 10)} alle{" "}
                                 {post.user.createdAt.slice(11, 16)}
                               </p>
                             </div>
                           </div>
                           <div>
-                            <Card.Text>{comment.comment}</Card.Text>
+                            <Card.Text className=" mt-1 ms-4">
+                              {comment.comment}
+                            </Card.Text>
                           </div>
                         </div>
                       ))}

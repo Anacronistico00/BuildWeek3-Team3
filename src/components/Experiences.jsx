@@ -1,15 +1,15 @@
-import { Card, Col, Container, Row } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
-import { GoPlus } from 'react-icons/go';
-import { useState, useEffect } from 'react';
-import GetExperiences from './GetExperiences';
-import { RetrieveExperiencesAction } from '../actions/setProfileAction';
-import { HiOutlinePencil } from 'react-icons/hi';
+import { Card, Col, Container, Row } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { GoPlus } from "react-icons/go";
+import { useState, useEffect } from "react";
+import GetExperiences from "./GetExperiences";
+import { RetrieveExperiencesAction } from "../actions/setProfileAction";
+import { HiOutlinePencil } from "react-icons/hi";
 
 function Experiences() {
   const [show, setShow] = useState(false);
   const [isModifing, setisModifing] = useState(false);
-  const [elementToModify, setElementToModify] = useState('');
+  const [elementToModify, setElementToModify] = useState("");
   const [expList, setExpList] = useState([]); // Usa stato locale per la lista delle esperienze
   const token = useSelector((state) => state.token.token);
   const user = useSelector((state) => state.user.user_logged);
@@ -49,24 +49,24 @@ function Experiences() {
       mesi += 12;
     }
     return `${
-      anni === 0 ? '' : anni === 1 ? `${anni} anno ` : `${anni} anni `
-    }${mesi === 0 ? '' : mesi === 1 ? `${mesi} mese ` : `${mesi} mesi `}`;
+      anni === 0 ? "" : anni === 1 ? `${anni} anno ` : `${anni} anni `
+    }${mesi === 0 ? "" : mesi === 1 ? `${mesi} mese ` : `${mesi} mesi `}`;
   };
 
   function formatoDataBreve(dataStr) {
     const mesi = [
-      'gen',
-      'feb',
-      'mar',
-      'apr',
-      'mag',
-      'giu',
-      'lug',
-      'ago',
-      'set',
-      'ott',
-      'nov',
-      'dic',
+      "gen",
+      "feb",
+      "mar",
+      "apr",
+      "mag",
+      "giu",
+      "lug",
+      "ago",
+      "set",
+      "ott",
+      "nov",
+      "dic",
     ];
     let data = new Date(dataStr);
     let mese = mesi[data.getMonth()];
@@ -86,7 +86,7 @@ function Experiences() {
   };
 
   return (
-    <Container className='px-0 mt-3'>
+    <Container className="px-0 mt-3">
       <GetExperiences
         show={show}
         handleClose={handleClose}
@@ -96,36 +96,36 @@ function Experiences() {
       />
       <Row>
         <Col xs={12}>
-          <Card className='p-4'>
-            <Row className=' align-items-end mb-3'>
-              <Col xs={'auto'}>
+          <Card className="p-4">
+            <Row className=" align-items-end mb-3">
+              <Col xs={"auto"}>
                 <h4>Esperienze</h4>
               </Col>
-              <Col xs={'auto'} className='ms-auto'>
+              <Col xs={"auto"} className="ms-auto">
                 {user && profile && user._id === profile._id && (
                   <button
-                    className='btn-experience bg-white border-0 rounded-circle p-1'
+                    className="btn-experience bg-white border-0 rounded-circle p-1"
                     onClick={() => setShow(true)}
                   >
-                    <GoPlus className='fs-2 text-decoration-none text-black' />
+                    <GoPlus className="fs-2 text-decoration-none text-black" />
                   </button>
                 )}
               </Col>
             </Row>
-            <div id='experiences'>
+            <div id="experiences">
               {experiences.length > 0 ? (
                 expList.slice(0, visibleCount).map((exp) => {
                   return (
-                    <Row key={exp._id} className='mb-3 g-1'>
+                    <Row key={exp._id} className="mb-3 g-1">
                       <Col xs={2} xl={1}>
-                        <img src={exp.image} alt='' width={50} height={50} />
+                        <img src={exp.image} alt="" width={50} height={50} />
                       </Col>
                       <Col xs={9} xl={10}>
-                        <h6 className='mb-0'>{exp.role}</h6>
-                        <p className='mb-0'>
+                        <h6 className="mb-0">{exp.role}</h6>
+                        <p className="mb-0">
                           {exp.company} • {exp.area}
                         </p>
-                        <p className='text-muted'>
+                        <p className="text-muted">
                           {`${formatoDataBreve(
                             exp.startDate
                           )} - ${formatoDataBreve(
@@ -133,17 +133,17 @@ function Experiences() {
                           )} • ${differenzaDate(exp.startDate, exp.endDate)}`}
                         </p>
                       </Col>
-                      <Col xs={1} className='text-start'>
+                      <Col xs={1} className="text-start">
                         {user._id === profile._id && (
                           <button
-                            className='btn-experience bg-white border-0 rounded-circle d-flex'
+                            className="btn-experience bg-white border-0 rounded-circle d-flex"
                             onClick={() => {
                               setisModifing(true);
                               setElementToModify(exp._id);
                               setShow(true);
                             }}
                           >
-                            <HiOutlinePencil className='fs-4' />
+                            <HiOutlinePencil className="fs-4" />
                           </button>
                         )}
                       </Col>
@@ -152,7 +152,7 @@ function Experiences() {
                 })
               ) : (
                 <>
-                  <p className='fw-medium'>
+                  <p className="fw-medium">
                     Non ci sono esperienze da mostrare
                   </p>
                   <p>

@@ -1,12 +1,7 @@
 .HomeIcons {
   width: 24px;
   height: 24px;
-  color: gray;
-}
-
-.toTheNextPage:hover {
-  color: rgb(0, 0, 0) !important;
-  text-decoration: none;
+  color: rgb(71, 71, 71);
 }
 
 .nameTab {
@@ -23,6 +18,14 @@
   .nameTab {
     display: none;
   }
+}
+
+.border-black {
+  border-bottom: 2px solid black;
+}
+
+.toNextPage .HomeIcons:hover {
+  color: black !important;
 }
 
 .input-group {
@@ -52,7 +55,7 @@
   font-size: 0.85em;
   margin: 0;
   padding: 0;
-  color: gray;
+  color: rgb(71, 71, 71);
 }
 
 .ImgProfile {
@@ -165,6 +168,14 @@
 
 .linksChangeicon {
   font-size: 0.85em;
+}
+
+/* Add styles for active links */
+.linksChange.active,
+.linksChangeicon.active {
+  color: #0a66c2;
+  font-weight: bold;
+  text-decoration: underline;
 }
 
 .smallerTitle {
@@ -337,7 +348,7 @@
   }
 
   .btnResource::before {
-    content: '⋯';
+    content: "⋯";
     font-size: 1rem;
   }
 }
@@ -348,7 +359,7 @@
   }
 
   .btnResource::before {
-    content: '⋯';
+    content: "⋯";
     font-size: 1rem;
   }
 }
@@ -430,6 +441,12 @@
   align-items: flex-start;
 }
 
+.footer a {
+  color: black;
+  text-decoration: none;
+  font-size: 8px;
+}
+
 .sbfooter_links_div h4 {
   font-size: 10px;
   line-height: 10px;
@@ -500,7 +517,6 @@ select {
   text-overflow: ellipsis;
   font-size: 1.2rem !important;
   padding: 0 !important;
-  color: rgba(0, 0, 0, 0.923);
 }
 
 .azienda {
@@ -545,12 +561,10 @@ select {
 .linkAlbero {
   font-size: 1rem;
   cursor: pointer;
-  color: #1b1f23;
 }
 
 .collegamenti {
   font-size: 0.9rem;
-  color: #1b1f23;
 }
 
 .espandi {
@@ -561,7 +575,7 @@ select {
 .linkAlbero:hover,
 .espandi:hover,
 .collegamenti:hover {
-  text-decoration: underline !important;
+  text-decoration: underline;
   cursor: pointer;
 }
 
@@ -576,7 +590,7 @@ select {
   text-decoration: underline;
 }
 
-.jobFooter p,
+/* .jobFooter p,
 .jobFooter span {
   font-size: 0.7rem !important;
 }
@@ -585,7 +599,7 @@ select {
   text-decoration: underline;
   color: #0a66c2 !important;
   cursor: pointer;
-}
+} */
 
 .workImage {
   width: 56px;

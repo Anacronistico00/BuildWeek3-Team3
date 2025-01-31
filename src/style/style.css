@@ -649,3 +649,8 @@ select {
   position: absolute;
   right: 15px;
 }
+
+.commentSection {
+  max-height: 300px;
+  overflow-y: auto;
+}

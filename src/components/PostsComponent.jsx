@@ -278,39 +278,71 @@ const PostsComponent = () => {
                 {isOpen && (
                   <Card.Footer>
                     <div className="d-flex align-items-center justify-content-between position-relative">
-                      <img
-                        src={profile.profileInfo.image}
-                        alt=""
-                        className="rounded-circle"
-                        style={{ width: "30px", height: "30px" }}
-                      />
-                      <FormControl
-                        as="textarea"
-                        value={commentValues[post._id] || ""}
-                        onChange={(e) =>
-                          handleCommentChange(post._id, e.target.value)
-                        }
-                        className="rounded-pill"
-                        style={{ height: "40px", paddingRight: "150px" }}
-                      />
-                      {commentValues[post._id] && (
-                        <div className="commentIcons d-flex align-items-center position-absolute fs-5 text-secondary">
-                          <FaRegFaceSmile />
-                          <FaRegImage className="ms-3" />
-                          <Button
-                            className="bg-transparent border-0 text-primary"
-                            onClick={() => handlePostComment(post._id)}
-                          >
-                            Pubblica
-                          </Button>
-                        </div>
-                      )}
+                      <Row className=" w-100">
+                        <Col xs={9}>
+                          <Row>
+                            <Col xs={1} className=" mt-1">
+                              <img
+                                src={profile.profileInfo.image}
+                                alt=""
+                                className="rounded-circle me-2"
+                                style={{ width: "30px", height: "30px" }}
+                              />
+                            </Col>
+                            <Col xs={11}>
+                              {" "}
+                              <FormControl
+                                as="textarea"
+                                value={commentValues[post._id] || ""}
+                                onChange={(e) =>
+                                  handleCommentChange(post._id, e.target.value)
+                                }
+                                className="rounded-pill"
+                                style={{
+                                  height: "40px",
+                                }}
+                              />
+                            </Col>
+                          </Row>
+                        </Col>
+                        <Col xs={3}>
+                          {commentValues[post._id] && (
+                            <Row>
+                              <Col
+                                xs={6}
+                                className=" text-center fs-5 text-secondary"
+                              >
+                                <FaRegFaceSmile />
+                              </Col>
+                              <Col
+                                xs={6}
+                                className=" text-center fs-5 text-secondary"
+                              >
+                                <FaRegImage className="ms-3" />
+                              </Col>
+                              <Col xs={12} className=" text-center">
+                                <Button
+                                  className=" bg-primary border-0 text-white rounded-pill mt-1"
+                                  onClick={() => handlePostComment(post._id)}
+                                >
+                                  Pubblica
+                                </Button>
+                              </Col>
+                            </Row>
+                          )}
+                        </Col>
+                      </Row>
+
+                      <div className="commentIcons d-flex align-items-center position-absolute fs-5 text-secondary"></div>
                     </div>
                     {comments.comments.length > 0 &&
                       comments.comments
                         .filter((comment) => comment.elementId === post._id)
                         .map((comment) => (
-                          <div key={comment._id}>
+                          <div
+                            key={comment._id}
+                            style={{ maxHeight: "200px", overflowY: "hidden" }}
+                          >
                             <div className="d-flex align-items-center justify-content-between">
                               <div className="d-flex align-items-center">
                                 <img

@@ -26,7 +26,7 @@ import {
 import { GoPlus } from "react-icons/go";
 import { useDispatch, useSelector } from "react-redux";
 import { getProfileInfo } from "../actions/profileInfo";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const NavBarComponent = function () {
   const profile = useSelector((state) => state.profileInfo);
@@ -50,17 +50,15 @@ const NavBarComponent = function () {
         <Container className="position-relative">
           <Row className="w-100">
             <Col xs={2} xl={3} className="d-flex align-items-center">
-              <Link to="/">
-                <Navbar.Brand href="#">
-                  <img
-                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/LinkedIn_icon.svg/72px-LinkedIn_icon.svg.png"
-                    width="36"
-                    height="36"
-                    className="d-inline-block align-top"
-                    alt="LinkedIn logo"
-                  />
-                </Navbar.Brand>
-              </Link>
+              <Navbar.Brand href="/">
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/LinkedIn_icon.svg/72px-LinkedIn_icon.svg.png"
+                  width="36"
+                  height="36"
+                  className="d-inline-block align-top"
+                  alt="LinkedIn logo"
+                />
+              </Navbar.Brand>
 
               {/* Barra di ricerca */}
               <Form className="mr-auto d-flex align-items-center">
@@ -81,47 +79,55 @@ const NavBarComponent = function () {
             >
               {/* Menu di navigazione */}
               <div className=" d-flex flex-row align-items-center justify-content-between mx-3  ">
-                <div className="toTheNextPage">
-                  <Link
-                    to="/"
-                    className="toNextPage d-flex flex-column align-items-center mx-2 mx-lg-4 "
-                  >
+                <NavLink
+                  to="/"
+                  className={({ isActive }) => (isActive ? "border-black" : "")}
+                >
+                  <div className="toNextPage d-flex flex-column align-items-center mx-2 mx-lg-4 ">
                     <HouseDoorFill className="HomeIcons" />
-                    <p className="SubsIcon d-none d-md-block">Home</p>
-                  </Link>
-                </div>
+                    <span className="SubsIcon d-none d-md-block">Home</span>
+                  </div>
+                </NavLink>
 
-                <Link
+                <NavLink
                   to="/network"
-                  className="d-flex flex-column align-items-center mx-2 mx-lg-4 "
+                  className={({ isActive }) => (isActive ? "border-black" : "")}
                 >
-                  <PeopleFill className="HomeIcons" />
-                  <p className="SubsIcon d-none d-md-block">Rete</p>
-                </Link>
+                  <div className="d-flex flex-column align-items-center mx-2 mx-lg-4 ">
+                    <PeopleFill className="HomeIcons" />
+                    <p className="SubsIcon d-none d-md-block">Rete</p>
+                  </div>
+                </NavLink>
 
-                <Link
+                <NavLink
                   to="/jobs"
-                  className="d-flex flex-column align-items-center mx-2 mx-lg-4 "
+                  className={({ isActive }) => (isActive ? "border-black" : "")}
                 >
-                  <BriefcaseFill className="HomeIcons" />
-                  <p className="SubsIcon d-none d-md-block">Lavoro</p>
-                </Link>
+                  <div className="d-flex flex-column align-items-center mx-2 mx-lg-4 ">
+                    <BriefcaseFill className="HomeIcons" />
+                    <p className="SubsIcon d-none d-md-block">Lavoro</p>
+                  </div>
+                </NavLink>
 
-                <Link
+                <NavLink
                   to="/messaging"
-                  className="d-flex flex-column align-items-center mx-1 mx-lg-2 "
+                  className={({ isActive }) => (isActive ? "border-black" : "")}
                 >
-                  <ChatDotsFill className="HomeIcons" />
-                  <p className="SubsIcon d-none d-md-block">Messaggistica</p>
-                </Link>
+                  <div className="d-flex flex-column align-items-center mx-1 mx-lg-2 ">
+                    <ChatDotsFill className="HomeIcons" />
+                    <p className="SubsIcon d-none d-md-block">Messaggistica</p>
+                  </div>
+                </NavLink>
 
-                <Link
+                <NavLink
                   to="/notifications"
-                  className="d-flex flex-column align-items-center mx-2 mx-lg-4 "
+                  className={({ isActive }) => (isActive ? "border-black" : "")}
                 >
-                  <Bell className="HomeIcons" />
-                  <p className="SubsIcon d-none d-md-block">Notifiche</p>
-                </Link>
+                  <div className="d-flex flex-column align-items-center mx-2 mx-lg-4 ">
+                    <Bell className="HomeIcons" />
+                    <p className="SubsIcon d-none d-md-block">Notifiche</p>
+                  </div>
+                </NavLink>
 
                 {/* Profilo Utente */}
                 {/* Profilo Utente */}

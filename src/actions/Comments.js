@@ -25,3 +25,31 @@ export const GetComments = () => async (dispatch) => {
     console.error("Errore nel recupero dei commenti:", error);
   }
 };
+
+export const postHomeComment = async (token, comment, postId) => {
+  const body = {
+    comment: comment,
+    rate: "4",
+    elementId: postId,
+  };
+  try {
+    const response = await fetch(
+      "https://striveschool-api.herokuapp.com/api/comments",
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      }
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    alert("Comment posted");
+    GetComments();
+  } catch (error) {
+    console.log(error);
+  }
+};

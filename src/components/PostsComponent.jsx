@@ -54,14 +54,10 @@ const PostsComponent = () => {
       [postId]: value,
     }));
   };
-    }));
-  };
 
   const handlePostComment = (postId) => {
     const commentValue = commentValues[postId];
-    const commentValue = commentValues[postId];
     if (commentValue) {
-      dispatch(postHomeComment(token, commentValue, postId));
       dispatch(postHomeComment(token, commentValue, postId));
       setCommentValues((prevValues) => ({
         ...prevValues,
@@ -69,12 +65,8 @@ const PostsComponent = () => {
       }));
     }
   };
-  };
 
   useEffect(() => {
-    fetchPosts();
-    dispatch(GetComments());
-  }, []);
     fetchPosts();
     dispatch(GetComments());
   }, []);
@@ -86,7 +78,6 @@ const PostsComponent = () => {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      });
       });
 
       if (response.ok) {
@@ -101,7 +92,6 @@ const PostsComponent = () => {
       console.log('Errore nella fetch dei dati', error);
     }
   };
-  };
 
   const deletePost = async (postId) => {
     try {
@@ -110,7 +100,6 @@ const PostsComponent = () => {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      });
       });
 
       if (response.ok) {
@@ -127,7 +116,6 @@ const PostsComponent = () => {
       console.log('Errore nella fetch dei dati', error);
     }
   };
-  };
 
   const editPost = async (postId, newText) => {
     try {
@@ -139,10 +127,8 @@ const PostsComponent = () => {
         },
         body: JSON.stringify({ text: newText }),
       });
-      });
 
       if (response.ok) {
-        const updatedPost = await response.json();
         const updatedPost = await response.json();
         setPosts(
           posts.map((post) => (post._id === postId ? updatedPost : post))
@@ -158,12 +144,8 @@ const PostsComponent = () => {
       console.log('Errore nella fetch dei dati', error);
     }
   };
-  };
 
   const handleDelete = (postId) => {
-    setPostToDelete(postId);
-    setShowModal(true);
-  };
     setPostToDelete(postId);
     setShowModal(true);
   };
@@ -173,31 +155,18 @@ const PostsComponent = () => {
     setEditText(post.text);
     setShowEditModal(true);
   };
-    setPostToEdit(post);
-    setEditText(post.text);
-    setShowEditModal(true);
-  };
 
   const confirmDelete = async () => {
     if (postToDelete) {
       await deletePost(postToDelete);
-      await deletePost(postToDelete);
     }
-  };
   };
 
   const confirmEdit = async () => {
     if (postToEdit) {
       await editPost(postToEdit._id, editText);
-      await editPost(postToEdit._id, editText);
     }
   };
-  };
-
-  if (error) {
-    return <div>Errore: {error}</div>;
-    return <div>Errore: {error}</div>;
-  }
 
   return (
     <Container>
@@ -403,8 +372,5 @@ const PostsComponent = () => {
     </Container>
   );
 };
-  );
-};
 
-export default PostsComponent;
 export default PostsComponent;

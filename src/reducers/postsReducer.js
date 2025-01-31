@@ -6,7 +6,7 @@ const initialState = {
 
 const setPostsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'SET_PROFILE':
+    case GET_POSTS:
       return {
         ...state,
         posts: action.payload,

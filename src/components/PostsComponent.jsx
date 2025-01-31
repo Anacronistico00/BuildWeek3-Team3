@@ -236,21 +236,29 @@ const PostsComponent = () => {
                 <Card.Footer>
                   {comments.comments.length > 0 &&
                     comments.comments
-                      .filter(
-                        (comment) => comment.comments.elementId === post._id
-                      )
+                      .filter((comment) => comment.elementId === post._id)
                       .map((comment) => (
-                        <div
-                          key={comment.comments._id}
-                          className='d-flex justify-content-between'
-                        >
-                          <div>
-                            <p className='fw-medium'>
-                              {comment.comments.author}
-                            </p>
+                        <div key={comment._id}>
+                          <div className='d-flex align-items-center justify-content-between'>
+                            <div className='d-flex align-items-center'>
+                              <img
+                                src={post.user.image}
+                                alt=''
+                                className='rounded-circle'
+                                style={{ width: '30px', height: '30px' }}
+                              />
+                              <p className='fw-medium ms-2'>{comment.author}</p>
+                            </div>
+
+                            <div>
+                              <p>
+                                {post.user.createdAt.slice(5, 10)} alle{' '}
+                                {post.user.createdAt.slice(11, 16)}
+                              </p>
+                            </div>
                           </div>
                           <div>
-                            <Card.Text>{comment.comments.text}</Card.Text>
+                            <Card.Text>{comment.comment}</Card.Text>
                           </div>
                         </div>
                       ))}

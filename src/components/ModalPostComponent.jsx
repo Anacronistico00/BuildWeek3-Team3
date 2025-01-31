@@ -16,7 +16,7 @@ const ModalPost = ({ show, handleClose }) => {
 
   const handleSubmit = () => {
     dispatch(postComment(token.token, text.text, selectedFile));
-    fetchPosts(token);
+    dispatch(fetchPosts(token));
     handleClose();
   };
 
@@ -100,7 +100,7 @@ const ModalPost = ({ show, handleClose }) => {
 
           <Modal.Footer>
             <Button variant='primary' onClick={handleSubmit}>
-              Salva modifiche
+              Pubblica post
             </Button>
           </Modal.Footer>
         </Modal>

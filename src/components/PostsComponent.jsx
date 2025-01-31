@@ -31,6 +31,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { GetComments, postHomeComment } from '../actions/Comments';
 import { FaRegImage } from 'react-icons/fa';
 import { FaRegFaceSmile } from 'react-icons/fa6';
+import { fetchPosts } from '../actions/GetPosts';
 
 const URL = 'https://striveschool-api.herokuapp.com/api/posts/';
 
@@ -67,11 +68,15 @@ const PostsComponent = () => {
   };
 
   useEffect(() => {
-    fetchPosts();
+    fetchPostsInternal();
     dispatch(GetComments());
   }, []);
 
-  const fetchPosts = async () => {
+  useEffect(() => {
+    dispatch(fetchPosts(token));
+  }, [dispatch]);
+
+  const fetchPostsInternal = async () => {
     try {
       const response = await fetch(URL, {
         method: 'GET',

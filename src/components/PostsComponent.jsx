@@ -48,6 +48,7 @@ const PostsComponent = () => {
   const comments = useSelector((state) => state.comments);
   const profile = useSelector((state) => state.profileInfo);
   const [commentValues, setCommentValues] = useState({});
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleCommentChange = (postId, value) => {
     setCommentValues((prevValues) => ({
@@ -260,7 +261,10 @@ const PostsComponent = () => {
                     <Button className=' text-secondary bg-transparent border-0'>
                       <HandThumbsUp /> <span>Consiglia</span>
                     </Button>
-                    <Button className=' text-secondary bg-transparent border-0'>
+                    <Button
+                      className=' text-secondary bg-transparent border-0'
+                      onClick={() => setIsOpen(!isOpen)}
+                    >
                       <ChatDots /> <span>Commenta</span>
                     </Button>
                     <Button className=' text-secondary bg-transparent border-0'>
@@ -271,65 +275,69 @@ const PostsComponent = () => {
                     </Button>
                   </div>
                 </Card.Body>
-                <Card.Footer>
-                  <div className='d-flex align-items-center justify-content-between position-relative'>
-                    <img
-                      src={profile.profileInfo.image}
-                      alt=''
-                      className='rounded-circle'
-                      style={{ width: '30px', height: '30px' }}
-                    />
-                    <FormControl
-                      as='textarea'
-                      value={commentValues[post._id] || ''}
-                      onChange={(e) =>
-                        handleCommentChange(post._id, e.target.value)
-                      }
-                      className='rounded-pill'
-                      style={{ height: '40px', paddingRight: '150px' }}
-                    />
-                    {commentValues[post._id] && (
-                      <div className='commentIcons d-flex align-items-center position-absolute fs-5 text-secondary'>
-                        <FaRegFaceSmile />
-                        <FaRegImage className='ms-3' />
-                        <Button
-                          className='bg-transparent border-0 text-primary'
-                          onClick={() => handlePostComment(post._id)}
-                        >
-                          Pubblica
-                        </Button>
-                      </div>
-                    )}
-                  </div>
-                  {comments.comments.length > 0 &&
-                    comments.comments
-                      .filter((comment) => comment.elementId === post._id)
-                      .map((comment) => (
-                        <div key={comment._id}>
-                          <div className='d-flex align-items-center justify-content-between'>
-                            <div className='d-flex align-items-center'>
-                              <img
-                                src={post.user.image}
-                                alt=''
-                                className='rounded-circle'
-                                style={{ width: '30px', height: '30px' }}
-                              />
-                              <p className='fw-medium ms-2'>{comment.author}</p>
-                            </div>
-
-                            <div>
-                              <p>
-                                {post.user.createdAt.slice(5, 10)} alle{' '}
-                                {post.user.createdAt.slice(11, 16)}
-                              </p>
-                            </div>
-                          </div>
-                          <div>
-                            <Card.Text>{comment.comment}</Card.Text>
-                          </div>
+                {isOpen && (
+                  <Card.Footer>
+                    <div className='d-flex align-items-center justify-content-between position-relative'>
+                      <img
+                        src={profile.profileInfo.image}
+                        alt=''
+                        className='rounded-circle'
+                        style={{ width: '30px', height: '30px' }}
+                      />
+                      <FormControl
+                        as='textarea'
+                        value={commentValues[post._id] || ''}
+                        onChange={(e) =>
+                          handleCommentChange(post._id, e.target.value)
+                        }
+                        className='rounded-pill'
+                        style={{ height: '40px', paddingRight: '150px' }}
+                      />
+                      {commentValues[post._id] && (
+                        <div className='commentIcons d-flex align-items-center position-absolute fs-5 text-secondary'>
+                          <FaRegFaceSmile />
+                          <FaRegImage className='ms-3' />
+                          <Button
+                            className='bg-transparent border-0 text-primary'
+                            onClick={() => handlePostComment(post._id)}
+                          >
+                            Pubblica
+                          </Button>
                         </div>
-                      ))}
-                </Card.Footer>
+                      )}
+                    </div>
+                    {comments.comments.length > 0 &&
+                      comments.comments
+                        .filter((comment) => comment.elementId === post._id)
+                        .map((comment) => (
+                          <div key={comment._id}>
+                            <div className='d-flex align-items-center justify-content-between'>
+                              <div className='d-flex align-items-center'>
+                                <img
+                                  src={post.user.image}
+                                  alt=''
+                                  className='rounded-circle'
+                                  style={{ width: '30px', height: '30px' }}
+                                />
+                                <p className='fw-medium ms-2'>
+                                  {comment.author}
+                                </p>
+                              </div>
+
+                              <div>
+                                <p>
+                                  {post.user.createdAt.slice(5, 10)} alle{' '}
+                                  {post.user.createdAt.slice(11, 16)}
+                                </p>
+                              </div>
+                            </div>
+                            <div>
+                              <Card.Text>{comment.comment}</Card.Text>
+                            </div>
+                          </div>
+                        ))}
+                  </Card.Footer>
+                )}
               </Card>
             ))
           )}

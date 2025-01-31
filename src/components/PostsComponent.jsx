@@ -73,6 +73,7 @@ const PostsComponent = () => {
         ...prevValues,
         [postId]: "",
       }))
+      dispatch(GetComments())
     }
   }
 
@@ -275,6 +276,12 @@ const PostsComponent = () => {
                         className="rounded-pill ms-2"
                         style={{ height: "40px", paddingRight: "150px" }}
                       />
+                      {commentValues[post._id] && (
+                        <div className="commentIcons d-flex align-items-center position-absolute fs-5 text-secondary">
+                          <FaRegFaceSmile />
+                          <FaRegImage className="ms-3" />
+                        </div>
+                      )}
                       {commentValues[post._id] && (
                         <div className="commentIcons d-flex align-items-center position-absolute fs-5 text-secondary">
                           <FaRegFaceSmile />

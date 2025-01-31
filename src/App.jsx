@@ -11,6 +11,7 @@ import NavBarComponent from './components/NavBarComponent';
 import Footer from './components/FooterComponent';
 import JobPageComponent from './components/JobPageComponent';
 import HomeComponent from './components/HomeComponent';
+import ErrorComponent from './components/ErrorComponent';
 
 function App() {
   return (
@@ -21,8 +22,7 @@ function App() {
         <Route path='/profile' element={<ProfileComponent />} />
 
         <Route path='/jobs' element={<JobPageComponent />} />
-        {/* <Route path='*' element={<ErrorComponent />} />  */}
-
+        <Route path='*' element={<ErrorComponent />} />
       </Routes>
 
       {<Footer />}

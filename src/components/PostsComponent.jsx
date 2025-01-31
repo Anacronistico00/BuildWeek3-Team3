@@ -20,7 +20,8 @@ import {
   XLg,
 } from "react-bootstrap-icons";
 import { BiShare } from "react-icons/bi";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { GetComments } from "../actions/Comments";
 
 const URL = "https://striveschool-api.herokuapp.com/api/posts/";
 
@@ -33,9 +34,12 @@ const PostsComponent = () => {
   const [showEditModal, setShowEditModal] = useState(false);
   const [postToEdit, setPostToEdit] = useState(null);
   const [editText, setEditText] = useState("");
+  const dispatch = useDispatch();
+  const comments = useSelector((state) => state.comments);
 
   useEffect(() => {
     fetchPosts();
+    dispatch(GetComments());
   }, []);
 
   const fetchPosts = async () => {
@@ -229,6 +233,28 @@ const PostsComponent = () => {
                     </Button>
                   </div>
                 </Card.Body>
+                <Card.Footer>
+                  {comments.comments.length > 0 &&
+                    comments.comments
+                      .filter(
+                        (comment) => comment.comments.elementId === post._id
+                      )
+                      .map((comment) => (
+                        <div
+                          key={comment.comments._id}
+                          className="d-flex justify-content-between"
+                        >
+                          <div>
+                            <p className="fw-medium">
+                              {comment.comments.author}
+                            </p>
+                          </div>
+                          <div>
+                            <Card.Text>{comment.comments.text}</Card.Text>
+                          </div>
+                        </div>
+                      ))}
+                </Card.Footer>
               </Card>
             ))
           )}

@@ -70,6 +70,7 @@ const PostsComponent = () => {
         ...prevValues,
         [postId]: '',
       }));
+      dispatch(GetComments());
     }
   };
 
@@ -272,6 +273,12 @@ const PostsComponent = () => {
                         className='rounded-pill'
                         style={{ height: '40px', paddingRight: '150px' }}
                       />
+                      {!commentValues[post._id] && (
+                        <div className='commentIcons d-flex align-items-center position-absolute fs-5 text-secondary'>
+                          <FaRegFaceSmile />
+                          <FaRegImage className='ms-3' />
+                        </div>
+                      )}
                       {commentValues[post._id] && (
                         <div className='commentIcons d-flex align-items-center position-absolute fs-5 text-secondary'>
                           <FaRegFaceSmile />
@@ -306,8 +313,8 @@ const PostsComponent = () => {
 
                               <div>
                                 <p>
-                                  {post.user.createdAt.slice(5, 10)} alle{' '}
-                                  {post.user.createdAt.slice(11, 16)}
+                                  {comment.createdAt.slice(5, 10)} alle{' '}
+                                  {comment.createdAt.slice(11, 16)}
                                 </p>
                               </div>
                             </div>

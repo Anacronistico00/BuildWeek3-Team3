@@ -13,10 +13,14 @@
   .HomeIcons {
     width: 20px;
     height: 20px;
+    margin-bottom: 5px;
   }
 
   .nameTab {
     display: none;
+  }
+  .border-black {
+    border-bottom: 2px solid black;
   }
 }
 

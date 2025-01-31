@@ -337,7 +337,7 @@
   }
 
   .btnResource::before {
-    content: '⋯';
+    content: "⋯";
     font-size: 1rem;
   }
 }
@@ -348,7 +348,7 @@
   }
 
   .btnResource::before {
-    content: '⋯';
+    content: "⋯";
     font-size: 1rem;
   }
 }

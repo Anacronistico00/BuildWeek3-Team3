@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect } from "react";
 import {
   Navbar,
   Form,
@@ -11,7 +11,7 @@ import {
   DropdownItemText,
   DropdownToggle,
   DropdownMenu,
-} from "react-bootstrap"
+} from "react-bootstrap";
 
 import {
   Bell,
@@ -22,28 +22,28 @@ import {
   HouseDoorFill,
   PeopleFill,
   Search,
-} from "react-bootstrap-icons"
-import { GoPlus } from "react-icons/go"
-import { useDispatch, useSelector } from "react-redux"
-import { getProfileInfo } from "../actions/profileInfo"
-import { Link, NavLink } from "react-router-dom"
+} from "react-bootstrap-icons";
+import { GoPlus } from "react-icons/go";
+import { useDispatch, useSelector } from "react-redux";
+import { getProfileInfo } from "../actions/profileInfo";
+import { Link, NavLink } from "react-router-dom";
 
 const NavBarComponent = function () {
-  const profile = useSelector((state) => state.profileInfo)
-  const dispatch = useDispatch()
-  const token = useSelector((state) => state.token.token)
+  const profile = useSelector((state) => state.profileInfo);
+  const dispatch = useDispatch();
+  const token = useSelector((state) => state.token.token);
 
   useEffect(() => {
-    console.log("Fetching profile info")
+    console.log("Fetching profile info");
 
-    dispatch(getProfileInfo(token))
-  }, [dispatch])
+    dispatch(getProfileInfo(token));
+  }, [dispatch]);
 
   useEffect(() => {
-    console.log("Fetching profile info")
+    console.log("Fetching profile info");
 
-    dispatch(getProfileInfo(token))
-  }, [dispatch])
+    dispatch(getProfileInfo(token));
+  }, [dispatch]);
   return (
     <>
       <Navbar className="px-0 py-1" fixed="top" bg="light" expand="lg">
@@ -662,7 +662,7 @@ const NavBarComponent = function () {
         </Container>
       </Navbar>
     </>
-  )
-}
+  );
+};
 
-export default NavBarComponent
+export default NavBarComponent;

@@ -149,7 +149,7 @@
 }
 
 .Underlined:hover {
-  text-decoration: underline;
+  text-decoration: underline !important;
   color: gray;
   background-color: transparent;
 }

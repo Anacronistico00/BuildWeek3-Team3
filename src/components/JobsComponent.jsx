@@ -14,7 +14,7 @@ const JobsComponent = () => {
   }, [dispatch]);
 
   return (
-    <div>
+    <div className=" mt-3">
       <Card>
         <div className=" px-3 divAcaso">
           <h2 className="titleJobCards">Offerte di lavoro per te:</h2>

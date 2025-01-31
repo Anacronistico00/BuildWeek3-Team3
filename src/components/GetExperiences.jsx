@@ -243,11 +243,15 @@ function GetExperiences(props) {
           </Form.Group>
           <Form.Group className='mb-3'>
             <Form.Label>Data fine</Form.Label>
-            <Form.Control
-              type='date'
-              value={exp.endDate}
-              onChange={(e) => setExp({ ...exp, endDate: e.target.value })}
-            />
+            {!exp.isPresent ? (
+              <Form.Control
+                type='date'
+                value={exp.endDate || ''}
+                onChange={(e) => setExp({ ...exp, endDate: e.target.value })}
+              />
+            ) : (
+              <span>Presente</span>
+            )}
           </Form.Group>
           <Form.Group className='mb-3'>
             <Form.Label>Upload immagine</Form.Label>

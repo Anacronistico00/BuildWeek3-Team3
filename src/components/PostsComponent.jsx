@@ -31,6 +31,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { GetComments, postHomeComment } from "../actions/Comments";
 import { FaRegImage } from "react-icons/fa";
 import { FaRegFaceSmile } from "react-icons/fa6";
+import { fetchPosts } from "../actions/GetPosts";
 
 const URL = "https://striveschool-api.herokuapp.com/api/posts/";
 
@@ -47,6 +48,7 @@ const PostsComponent = () => {
   const comments = useSelector((state) => state.comments);
   const profile = useSelector((state) => state.profileInfo);
   const [commentValues, setCommentValues] = useState({});
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleCommentChange = (postId, value) => {
     setCommentValues((prevValues) => ({
@@ -67,11 +69,15 @@ const PostsComponent = () => {
   };
 
   useEffect(() => {
-    fetchPosts();
+    fetchPostsInternal();
     dispatch(GetComments());
   }, []);
 
-  const fetchPosts = async () => {
+  useEffect(() => {
+    dispatch(fetchPosts(token));
+  }, [dispatch]);
+
+  const fetchPostsInternal = async () => {
     try {
       const response = await fetch(URL, {
         method: "GET",
@@ -168,15 +174,11 @@ const PostsComponent = () => {
     }
   };
 
-  if (error) {
-    return <div>Errore: {error}</div>;
-  }
-
   return (
     <Container>
       <Row>
         <Col>
-          <CreateNewPostComponent fetchPosts={fetchPosts} />
+          <CreateNewPostComponent />
 
           {posts.length === 0 ? (
             <p>Nessun post disponibile</p>
@@ -255,92 +257,87 @@ const PostsComponent = () => {
                   <div>
                     <img src={post.image} className=" w-100 img-fluid" />
                   </div>
-                  <Row className="border-top mt-4">
-                    <Col xs={3}>
-                      <Button className=" text-secondary bg-transparent border-0">
-                        <HandThumbsUp /> <span>Consiglia</span>
-                      </Button>
-                    </Col>
-                    <Col xs={3}>
-                      <Button className=" text-secondary bg-transparent border-0">
-                        <ChatDots /> <span>Commenta</span>
-                      </Button>
-                    </Col>
-                    <Col xs={3}>
-                      {" "}
-                      <Button className=" text-secondary bg-transparent border-0">
-                        <BiShare /> <span>Diffondi il post</span>
-                      </Button>
-                    </Col>
-                    <Col xs={3}>
-                      {" "}
-                      <Button className=" text-secondary bg-transparent border-0">
-                        <SendFill /> <span>Invia</span>
-                      </Button>
-                    </Col>
-                  </Row>
-                </Card.Body>
-                <Card.Footer>
-                  <div className="d-flex align-items-center justify-content-between position-relative">
-                    <img
-                      src={profile.profileInfo.image}
-                      alt=""
-                      className="rounded-circle me-2"
-                      style={{ width: "30px", height: "30px" }}
-                    />
-                    <FormControl
-                      as="textarea"
-                      value={commentValues[post._id] || ""}
-                      onChange={(e) =>
-                        handleCommentChange(post._id, e.target.value)
-                      }
-                      className="rounded-pill"
-                      style={{ height: "40px", paddingRight: "150px" }}
-                    />
-                    {commentValues[post._id] && (
-                      <div className="commentIcons d-flex align-items-center position-absolute fs-5 text-secondary">
-                        <FaRegFaceSmile />
-                        <FaRegImage className="ms-3" />
-                        <Button
-                          className="bg-transparent border-0 text-primary"
-                          onClick={() => handlePostComment(post._id)}
-                        >
-                          Pubblica
-                        </Button>
-                      </div>
-                    )}
+                  <div className=" d-flex justify-content-between border-top p-2 mt-4">
+                    <Button className=" text-secondary bg-transparent border-0">
+                      <HandThumbsUp /> <span>Consiglia</span>
+                    </Button>
+                    <Button
+                      className=" text-secondary bg-transparent border-0"
+                      onClick={() => setIsOpen(!isOpen)}
+                    >
+                      <ChatDots /> <span>Commenta</span>
+                    </Button>
+                    <Button className=" text-secondary bg-transparent border-0">
+                      <BiShare /> <span>Diffondi il post</span>
+                    </Button>
+                    <Button className=" text-secondary bg-transparent border-0">
+                      <SendFill /> <span>Invia</span>
+                    </Button>
                   </div>
-                  {comments.comments.length > 0 &&
-                    comments.comments
-                      .filter((comment) => comment.elementId === post._id)
-                      .map((comment) => (
-                        <div key={comment._id} className=" mt-2">
-                          <div className="d-flex align-items-center justify-content-between">
-                            <div className="d-flex align-items-center">
-                              <img
-                                src={post.user.image}
-                                alt=""
-                                className="rounded-circle"
-                                style={{ width: "30px", height: "30px" }}
-                              />
-                              <p className=" fw-bold ms-2">{comment.author}</p>
-                            </div>
-
-                            <div>
-                              <p>
-                                {post.user.createdAt.slice(0, 10)} alle{" "}
-                                {post.user.createdAt.slice(11, 16)}
-                              </p>
-                            </div>
-                          </div>
-                          <div>
-                            <Card.Text className=" mt-1 ms-4">
-                              {comment.comment}
-                            </Card.Text>
-                          </div>
+                </Card.Body>
+                {isOpen && (
+                  <Card.Footer>
+                    <div className="d-flex align-items-center justify-content-between position-relative">
+                      <img
+                        src={profile.profileInfo.image}
+                        alt=""
+                        className="rounded-circle"
+                        style={{ width: "30px", height: "30px" }}
+                      />
+                      <FormControl
+                        as="textarea"
+                        value={commentValues[post._id] || ""}
+                        onChange={(e) =>
+                          handleCommentChange(post._id, e.target.value)
+                        }
+                        className="rounded-pill"
+                        style={{ height: "40px", paddingRight: "150px" }}
+                      />
+                      {commentValues[post._id] && (
+                        <div className="commentIcons d-flex align-items-center position-absolute fs-5 text-secondary">
+                          <FaRegFaceSmile />
+                          <FaRegImage className="ms-3" />
+                          <Button
+                            className="bg-transparent border-0 text-primary"
+                            onClick={() => handlePostComment(post._id)}
+                          >
+                            Pubblica
+                          </Button>
                         </div>
-                      ))}
-                </Card.Footer>
+                      )}
+                    </div>
+                    {comments.comments.length > 0 &&
+                      comments.comments
+                        .filter((comment) => comment.elementId === post._id)
+                        .map((comment) => (
+                          <div key={comment._id}>
+                            <div className="d-flex align-items-center justify-content-between">
+                              <div className="d-flex align-items-center">
+                                <img
+                                  src={post.user.image}
+                                  alt=""
+                                  className="rounded-circle"
+                                  style={{ width: "30px", height: "30px" }}
+                                />
+                                <p className="fw-medium ms-2">
+                                  {comment.author}
+                                </p>
+                              </div>
+
+                              <div>
+                                <p>
+                                  {post.user.createdAt.slice(5, 10)} alle{" "}
+                                  {post.user.createdAt.slice(11, 16)}
+                                </p>
+                              </div>
+                            </div>
+                            <div>
+                              <Card.Text>{comment.comment}</Card.Text>
+                            </div>
+                          </div>
+                        ))}
+                  </Card.Footer>
+                )}
               </Card>
             ))
           )}

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { RetrieveExperiencesAction } from '../actions/setProfileAction';
 
 function GetExperiences(props) {
   const [exp, setExp] = useState({
@@ -16,6 +17,7 @@ function GetExperiences(props) {
   const profile = useSelector((state) => state.profileInfo);
   const user = useSelector((state) => state.user.user_logged);
   const token = useSelector((state) => state.token.token);
+  const dispatch = useDispatch();
 
   const retrieveModify = async () => {
     if (props.mod) {
@@ -48,6 +50,8 @@ function GetExperiences(props) {
     } else {
       setExp(exp);
     }
+    dispatch(RetrieveExperiencesAction(token, profile.profileInfo));
+    props.handleClose();
   };
 
   useEffect(() => {
@@ -107,6 +111,8 @@ function GetExperiences(props) {
     } catch (err) {
       alert(err.message);
     }
+    dispatch(RetrieveExperiencesAction(token, profile.profileInfo));
+    props.handleClose();
   };
 
   const handleDelete = async (e) => {
@@ -136,6 +142,8 @@ function GetExperiences(props) {
         alert(err.message);
       }
     }
+    dispatch(RetrieveExperiencesAction(token, profile.profileInfo));
+    props.handleClose();
   };
 
   const handleModify = async (e) => {

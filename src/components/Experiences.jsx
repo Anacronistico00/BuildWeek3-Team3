@@ -113,7 +113,7 @@ function Experiences() {
               </Col>
             </Row>
             <div id='experiences'>
-              {experiences &&
+              {experiences.length > 0 ? (
                 expList.slice(0, visibleCount).map((exp) => {
                   return (
                     <Row key={exp._id} className='mb-3 g-1'>
@@ -149,7 +149,17 @@ function Experiences() {
                       </Col>
                     </Row>
                   );
-                })}
+                })
+              ) : (
+                <>
+                  <p className='fw-medium'>
+                    Non ci sono esperienze da mostrare
+                  </p>
+                  <p>
+                    Aggiungine ora per aumentare le chance di essere assunto!
+                  </p>
+                </>
+              )}
               {visibleCount < expList.length && (
                 <button onClick={showMore}>Mostra di più</button>
               )}

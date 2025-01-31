@@ -40,7 +40,7 @@ const PostsComponent = () => {
   useEffect(() => {
     fetchPosts();
     dispatch(GetComments());
-  }, [dispatch]);
+  }, []);
 
   const fetchPosts = async () => {
     try {

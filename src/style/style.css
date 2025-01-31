@@ -649,3 +649,7 @@ select {
   position: absolute;
   right: 15px;
 }
+
+.CommentStyle {
+  margin: 2px 36px;
+}

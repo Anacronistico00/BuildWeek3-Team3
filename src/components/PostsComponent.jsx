@@ -227,7 +227,7 @@ const PostsComponent = () => {
                     </div>
                   </div>
 
-                  <div className=" m-4 ">
+                  <div className=" m-2 ">
                     <Card.Text>{post.text}</Card.Text>
                   </div>
                   <div>

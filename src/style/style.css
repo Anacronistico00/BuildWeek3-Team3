@@ -337,7 +337,7 @@
   }
 
   .btnResource::before {
-    content: "⋯";
+    content: '⋯';
     font-size: 1rem;
   }
 }
@@ -348,7 +348,7 @@
   }
 
   .btnResource::before {
-    content: "⋯";
+    content: '⋯';
     font-size: 1rem;
   }
 }
@@ -576,7 +576,7 @@ select {
   text-decoration: underline;
 }
 
-/* .jobFooter p,
+.jobFooter p,
 .jobFooter span {
   font-size: 0.7rem !important;
 }
@@ -585,7 +585,7 @@ select {
   text-decoration: underline;
   color: #0a66c2 !important;
   cursor: pointer;
-} */
+}
 
 .workImage {
   width: 56px;

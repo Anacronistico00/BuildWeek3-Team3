@@ -5,8 +5,9 @@ import { EmojiSmile, Youtube } from 'react-bootstrap-icons';
 import { FaRegCalendarAlt, FaRegImage } from 'react-icons/fa';
 import { LuPlus } from 'react-icons/lu';
 import { useRef, useState } from 'react';
+import { fetchPosts } from '../actions/GetPosts';
 
-const ModalPost = ({ show, handleClose, fetchPosts }) => {
+const ModalPost = ({ show, handleClose }) => {
   const profile = useSelector((state) => state.profileInfo);
   const dispatch = useDispatch();
   const text = useSelector((state) => state.text);
@@ -15,7 +16,7 @@ const ModalPost = ({ show, handleClose, fetchPosts }) => {
 
   const handleSubmit = () => {
     dispatch(postComment(token.token, text.text, selectedFile));
-    fetchPosts();
+    fetchPosts(token);
     handleClose();
   };
 

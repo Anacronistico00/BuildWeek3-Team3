@@ -8,6 +8,7 @@ import jobsReducer from '../reducers/jobsReducer';
 import jobsCategoryReducer from '../reducers/jobsCategoryReducer';
 import jobsAgencyReducer from '../reducers/jobAgencySearch';
 import commentsReducer from '../reducers/commentsReducer';
+import setPostsReducer from '../reducers/postsReducer';
 
 const mainReducer = combineReducers({
   experiences: experiencesReducer,
@@ -19,6 +20,7 @@ const mainReducer = combineReducers({
   jobsCategory: jobsCategoryReducer,
   jobsAgency: jobsAgencyReducer,
   comments: commentsReducer,
+  posts: setPostsReducer,
 });
 
 const store = configureStore({

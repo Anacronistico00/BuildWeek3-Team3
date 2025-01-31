@@ -28,7 +28,9 @@ import {
 } from "react-bootstrap-icons"
 import { BiShare } from "react-icons/bi"
 import { useDispatch, useSelector } from "react-redux"
-import { GetComments } from "../actions/Comments"
+import { GetComments, postHomeComment } from "../actions/Comments"
+import { FaRegImage } from "react-icons/fa"
+import { FaRegFaceSmile } from "react-icons/fa6"
 
 const URL = "https://striveschool-api.herokuapp.com/api/posts/"
 
@@ -43,6 +45,26 @@ const PostsComponent = () => {
   const [editText, setEditText] = useState("")
   const dispatch = useDispatch()
   const comments = useSelector((state) => state.comments)
+  const profile = useSelector((state) => state.profileInfo)
+  const [commentValues, setCommentValues] = useState({})
+
+  const handleCommentChange = (postId, value) => {
+    setCommentValues((prevValues) => ({
+      ...prevValues,
+      [postId]: value,
+    }))
+  }
+
+  const handlePostComment = (postId) => {
+    const commentValue = commentValues[postId]
+    if (commentValue) {
+      dispatch(postHomeComment(token, commentValue, postId))
+      setCommentValues((prevValues) => ({
+        ...prevValues,
+        [postId]: "",
+      }))
+    }
+  }
 
   useEffect(() => {
     fetchPosts()
@@ -249,6 +271,35 @@ const PostsComponent = () => {
                   </div>
                 </Card.Body>
                 <Card.Footer>
+                  <div className="d-flex align-items-center justify-content-between position-relative">
+                    <img
+                      src={profile.profileInfo.image}
+                      alt=""
+                      className="rounded-circle"
+                      style={{ width: "30px", height: "30px" }}
+                    />
+                    <FormControl
+                      as="textarea"
+                      value={commentValues[post._id] || ""}
+                      onChange={(e) =>
+                        handleCommentChange(post._id, e.target.value)
+                      }
+                      className="rounded-pill"
+                      style={{ height: "40px", paddingRight: "150px" }}
+                    />
+                    {commentValues[post._id] && (
+                      <div className="commentIcons d-flex align-items-center position-absolute fs-5 text-secondary">
+                        <FaRegFaceSmile />
+                        <FaRegImage className="ms-3" />
+                        <Button
+                          className="bg-transparent border-0 text-primary"
+                          onClick={() => handlePostComment(post._id)}
+                        >
+                          Pubblica
+                        </Button>
+                      </div>
+                    )}
+                  </div>
                   {comments.comments.length > 0 &&
                     comments.comments
                       .filter((comment) => comment.elementId === post._id)

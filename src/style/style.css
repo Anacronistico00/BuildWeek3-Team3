@@ -632,3 +632,8 @@ select {
   color: #0a66c2;
   cursor: pointer;
 }
+
+.commentIcons {
+  position: absolute;
+  right: 15px;
+}

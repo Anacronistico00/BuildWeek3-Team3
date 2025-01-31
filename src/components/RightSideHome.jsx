@@ -1,13 +1,13 @@
-import { Container, Card, Row, Col } from "react-bootstrap"
-import { useSelector } from "react-redux"
-import { Link } from "react-router-dom"
-import { IoPersonAddSharp } from "react-icons/io5"
-import { FaBookmark } from "react-icons/fa"
-import { HiUserGroup } from "react-icons/hi"
-import { BiNews } from "react-icons/bi"
-import { MdEvent } from "react-icons/md"
+import { Container, Card, Row, Col } from "react-bootstrap";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { IoPersonAddSharp } from "react-icons/io5";
+import { FaBookmark } from "react-icons/fa";
+import { HiUserGroup } from "react-icons/hi";
+import { BiNews } from "react-icons/bi";
+import { MdEvent } from "react-icons/md";
 function RightSide() {
-  const profile = useSelector((state) => state.profileInfo)
+  const profile = useSelector((state) => state.profileInfo);
 
   return (
     <>
@@ -71,7 +71,7 @@ function RightSide() {
                         </p>
                       </Col>
                       <Col xs={2}>
-                        <IoPersonAddSharp className=" fs-5" />
+                        <IoPersonAddSharp className=" fs-5 text-black" />
                       </Col>
                       {/* <Col xs={12} className="oltre">
                         <p className="premiumTitle text-start">
@@ -119,7 +119,7 @@ function RightSide() {
         </ul>
       </Card>
     </>
-  )
+  );
 }
 
-export default RightSide
+export default RightSide;

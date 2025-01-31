@@ -19,7 +19,7 @@ export const fetchPosts = () => {
       console.log('SONO DATA', data);
       dispatch({
         type: GET_POSTS,
-        payload: data,
+        payload: data.reverse().slice(0, 50),
       });
     } catch (error) {
       console.log('Errore nella fetch dei dati', error);

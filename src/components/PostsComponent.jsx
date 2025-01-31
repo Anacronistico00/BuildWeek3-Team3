@@ -20,45 +20,62 @@ import {
   XLg,
 } from "react-bootstrap-icons";
 import { BiShare } from "react-icons/bi";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { GetComments, postHomeComment } from "../actions/Comments";
+import { FaRegImage } from "react-icons/fa";
+import { FaRegFaceSmile } from "react-icons/fa6";
+import { fetchPosts } from "../actions/GetPosts";
 
 const URL = "https://striveschool-api.herokuapp.com/api/posts/";
 
 const PostsComponent = () => {
   const token = useSelector((state) => state.token.token);
-  const [posts, setPosts] = useState([]);
-  const [error, setError] = useState(null);
+
   const [showModal, setShowModal] = useState(false);
   const [postToDelete, setPostToDelete] = useState(null);
   const [showEditModal, setShowEditModal] = useState(false);
   const [postToEdit, setPostToEdit] = useState(null);
   const [editText, setEditText] = useState("");
+  const dispatch = useDispatch();
+  const comments = useSelector((state) => state.comments);
+  const profile = useSelector((state) => state.profileInfo);
+  const [commentValues, setCommentValues] = useState({});
+  const [isOpen, setIsOpen] = useState(false);
+  const [openComments, setOpenComments] = useState({});
+  const posts = useSelector((state) => state.posts.posts);
 
-  useEffect(() => {
-    fetchPosts();
-  }, []);
+  const isOpenFunc = () => {
+    setIsOpen(!isOpen);
+  };
 
-  const fetchPosts = async () => {
-    try {
-      const response = await fetch(URL, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+  const handleCommentChange = (postId, value) => {
+    setCommentValues((prevValues) => ({
+      ...prevValues,
+      [postId]: value,
+    }));
+  };
 
-      if (response.ok) {
-        const data = await response.json();
-        console.log("SONO DATA", data);
-        setPosts(data.reverse().slice(0, 30));
-      } else {
-        throw new Error("Errore nel recupero dei dati");
-      }
-    } catch (error) {
-      setError(error.message);
-      console.log("Errore nella fetch dei dati", error);
+  const handlePostComment = (postId) => {
+    const commentValue = commentValues[postId];
+    if (commentValue) {
+      dispatch(postHomeComment(token, commentValue, postId));
+      setCommentValues((prevValues) => ({
+        ...prevValues,
+        [postId]: "",
+      }));
     }
   };
+
+  const toggleComments = (postId) => {
+    setOpenComments(postId);
+    console.log(openComments);
+    isOpenFunc();
+  };
+
+  useEffect(() => {
+    dispatch(GetComments());
+    dispatch(fetchPosts(token));
+  }, []);
 
   const deletePost = async (postId) => {
     try {
@@ -70,15 +87,12 @@ const PostsComponent = () => {
       });
 
       if (response.ok) {
-        setPosts(posts.filter((post) => post._id !== postId));
-        setShowModal(false);
-        setPostToDelete(null);
+        dispatch(fetchPosts(token));
         alert("Post eliminato");
       } else {
         throw new Error("Non puoi eliminare questo post");
       }
     } catch (error) {
-      setError(error.message);
       alert(error.message);
       console.log("Errore nella fetch dei dati", error);
     }
@@ -96,10 +110,7 @@ const PostsComponent = () => {
       });
 
       if (response.ok) {
-        const updatedPost = await response.json();
-        setPosts(
-          posts.map((post) => (post._id === postId ? updatedPost : post))
-        );
+        dispatch(fetchPosts(token));
         setShowEditModal(false);
         setPostToEdit(null);
         setEditText("");
@@ -218,7 +229,10 @@ const PostsComponent = () => {
                     <Button className=" text-secondary bg-transparent border-0">
                       <HandThumbsUp /> <span>Consiglia</span>
                     </Button>
-                    <Button className=" text-secondary bg-transparent border-0">
+                    <Button
+                      className=" text-secondary bg-transparent border-0"
+                      onClick={() => toggleComments(post._id)}
+                    >
                       <ChatDots /> <span>Commenta</span>
                     </Button>
                     <Button className=" text-secondary bg-transparent border-0">
@@ -229,6 +243,70 @@ const PostsComponent = () => {
                     </Button>
                   </div>
                 </Card.Body>
+                {isOpen && post._id === openComments && (
+                  <Card.Footer>
+                    <div className="d-flex align-items-center justify-content-between position-relative">
+                      <img
+                        src={profile.profileInfo.image}
+                        alt=""
+                        className="rounded-circle"
+                        style={{ width: "30px", height: "30px" }}
+                      />
+                      <FormControl
+                        as="textarea"
+                        value={commentValues[post._id] || ""}
+                        onChange={(e) =>
+                          handleCommentChange(post._id, e.target.value)
+                        }
+                        className="rounded-pill"
+                        style={{ height: "40px", paddingRight: "150px" }}
+                      />
+                      {commentValues[post._id] && (
+                        <div className="commentIcons d-flex align-items-center position-absolute fs-5 text-secondary">
+                          <FaRegFaceSmile />
+                          <FaRegImage className="ms-3" />
+                          <Button
+                            className="bg-transparent border-0 text-primary"
+                            onClick={() => handlePostComment(post._id)}
+                          >
+                            Pubblica
+                          </Button>
+                        </div>
+                      )}
+                    </div>
+                    {comments.comments.length > 0 &&
+                      openComments === post._id &&
+                      comments.comments
+                        .filter((comment) => comment.elementId === post._id)
+                        .map((comment) => (
+                          <div key={comment._id}>
+                            <div className="d-flex align-items-center justify-content-between">
+                              <div className="d-flex align-items-center">
+                                <img
+                                  src="public\epicode.png"
+                                  alt=""
+                                  className="rounded-circle"
+                                  style={{ width: "30px", height: "30px" }}
+                                />
+                                <p className="fw-medium ms-2">
+                                  {comment.author}
+                                </p>
+                              </div>
+
+                              <div>
+                                <p>
+                                  {post.user.createdAt.slice(5, 10)} alle{" "}
+                                  {post.user.createdAt.slice(11, 16)}
+                                </p>
+                              </div>
+                            </div>
+                            <div>
+                              <Card.Text>{comment.comment}</Card.Text>
+                            </div>
+                          </div>
+                        ))}
+                  </Card.Footer>
+                )}
               </Card>
             ))
           )}

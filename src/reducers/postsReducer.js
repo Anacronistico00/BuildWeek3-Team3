@@ -1,7 +1,7 @@
 import { GET_POSTS } from '../actions/GetPosts';
 
 const initialState = {
-  posts: null,
+  posts: [],
 };
 
 const setPostsReducer = (state = initialState, action) => {

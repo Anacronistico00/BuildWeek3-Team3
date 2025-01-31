@@ -22,6 +22,7 @@ import {
 import { BiShare } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
 import { GetComments } from "../actions/Comments";
+import CommentsPost from "./PostCommentsComponent";
 
 const URL = "https://striveschool-api.herokuapp.com/api/posts/";
 
@@ -234,23 +235,20 @@ const PostsComponent = () => {
                   </div>
                 </Card.Body>
                 <Card.Footer>
-                  {comments.comments.length > 0 &&
+                  <CommentsPost />
+                  {comments.length > 0 &&
                     comments.comments
-                      .filter(
-                        (comment) => comment.comments.elementId === post._id
-                      )
+                      .filter((comment) => comment.elementId === post._id)
                       .map((comment) => (
                         <div
-                          key={comment.comments._id}
+                          key={comment._id}
                           className="d-flex justify-content-between"
                         >
                           <div>
-                            <p className="fw-medium">
-                              {comment.comments.author}
-                            </p>
+                            <p className="fw-medium">{comment.author}</p>
                           </div>
                           <div>
-                            <Card.Text>{comment.comments.text}</Card.Text>
+                            <div>{comment.text}</div>
                           </div>
                         </div>
                       ))}
